@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-200">
+    <div className="flex flex-col md:navbar bg-base-200">
       <div className="flex-1 mx-10">
         <Dices className='w-12 h-12'/>
         <Link href='/' className="btn btn-ghost text-xl">Boring Games For Boring Times</Link>

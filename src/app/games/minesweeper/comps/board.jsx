@@ -1,6 +1,7 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cell from "./cell";
+import toast from "react-hot-toast";
 
 const BOARD_SIZE = 9; // 9x9 grid
 const NUM_BOMBS = 10;
@@ -48,19 +49,28 @@ const generateBoard = () => {
   return board;
 };
 
-const Board = () => {
+const Board = ({setMarked, setStart}) => {
   const [board, setBoard] = useState(generateBoard());
   const [gameOver, setGameOver] = useState(false);
+  const [isFirstClick, setIsFirstClick] = useState(true)
+
+  useEffect(() => {
+    const flaggedCount = board.flat().filter((cell) => cell.flagged).length;
+    setMarked(flaggedCount);
+  }, [board, setMarked]);
 
   const revealCell = (row, col) => {
     if (gameOver || board[row][col].revealed || board[row][col].flagged) return;
+
+    if (isFirstClick) { setStart(true); setIsFirstClick(false)}
 
     const newBoard = [...board];
     const cell = newBoard[row][col];
 
     if (cell.isBomb) {
       setGameOver(true);
-      alert("Game Over!");
+      setStart(false)
+      toast.error("Game Over!");
       return;
     }
 

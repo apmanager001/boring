@@ -1,12 +1,12 @@
 import React from "react";
-import Board from "./comps/board";
+import Minesweeper from "./minesweeper";
 
-const Minesweeper = () => {
+const Page = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-100">
-      <Board />
+    <div>
+      <Minesweeper />
     </div>
   );
 };
 
-export default Minesweeper;
+export default Page;
