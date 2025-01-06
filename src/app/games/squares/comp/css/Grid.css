@@ -1,0 +1,22 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 50px); /* Adjust for GridSize */
+  grid-template-rows: repeat(5, 50px); /* Adjust for GridSize */
+}
+
+.grid-row {
+  display: flex;
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  margin: 15px; /* Adjust for spacing */
+}
+
+.line {
+  background-color: black;
+  position: absolute;
+}

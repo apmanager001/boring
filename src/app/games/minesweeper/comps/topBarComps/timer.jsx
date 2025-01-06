@@ -48,7 +48,7 @@ const Timer = ({start}) => {
   // };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 text-center">
       <h1>{time} seconds</h1>
       {/* <button className="btn btn-primary btn-sm" onClick={startTimer}>Start</button> */}
       {/* <button onClick={stopTimer}>Stop</button> */}

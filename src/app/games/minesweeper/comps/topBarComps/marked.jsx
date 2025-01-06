@@ -2,8 +2,8 @@ import React from 'react'
 
 const Marked = ({marked}) => {
   return (
-    <div className='flex items-center'>
-      Flagged Squares: <div className='font-extrabold ml-4'>{marked}</div>
+    <div className='flex flex-col items-center justify-center text-center'>
+      <div className='font-extrabold'>{marked}</div> Squirrels Placed: 
     </div>
   )
 }

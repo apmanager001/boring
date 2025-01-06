@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import { Flag, Bomb } from "lucide-react";
+import { Flag, Bomb, Squirrel, Nut } from "lucide-react";
 
 const Cell = ({ cell, onClick, onRightClick, lose }) => {
   return (
@@ -16,8 +16,14 @@ const Cell = ({ cell, onClick, onRightClick, lose }) => {
       onContextMenu={onRightClick}
     >
       {cell.flagged ? (
-        <Flag color="red" fill={'red'}/>
-      ) : cell.revealed && !cell.isBomb ? (
+        <Squirrel
+          color={"white"}
+          fill={"#989082"}
+          size={44}
+          strokeWidth={0.5}
+        />
+      ) : // <Flag color="red" fill={'red'}/>
+      cell.revealed && !cell.isBomb ? (
         cell.adjacentBombs > 0 ? (
           cell.adjacentBombs
         ) : (
@@ -25,7 +31,8 @@ const Cell = ({ cell, onClick, onRightClick, lose }) => {
         )
       ) : cell.isBomb ? (
         lose ? (
-          <Bomb />
+          // <Bomb />
+          <Nut color={"white"} fill={"#341c02"} size={44} strokeWidth={0.5} />
         ) : (
           ""
         )

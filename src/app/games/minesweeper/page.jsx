@@ -3,7 +3,7 @@ import Minesweeper from "./minesweeper";
 
 const Page = () => {
   return (
-    <div>
+    <div >
       <Minesweeper />
     </div>
   );
