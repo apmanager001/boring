@@ -32,7 +32,7 @@ const Header = () => {
             </details>
           </li>
           <li>
-            <a>SignUp/SignIn</a>
+            <a href='/login'>SignUp/SignIn</a>
           </li>
         </ul>
       </div>
