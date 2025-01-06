@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Cell from "./cell";
 import toast from "react-hot-toast";
+import LoseAlert from "./loseAlert";
 
 const BOARD_SIZE = 9; // 9x9 grid
 const NUM_BOMBS = 10;
@@ -53,6 +54,8 @@ const Board = ({setMarked, setStart}) => {
   const [board, setBoard] = useState(generateBoard());
   const [gameOver, setGameOver] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true)
+  const [lose, setLose] = useState(false)
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const flaggedCount = board.flat().filter((cell) => cell.flagged).length;
@@ -70,7 +73,9 @@ const Board = ({setMarked, setStart}) => {
     if (cell.isBomb) {
       setGameOver(true);
       setStart(false)
-      toast.error("Game Over!");
+      setLose(true)
+      setShowAlert(true)
+      // toast.error("Game Over!");
       return;
     }
 
@@ -102,19 +107,23 @@ const Board = ({setMarked, setStart}) => {
 
   return (
     <div className="grid grid-cols-9 gap-1">
-      {board.map((row, rowIndex) =>
-        row.map((cell, colIndex) => (
-          <Cell
-            key={`${rowIndex}-${colIndex}`}
-            cell={cell}
-            onClick={() => revealCell(rowIndex, colIndex)}
-            onRightClick={(e) => {
-              e.preventDefault();
-              toggleFlag(rowIndex, colIndex);
-            }}
-          />
-        ))
-      )}
+      {showAlert ?
+        <LoseAlert />
+      : " "}
+        {board.map((row, rowIndex) =>
+          row.map((cell, colIndex) => (
+            <Cell
+              lose={lose}
+              key={`${rowIndex}-${colIndex}`}
+              cell={cell}
+              onClick={() => revealCell(rowIndex, colIndex)}
+              onRightClick={(e) => {
+                e.preventDefault();
+                toggleFlag(rowIndex, colIndex);
+              }}
+            />
+          ))
+        )}
     </div>
   );
 };
