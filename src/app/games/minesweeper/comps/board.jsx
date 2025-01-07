@@ -122,7 +122,7 @@ const Board = ({setMarked, setStart}) => {
   };
 
   return (
-    <div className={`grid grid-cols-${gridSize} gap-1`}>
+    <div className={`grid grid-cols-9 gap-1`}>
       {showAlert ? <LoseAlert /> : " "}
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
