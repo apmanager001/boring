@@ -27,9 +27,9 @@ const Header = () => {
                   Games
                 </summary>
                 <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
-                  {/* <li>
+                  <li>
                     <a href="/games/tiktaktoe">Tick Tack Toe</a>
-                  </li> */}
+                  </li>
                   <li>
                     <a href="/games/acornsweeper">AcornSweeper</a>
                   </li>
@@ -41,12 +41,12 @@ const Header = () => {
                 <TableProperties /> Leaderboard
               </a>
             </li>
-            {/* <li>
+            <li>
               <a href="/login">
                 <KeyRound />
                 Login
               </a>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>
