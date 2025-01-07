@@ -10,12 +10,12 @@ const Signup = () => {
           <h2 className="font-bold text-3xl text-primary">Register</h2>
           <p className="text-sm mt-4 text-primary">Easily register now.</p>
 
-          <form action="" className="flex flex-col gap-4">
+          <form action="" className="flex flex-col gap-1">
             <div>
               <div className="flex justify-between">
                 <label
                   htmlFor="email"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-sm font-bold"
                 >
                   Email
                 </label>
@@ -31,7 +31,7 @@ const Signup = () => {
               <div className="flex justify-between">
                 <label
                   htmlFor="username"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-sm font-bold"
                 >
                   Username
                 </label>
@@ -47,29 +47,29 @@ const Signup = () => {
                 <div className="flex justify-between">
                     <label
                     htmlFor="password"
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-700 text-sm font-bold"
                     >
                     Password
                     </label>
                 </div>
-            <div className="relative">
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    className="input input-bordered w-full max-w-xs"
-                />
-                <Eye
-                    size={24}
-                    className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer z-20 opacity-100"
-                />
+                <div className="relative">
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        className="input input-bordered w-full max-w-xs"
+                    />
+                    <Eye
+                        size={24}
+                        className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer z-20 opacity-100"
+                    />
               </div>
             </div>
             <div>
               <div className="flex justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-sm font-bold "
                 >
                   Password
                 </label>
@@ -88,7 +88,7 @@ const Signup = () => {
               </div>
             </div>
             <button
-              className="btn btn-primary py-2 rounded-xl hover:scale-105 duration-300 text-lg"
+              className="btn btn-primary py-2 mt-2 rounded-xl hover:scale-105 duration-300 text-lg"
               type="submit"
             >
               Register

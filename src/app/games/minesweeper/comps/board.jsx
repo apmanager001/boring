@@ -1,11 +1,16 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import Cell from "./cell";
-import toast from "react-hot-toast";
 import LoseAlert from "./loseAlert";
+import Confetti from "./confetti";
 
-const BOARD_SIZE = 9; // 9x9 grid
+const gridSize = 9
+
+const BOARD_SIZE = gridSize
 const NUM_BOMBS = 10;
+
+const totalCells = gridSize * gridSize;
+const nonBombCells = totalCells - NUM_BOMBS; 
 
 const generateBoard = () => {
   // Initialize an empty board
@@ -56,26 +61,40 @@ const Board = ({setMarked, setStart}) => {
   const [isFirstClick, setIsFirstClick] = useState(true)
   const [lose, setLose] = useState(false)
   const [showAlert, setShowAlert] = useState(false);
+  const [revealedCells, setRevealedCells] = useState(0);
 
   useEffect(() => {
     const flaggedCount = board.flat().filter((cell) => cell.flagged).length;
     setMarked(flaggedCount);
   }, [board, setMarked]);
 
+  console.log(revealedCells);
+
+  useEffect(() => {
+    if (revealedCells === nonBombCells) {
+      Confetti()
+      setGameOver(true);
+      setShowAlert(true)
+      setStart(false);
+    }
+  }, [revealedCells]);
+
   const revealCell = (row, col) => {
     if (gameOver || board[row][col].revealed || board[row][col].flagged) return;
 
-    if (isFirstClick) { setStart(true); setIsFirstClick(false)}
+    if (isFirstClick) {
+      setStart(true);
+      setIsFirstClick(false);
+    }
 
     const newBoard = [...board];
     const cell = newBoard[row][col];
 
     if (cell.isBomb) {
       setGameOver(true);
-      setStart(false)
-      setLose(true)
-      setShowAlert(true)
-      // toast.error("Game Over!");
+      setStart(false);
+      setLose(true);
+      setShowAlert(true);
       return;
     }
 
@@ -84,7 +103,7 @@ const Board = ({setMarked, setStart}) => {
       const currentCell = newBoard[r][c];
       if (currentCell.revealed || currentCell.flagged) return;
       currentCell.revealed = true;
-
+      setRevealedCells((prev) => prev + 1);
       if (currentCell.adjacentBombs === 0) {
         for (let i = -1; i <= 1; i++) {
           for (let j = -1; j <= 1; j++) {
@@ -93,7 +112,6 @@ const Board = ({setMarked, setStart}) => {
         }
       }
     };
-
     revealRecursive(row, col);
     setBoard(newBoard);
   };
@@ -106,7 +124,7 @@ const Board = ({setMarked, setStart}) => {
   };
 
   return (
-    <div className="grid grid-cols-9 gap-1">
+    <div className={`grid grid-cols-${gridSize} gap-1`}>
       {showAlert ?
         <LoseAlert />
       : " "}
