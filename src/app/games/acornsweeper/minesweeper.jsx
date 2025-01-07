@@ -10,8 +10,12 @@ const Minesweeper = () => {
     const [start, setStart] = useState(false)
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-base-100">
+    <div className="flex flex-col items-center bg-base-100 mb-10">
+      <div className="mt-4 text-sm text-center">
+        <span>There are 10 acorns to avoid. <br />Right click to flag a square with a Squirrel.</span>
+      </div>
       <div className="flex justify-between my-4 w-96">
+        
         <div className="w-16 flex items-center justify-center">
           <Timer start={start} />
         </div>
