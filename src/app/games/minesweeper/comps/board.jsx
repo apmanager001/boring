@@ -68,8 +68,6 @@ const Board = ({setMarked, setStart}) => {
     setMarked(flaggedCount);
   }, [board, setMarked]);
 
-  console.log(revealedCells);
-
   useEffect(() => {
     if (revealedCells === nonBombCells) {
       Confetti()
@@ -125,23 +123,21 @@ const Board = ({setMarked, setStart}) => {
 
   return (
     <div className={`grid grid-cols-${gridSize} gap-1`}>
-      {showAlert ?
-        <LoseAlert />
-      : " "}
-        {board.map((row, rowIndex) =>
-          row.map((cell, colIndex) => (
-            <Cell
-              lose={lose}
-              key={`${rowIndex}-${colIndex}`}
-              cell={cell}
-              onClick={() => revealCell(rowIndex, colIndex)}
-              onRightClick={(e) => {
-                e.preventDefault();
-                toggleFlag(rowIndex, colIndex);
-              }}
-            />
-          ))
-        )}
+      {showAlert ? <LoseAlert /> : " "}
+      {board.map((row, rowIndex) =>
+        row.map((cell, colIndex) => (
+          <Cell
+            lose={lose}
+            key={`${rowIndex}-${colIndex}`}
+            cell={cell}
+            onClick={() => revealCell(rowIndex, colIndex)}
+            onRightClick={(e) => {
+              e.preventDefault();
+              toggleFlag(rowIndex, colIndex);
+            }}
+          />
+        ))
+      )}
     </div>
   );
 };

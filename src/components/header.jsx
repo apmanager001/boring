@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-200">
-      <div className="flex-1 mx-10">
+    <div className="flex flex-col md:navbar bg-base-200">
+      <div className="flex-1 flex mx-10">
         <Squirrel
           color={"white"}
           fill={"#989082"}
