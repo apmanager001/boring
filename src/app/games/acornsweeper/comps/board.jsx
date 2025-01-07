@@ -62,6 +62,7 @@ const Board = ({setMarked, setStart}) => {
   const [lose, setLose] = useState(false)
   const [showAlert, setShowAlert] = useState(false);
   const [revealedCells, setRevealedCells] = useState(0);
+  const [gridCols, setGridCols] = useState('grid-cols-9')
 
   useEffect(() => {
     const flaggedCount = board.flat().filter((cell) => cell.flagged).length;
@@ -121,8 +122,15 @@ const Board = ({setMarked, setStart}) => {
     setBoard(newBoard);
   };
 
+  useEffect(()=> {
+    if(gridSize === 12){
+      setGridCols('grid-cols-12')
+    } 
+  }, [])
+  
+
   return (
-    <div className={`grid grid-cols-9 gap-1`}>
+    <div className={`grid ${gridCols} gap-1`}>
       {showAlert ? <LoseAlert /> : " "}
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
