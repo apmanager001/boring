@@ -8,15 +8,14 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
   const handleDrop = (e) => { 
     e.preventDefault();
     const piece = e.dataTransfer.getData("piece");
-    console.log(piece)
-    
     if (piece && cell) {
-      console.log(cell.player)
-      console.log(currentPlayer)
-      if(currentPlayer )
+      if(currentPlayer === cell.player){
+         alert("You can't replace your own piece");
+         return;
+      }
       if (
         cell.piece === "lg" ||
-        (cell.piece === "md" && piece === "sm" || piece === "md") ||
+        (cell.piece === "md" && (piece === "sm" || piece === "md")) ||
         (cell.piece === "sm" && !["md", "lg"].includes(piece))
       ) {
         alert("This square is already occupied with a bigger or equal piece");

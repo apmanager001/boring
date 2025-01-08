@@ -49,7 +49,7 @@ const App = () => {
     <div className="flex flex-col my-10 items-center justify-center">
       <div><span>Selected Piece: {selectedPiece}</span></div>
       <h1>Tic-Tac-Toe</h1>
-      <Board board={board} handleMove={handleMove} />
+      <Board board={board} currentPlayer={currentPlayer} handleMove={handleMove} />
       <div className="mt-4">
         <h2>Player {currentPlayer}'s Turn</h2>
         <div className="flex gap-2">
