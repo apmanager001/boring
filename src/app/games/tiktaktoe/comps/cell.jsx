@@ -8,10 +8,15 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
   const handleDrop = (e) => { 
     e.preventDefault();
     const piece = e.dataTransfer.getData("piece");
+    console.log(piece)
+    
     if (piece && cell) {
+      console.log(cell.player)
+      console.log(currentPlayer)
+      if(currentPlayer )
       if (
         cell.piece === "lg" ||
-        (cell.piece === "md" && piece === "sm" || "md") ||
+        (cell.piece === "md" && piece === "sm" || piece === "md") ||
         (cell.piece === "sm" && !["md", "lg"].includes(piece))
       ) {
         alert("This square is already occupied with a bigger or equal piece");
@@ -19,7 +24,7 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
       }
       handleMove(row, col, piece);
     }
-    if (piece) {
+    if (piece && !cell) {
       handleMove(row, col, piece);
     }
     // if (selectedPiece) {
