@@ -1,7 +1,9 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Board from "./board";
 import Piece from "./piece";
+import { checkForWinner } from "./checkWinner";
+import Confetti from "../../acornsweeper/comps/confetti";
 
 const App = () => {
   const [player1Pieces, setPlayer1Pieces] = useState({ sm: 2, md: 2, lg: 2 });
@@ -44,6 +46,18 @@ const App = () => {
     // Switch to the next player
     setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
   };
+
+    useEffect(() => {
+      const winner = checkForWinner(board);
+
+      if (winner) {
+        Confetti()
+        alert(winner); // or display the winner in a modal, update game status, etc.
+        // Optionally, you can reset the game here or set a game-over state.
+        // Example:
+        // setGameOver(true); // This could stop further moves.
+      }
+    }, [board]);
 
   return (
     <div className="flex flex-col my-10 items-center justify-center">
