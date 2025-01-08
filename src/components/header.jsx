@@ -28,10 +28,13 @@ const Header = () => {
                 </summary>
                 <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
                   <li>
-                    <a href="/games/tiktaktoe">Tick Tack Toe</a>
+                    <a href="/games/tiktaktoe">Tik Tak Toe</a>
                   </li>
                   <li>
                     <a href="/games/acornsweeper">AcornSweeper</a>
+                  </li>
+                  <li>
+                    <a href="/games/acornTreeSquirrel">Acorn Tree Squirrel</a>
                   </li>
                 </ul>
               </details>

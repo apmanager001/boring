@@ -1,11 +1,9 @@
 import React from 'react'
-import App from './comps/app'
+import ATS from './comp/aTS'
 
 const Page = () => {
   return (
-    <div>
-      <App />
-      </div>
+    <div><ATS /></div>
   )
 }
 

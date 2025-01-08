@@ -2,7 +2,7 @@
 import React from "react";
 import Cell from "./cell";
 
-const Board = ({ board, handleMove }) => {
+const Board = ({ board, handleMove, selectedPiece }) => {
   return (
     <div className="grid grid-cols-3 gap-1">
       {board.map((row, rowIndex) =>
@@ -13,6 +13,7 @@ const Board = ({ board, handleMove }) => {
             col={colIndex}
             cell={cell}
             handleMove={handleMove}
+            selectedPiece={selectedPiece}
           />
         ))
       )}
