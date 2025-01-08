@@ -11,7 +11,7 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
     if (piece && cell) {
       if (
         cell.piece === "lg" ||
-        (cell.piece === "md" && piece === "sm") ||
+        (cell.piece === "md" && piece === "sm" || "md") ||
         (cell.piece === "sm" && !["md", "lg"].includes(piece))
       ) {
         alert("This square is already occupied with a bigger or equal piece");
