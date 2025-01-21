@@ -1,6 +1,7 @@
 import React from 'react'
 import { Squirrel } from 'lucide-react';
 import { TableProperties, Dices, KeyRound } from 'lucide-react';
+import UserInfo from '../components/headerComps/userInfo'
 import Link from 'next/link';
 
 const Header = () => {
@@ -40,15 +41,12 @@ const Header = () => {
               </details>
             </li>
             <li>
-              <a href="/leaderboard">
+              <Link href="/leaderboard">
                 <TableProperties /> Leaderboard
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/login">
-                <KeyRound />
-                Login
-              </a>
+              <UserInfo />
             </li>
           </ul>
         </div>
