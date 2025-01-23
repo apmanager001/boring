@@ -1,11 +1,21 @@
 'use client'
-import React from 'react'
+import React, {useEffect} from 'react'
 import Link from 'next/link'
 import useStore from '../../app/store/store'
 import { KeyRound, UserRound } from 'lucide-react'
 
 const UserInfo = () => {
     const user = useStore((state) => state.user);
+    const validateSession = useStore((state) => state.validateSession);
+
+    
+    useEffect(() => {
+      if(!user){
+        validateSession();
+      }
+    }, [validateSession]);
+  
+    
 
     return (
       <div>

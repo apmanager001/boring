@@ -1,7 +1,6 @@
 import {create} from 'zustand'
 import axiosInstance from '../../components/utility/axios'
 
-
 const useStore = create((set, get) => ({
   session: null,
   user: null,
