@@ -1,16 +1,34 @@
 import React from "react";
 
-const Cell = ({ row, col, cell, handleMove, currentPlayer }) => {
+const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
   const handleDragOver = (e) => {
     e.preventDefault(); // Allow drop by preventing the default behavior
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = (e) => { 
     e.preventDefault();
     const piece = e.dataTransfer.getData("piece");
+    if (piece && cell) {
+      if(currentPlayer === cell.player){
+         alert("You can't replace your own piece");
+         return;
+      }
+      if (
+        cell.piece === "lg" ||
+        (cell.piece === "md" && (piece === "sm" || piece === "md")) ||
+        (cell.piece === "sm" && !["md", "lg"].includes(piece))
+      ) {
+        alert("This square is already occupied with a bigger or equal piece");
+        return;
+      }
+      handleMove(row, col, piece);
+    }
     if (piece && !cell) {
       handleMove(row, col, piece);
     }
+    // if (selectedPiece) {
+    //   handleMove(row, col, selectedPiece);
+    // }
   };
 
   return (

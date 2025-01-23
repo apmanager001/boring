@@ -1,6 +1,7 @@
 import React from 'react'
 import { Squirrel } from 'lucide-react';
 import { TableProperties, Dices, KeyRound } from 'lucide-react';
+import UserInfo from '../components/headerComps/userInfo'
 import Link from 'next/link';
 
 const Header = () => {
@@ -27,26 +28,26 @@ const Header = () => {
                   Games
                 </summary>
                 <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
-                  {/* <li>
-                    <a href="/games/tiktaktoe">Tick Tack Toe</a>
-                  </li> */}
+                  <li>
+                    <a href="/games/tiktaktoe">Tik Tak Toe</a>
+                  </li>
                   <li>
                     <a href="/games/acornsweeper">AcornSweeper</a>
+                  </li>
+                  <li>
+                    <a href="/games/acornTreeSquirrel">Acorn Tree Squirrel</a>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <a href="/leaderboard">
+              <Link href="/leaderboard">
                 <TableProperties /> Leaderboard
-              </a>
+              </Link>
             </li>
-            {/* <li>
-              <a href="/login">
-                <KeyRound />
-                Login
-              </a>
-            </li> */}
+            <li>
+              <UserInfo />
+            </li>
           </ul>
         </div>
       </div>

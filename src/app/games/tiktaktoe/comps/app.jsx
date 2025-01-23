@@ -1,18 +1,34 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Board from "./board";
 import Piece from "./piece";
+import { checkForWinner } from "./checkWinner";
+import Confetti from "../../acornsweeper/comps/confetti";
 
 const App = () => {
-  const [player1Pieces, setPlayer1Pieces] = useState({ sm: 3, md: 2, lg: 1 });
-  const [player2Pieces, setPlayer2Pieces] = useState({ sm: 3, md: 2, lg: 1 });
+  const [player1Pieces, setPlayer1Pieces] = useState({ sm: 2, md: 2, lg: 2 });
+  const [player2Pieces, setPlayer2Pieces] = useState({ sm: 2, md: 2, lg: 2 });
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [board, setBoard] = useState(Array(3).fill(Array(3).fill(null)));
+  const [selectedPiece, setSelectedPiece] = useState(null)
 
   const handleMove = (row, col, piece) => {
-    if (board[row][col] !== null) return; // Cell is already occupied.
+    // console.log(board[row][col])
+    // console.log(piece)
+    if (board[row][col] !== null) { 
+      // console.log(board[row][col].piece)
+      // const currentPiece = board[row][col].piece;
+      // if (currentPiece === 'lg' || 
+      //     (currentPiece === 'md' && selectedPiece === 'sm') || 
+      //     (currentPiece === 'sm' && !['md', 'lg'].includes(selectedPiece))) { 
+      //       alert('This square is already occupied with a bigger or equal piece')
+      //   return;
+      //   }
+    }
+    const newBoard = board.map((r, rowIndex) => 
+      rowIndex === row ? [...r] : r
+    )
 
-    const newBoard = [...board];
     newBoard[row][col] = { player: currentPlayer, piece };
     setBoard(newBoard);
 
@@ -31,10 +47,23 @@ const App = () => {
     setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
   };
 
+    useEffect(() => {
+      const winner = checkForWinner(board);
+
+      if (winner) {
+        Confetti()
+        alert(winner); // or display the winner in a modal, update game status, etc.
+        // Optionally, you can reset the game here or set a game-over state.
+        // Example:
+        // setGameOver(true); // This could stop further moves.
+      }
+    }, [board]);
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="flex flex-col my-10 items-center justify-center">
+      <div><span>Selected Piece: {selectedPiece}</span></div>
       <h1>Tic-Tac-Toe</h1>
-      <Board board={board} handleMove={handleMove} />
+      <Board board={board} currentPlayer={currentPlayer} handleMove={handleMove} />
       <div className="mt-4">
         <h2>Player {currentPlayer}'s Turn</h2>
         <div className="flex gap-2">
@@ -42,10 +71,12 @@ const App = () => {
             <Piece
               key={size}
               size={size}
+              player={currentPlayer}
               count={
                 currentPlayer === 1 ? player1Pieces[size] : player2Pieces[size]
               }
-              onClick={() => handleMove(1, 1, size)} // This is just a placeholder for demonstration
+              // onClick={() => handleMove(1, 1, size)} // This is just a placeholder for demonstration
+              onClick={() => setSelectedPiece(size)}
             />
           ))}
         </div>
