@@ -78,7 +78,7 @@ const Login = () => {
                   htmlFor="email"
                   className="block text-gray-700 text-sm font-bold mb-2"
                 >
-                  Email
+                  Username
                 </label>
               </div>
               <input
@@ -86,7 +86,7 @@ const Login = () => {
                 id="email"
                 name="email"
                 className="input input-bordered w-full"
-                placeholder="Email or Username"
+                placeholder="Username"
                 value={data.name}
                 onChange={(e) => setData({ ...data, name: e.target.value })}
                 required

@@ -1,59 +1,56 @@
 'use client'
 import React, {useState} from 'react'
 import Link from 'next/link'
-import { ChevronDown } from 'lucide-react'
+import axiosInstance from '../../../components/utility/axios'
+import { LogOut, Settings, User, KeyRound } from 'lucide-react'
 import useStore from '../../store/store'
 
 const GameLogged = () => {
     const user = useStore((state) => state.user);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
-    }
+    const handleLogout = async () => {
+      try {
+        await axiosInstance.post("/logout");
+        window.location.href = "/login";
+      } catch (error) {
+        toast.error(error);
+      }
+    };
   return (
     <>
       {user ? (
-        // <div className='realtive text-left'>
-        //     <div onClick={toggleDropdown} className='text-left flex gap-2 '>
-        //         {user.username}
-        //         <ChevronDown />
-        //     </div>
-        //     {dropdownOpen && (
-        //         <div className='absolute right-3 md:right-auto mt-2 w-36 bg-base-300 border rounded shadow-md'>
-        //             <Link href="/profile" className='block px-4 py-2 hover:bg-base-200'>Profile</Link>
-        //             <Link href="/stats" className='block px-4 py-2 hover:bg-base-200'>Settings</Link>
-        //             <Link href="/logout" className='block px-4 py-2 hover:bg-base-200'>Logout</Link>
-        //         </div>
-        //     )}
-        // </div>
         <div className="navbar justify-end">
           <div className="flex-none">
             <ul className="menu menu-horizontal px-1">
               <li>
                 <details>
-                  <summary>{user.username}</summary>
+                  <summary>
+                    {user.username}
+                  </summary>
                   <ul className="bg-base-200 rounded-t-none p-4">
                     <li>
-                      <Link
-                        href={`/profile/${user.username}`}
-                      >
+                      <Link href={`/profile/${user.username}`}>
+                        <User />
                         Profile
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        href="/stats"
-                      >
+                      <Link href="/stats">
+                        <Settings />
                         Settings
                       </Link>
                     </li>
                     <li>
-                        <Link
-                            href="/logout"
-                        >
-                            Logout
-                        </Link>
+                      <Link
+                        href="#"
+                        className="hover:bg-red-600 hover:text-white"
+                        onClick={handleLogout}
+                        data-name="logout"
+                        aria-label="This link will log you out of your account. "
+                      >
+                        <LogOut />
+                        Logout
+                      </Link>
                     </li>
                   </ul>
                 </details>
@@ -63,7 +60,10 @@ const GameLogged = () => {
         </div>
       ) : (
         <Link href="/login">
-          <div className="btn btm-xs">Login</div>
+          <div className="flex gap-2 items-center">
+            <KeyRound />
+            Login
+          </div>
         </Link>
       )}
     </>
