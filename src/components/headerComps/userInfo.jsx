@@ -6,25 +6,30 @@ import axiosInstance from '../utility/axios'
 import { LogOut, Settings, User, UserRound, KeyRound } from "lucide-react";
 
 const UserInfo = () => {
-  const user = useStore((state) => state.user);
-  const validateSession = useStore((state) => state.validateSession);
-    
-  useEffect(() => {
-    if(!user){
-      validateSession();
-    }
-  }, [validateSession]);
+   const { user, loading, error, validateSession, logout } = useStore();
+
+   useEffect(() => {
+     validateSession(); 
+   }, [validateSession]);
+
+   if (loading) return <p>Loading...</p>;
+   if (error) return <p>Error: {error}</p>;
+
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post("/logout");
+      await logout();
       window.location.href = "/login";
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
-    
 
+  if (error) {
+    toast.error(error);
+  }
+    
+console.log(user)
   return (
     <>
       {user ? (

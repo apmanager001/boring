@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Link from "next/link";
 import axiosInstance from '../../../components/utility/axios';
 import { toast } from "react-hot-toast";
@@ -65,6 +65,7 @@ const Login = () => {
   const handleHidePassword =()=> {
     setHidePassword(!hidePassword)
   }
+
   return (
     <section className="my-28 flex box-border justify-center items-center">
       <div className="bg-base-300 rounded-2xl flex max-w-3xl p-5 items-center hover:shadow-2xl">
@@ -180,7 +181,6 @@ const Login = () => {
             <Google />
             Login with Google
           </button>
-
           <div className="mt-4 text-sm text-white flex justify-between items-center ">
             <p className="mr-3 md:mr-0 ">If you don't have an account yet..</p>
             <a href="/signup">
