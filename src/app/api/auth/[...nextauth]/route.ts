@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import {session} from '@/app/api/auth/session'
+// import {session} from '@/app/api/auth/session'
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -18,7 +18,7 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({  profile }) {
       if (!profile?.email) {
         throw new Error("No Profile");
       }
