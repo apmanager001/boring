@@ -14,7 +14,16 @@ import { User, getServerSession } from "next-auth";
   // if (!authUserSession) throw new Error('unauthorized')
 //   return authUserSession?.user;
 // };
-export const getUserSession = async (): Promise<User> => {
+// export const getUserSession = async (): Promise<User> => {
+//   const authUserSession = await getServerSession();
+//   return authUserSession?.user
+// }
+export const getUserSession = async (): Promise<User | null> => {
   const authUserSession = await getServerSession();
-  return authUserSession?.user
-}
+
+  if (!authUserSession || !authUserSession.user) {
+    return null; // Return null if no session or user is found
+  }
+
+  return authUserSession.user; // Safely return the user object
+};
