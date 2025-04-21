@@ -5,12 +5,11 @@ export const session = async ({ session, token }: any) => {
   return session;
 };
 
-export const getUserSession = async (): Promise<User> => {
+export const getUserSession = async (): Promise<User | null> => {
   const authUserSession = await getServerSession({
     callbacks: {
       session,
     },
   });
-  // if (!authUserSession) throw new Error('unauthorized')
   return authUserSession?.user || null;
 };
