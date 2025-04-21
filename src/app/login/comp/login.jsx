@@ -1,8 +1,11 @@
 'use client'
 import React, {useEffect, useState} from 'react'
+
 import Link from "next/link";
 import axiosInstance from '../../../components/utility/axios';
 import { toast } from "react-hot-toast";
+import { signIn } from 'next-auth/react';
+
 import Google from './google';
 import { Eye } from 'lucide-react';
 
@@ -65,7 +68,6 @@ const Login = () => {
   const handleHidePassword =()=> {
     setHidePassword(!hidePassword)
   }
-
   return (
     <section className="my-28 flex box-border justify-center items-center">
       <div className="bg-base-300 rounded-2xl flex max-w-3xl p-5 items-center hover:shadow-2xl">
@@ -177,7 +179,11 @@ const Login = () => {
           <div className="mt-6  items-center text-gray-100">
             <div className="divider">OR</div>
           </div>
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 hover:bg-gray-200 font-medium">
+          <button
+            className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 hover:bg-gray-200 font-medium"
+            onClick={() => signIn("google")}
+          >
+
             <Google />
             Login with Google
           </button>

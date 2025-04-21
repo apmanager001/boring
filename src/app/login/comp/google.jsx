@@ -1,28 +1,11 @@
 'use client'
-import React, {useEffect} from 'react'
-import { useRouter } from 'next/navigation';
+import React from 'react'
 
 
 
 function Google() {
-  // const router = useRouter();
-  // const { setToken, setUser } = useAuthStore();
-
-  // useEffect(() => {
-  //   if (router.query.token) {
-  //     const token = router.query.token;
-  //     localStorage.setItem("token", token);
-  //     setToken(token);
-  //     router.push("/");
-  //   }
-  // }, [router.query.token]);
-
-  const handleLogin = () => {
-    window.location.href = "/auth/google";
-  };
-
   return (
-    <div onClick={handleLogin}>
+    <div>
       <svg
         className="mr-3"
         xmlns="http://www.w3.org/2000/svg"

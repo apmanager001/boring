@@ -7,7 +7,6 @@ import { LogOut, Settings, User, UserRound, KeyRound } from "lucide-react";
 
 const UserInfo = () => {
    const { user, loading, error, validateSession, logout } = useStore();
-
    useEffect(() => {
      validateSession(); 
    }, [validateSession]);
