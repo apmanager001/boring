@@ -15,6 +15,6 @@ import { User, getServerSession } from "next-auth";
 //   return authUserSession?.user;
 // };
 export const getUserSession = async (): Promise<User> => {
-  const authUserSession = await getServerSession()
+  const authUserSession = await getServerSession();
   return authUserSession?.user
 }

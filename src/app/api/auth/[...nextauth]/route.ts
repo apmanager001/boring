@@ -6,6 +6,12 @@ import GoogleProvider from "next-auth/providers/google";
 const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENTID
 const clientSecret = process.env.NEXT_PUBLIC_GOOGLE_SECRET
 
+if (!clientId || !clientSecret) {
+  throw new Error(
+    "Missing Google client ID or client secret environment variables."
+  );
+}
+
 
 const authOptions: NextAuthOptions = {
   session: {
