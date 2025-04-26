@@ -4,8 +4,6 @@ import React, {useEffect, useState} from 'react'
 import Link from "next/link";
 import axiosInstance from '../../../components/utility/axios';
 import { toast } from "react-hot-toast";
-import { signIn } from 'next-auth/react';
-
 import Google from './google';
 import { Eye } from 'lucide-react';
 

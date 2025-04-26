@@ -1,13 +1,9 @@
 import React from "react";
-import { Squirrel, TableProperties, Dices, User, LogOut } from "lucide-react";
-import UserInfo from "../components/headerComps/userInfo";
+import { Squirrel, TableProperties, Dices } from "lucide-react";
+import GoogleSignin from './headerComps/googleSignin'
 import Link from "next/link";
-import GoogleSignout from './headerComps/googleSignout'
-import { getUserSession } from "@/app/api/auth/session";
 
 const Header = async () => {
-  const googleUser = await getUserSession();
-  console.log("google user", googleUser);
 
   return (
     <div className="navbar justify-center bg-base-200">
@@ -39,9 +35,7 @@ const Header = async () => {
                     <a href="/games/acornsweeper">AcornSweeper</a>
                   </li>
                   <li>
-                    <a href="/games/acornTreeSquirrel">
-                      Acorn Tree Squirrel
-                    </a>
+                    <a href="/games/acornTreeSquirrel">Acorn Tree Squirrel</a>
                   </li>
                 </ul>
               </details>
@@ -52,18 +46,8 @@ const Header = async () => {
               </Link>
             </li>
             <li>
-              {googleUser ? (
-                <div>
-                  <User />
-                  {googleUser.name}
-                </div>
-              ) : (
-                <UserInfo />
-              )}
+              <GoogleSignin />
             </li>
-            {googleUser && (
-              <GoogleSignout />
-            )}
           </ul>
         </div>
       </div>
