@@ -31,7 +31,7 @@ const GoogleSignin = () => {
     </summary>
     <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
         <li>
-        <Link href={`/profile`} className="text-center flex justify-center">
+        <Link href={`/profile/placeholder`} className="text-center flex justify-center">
             <Fingerprint />
             Account
         </Link>
