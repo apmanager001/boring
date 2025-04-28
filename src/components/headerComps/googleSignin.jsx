@@ -23,36 +23,38 @@ const GoogleSignin = () => {
 
   //   fetchAuthStatus();
   // }, []);
-  return googleUser ? (
-    <details>
-    <summary>
-        <User />
-        Placeholder
-    </summary>
-    <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
-        <li>
-        <Link href={`/profile/placeholder`} className="text-center flex justify-center">
-            <Fingerprint />
-            Account
-        </Link>
-        </li>
-        <li>
-        <Link
-            href={`/settings`}
-            className="text-center flex justify-center"
-        >
-            <Cog />
-            Settings
-        </Link>
-        </li>
-        <li>
-        <GoogleSignout />
-        </li>
-    </ul>
-    </details>
-  ) : (
+  return (
+  //   googleUser ? (
+  //   <details>
+  //   <summary>
+  //       <User />
+  //       Placeholder
+  //   </summary>
+  //   <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
+  //       <li>
+  //       <Link href={`/profile/placeholder`} className="text-center flex justify-center">
+  //           <Fingerprint />
+  //           Account
+  //       </Link>
+  //       </li>
+  //       <li>
+  //       <Link
+  //           href={`/settings`}
+  //           className="text-center flex justify-center"
+  //       >
+  //           <Cog />
+  //           Settings
+  //       </Link>
+  //       </li>
+  //       <li>
+  //       <GoogleSignout />
+  //       </li>
+  //   </ul>
+  //   </details>
+  // ) : (
     <UserInfo />
-  );
+  // )
+)
 }
 
 export default GoogleSignin
