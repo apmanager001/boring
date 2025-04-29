@@ -27,8 +27,6 @@ const UserInfo = () => {
   if (error) {
     toast.error(error);
   }
-    
-console.log(user)
   return (
     <>
       {user ? (
@@ -45,7 +43,7 @@ console.log(user)
               </Link>
             </li>
             <li>
-              <Link href="/stats">
+              <Link href="/account">
                 <Settings />
                 Settings
               </Link>

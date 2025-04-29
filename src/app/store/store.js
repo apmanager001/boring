@@ -20,7 +20,7 @@ const useStore = create((set, get) => ({
 
     set({ loading: true, error: null });
     try {
-      const response = await axiosInstance.get("/profile"); // Make the request
+      const response = await axiosInstance.get("/profile");
       const data = response.data; // Extract data from response
       const user =
         (Array.isArray(data.body) && data.body.length === 0) ||
@@ -32,9 +32,9 @@ const useStore = create((set, get) => ({
         loading: false,
         error: null,
       });
-      console.log("User session validated:", data.body);
+      console.log("User session validated:", data);
     } catch (error) {
-      console.error("Error validating session:", error);
+      // console.error("Error validating session:", error);
       // set({
       //   user: null,
       //   loading: false,

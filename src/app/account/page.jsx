@@ -1,8 +1,9 @@
 import React from 'react'
+import Settings from './comp/settings'
 
 const Page = () => {
   return (
-    <div>Page</div>
+    <div><Settings/></div>
   )
 }
 

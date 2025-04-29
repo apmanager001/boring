@@ -12,9 +12,9 @@ const Minesweeper = () => {
 
   return (
     <div className="flex flex-col items-center bg-base-100 mb-20">
-      <div className="mt-4 mr-4 flex justify-end w-full md:w-[500px]">
+      {/* <div className="mt-4 mr-4 flex justify-end w-full md:w-[500px]">
         <GameLogged />
-      </div>
+      </div> */}
       <div className="mt-4 text-sm text-center">
         <span>
           There are 10 acorns to avoid. <br />
