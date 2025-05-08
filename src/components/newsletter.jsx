@@ -39,7 +39,6 @@ const Newsletter = () => {
             }
         }
     };
-console.log(address)
   return (
     <form onSubmit={handleSubmit}>
       <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 rounded-lg ">
