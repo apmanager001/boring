@@ -34,12 +34,6 @@ const useStore = create((set, get) => ({
       });
       console.log("User session validated:", data);
     } catch (error) {
-      // console.error("Error validating session:", error);
-      // set({
-      //   user: null,
-      //   loading: false,
-      //   error: error.response?.data?.message || "Failed to validate session",
-      // });
       if (error.response?.status === 404) {
       set({
         user: null,

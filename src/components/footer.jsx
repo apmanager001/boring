@@ -1,4 +1,5 @@
 import React from 'react'
+import Newsletter from './newsletter'
 import { Home, Gamepad2, Info, Bell } from "lucide-react";
 
 const Footer = () => {
@@ -57,32 +58,7 @@ const Footer = () => {
                 Get Updates on New Games:
               </h4>
 
-              <form>
-                <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 rounded-lg ">
-                  <div className="w-full">
-                    <label htmlFor="emails" className="sr-only">
-                      Subscribe
-                    </label>
-                    <input
-                      type="text"
-                      id="emails"
-                      name="emails"
-                      className="input input-bordered block w-full rounded-lg text-sm"
-                      placeholder="Enter your email"
-                      autoComplete="true"
-                    />
-                  </div>
-                  <a
-                    className="w-full sm:w-auto hover:scale-110 whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent btn btn-primary  disabled:pointer-events-none"
-                    href="#"
-                  >
-                    Subscribe
-                  </a>
-                </div>
-                {/* <p className="mt-3 text-sm text-gray-400">
-                New UI kits or big discounts. Never spam.
-              </p> */}
-              </form>
+              <Newsletter />
             </div>
           </div>
 

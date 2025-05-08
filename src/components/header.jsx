@@ -27,7 +27,7 @@ const Header = async () => {
                   <Dices />
                   Games
                 </summary>
-                <ul className="rounded-t-none p-2 text-center bg-base-300 z-50">
+                <ul className="rounded-t-none p-2 text-center bg-base-200 z-50">
                   <li>
                     <a href="/games/tiktaktoe">Tik Tak Toe</a>
                   </li>

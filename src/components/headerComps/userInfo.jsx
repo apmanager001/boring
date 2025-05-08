@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
 import useStore from '../../app/store/store'
 import axiosInstance from '../utility/axios'
-import { LogOut, Settings, User, UserRound, KeyRound } from "lucide-react";
+import { LogOut, Cog, User, UserRound, KeyRound } from "lucide-react";
 
 const UserInfo = () => {
    const { user, loading, error, validateSession, logout } = useStore();
@@ -44,7 +44,7 @@ const UserInfo = () => {
             </li>
             <li>
               <Link href="/account">
-                <Settings />
+                <Cog />
                 Settings
               </Link>
             </li>
