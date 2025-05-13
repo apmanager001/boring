@@ -6,7 +6,7 @@ import Link from "next/link";
 const Header = async () => {
 
   return (
-    <div className="navbar justify-center bg-base-200">
+    <div className="navbar justify-center bg-base-200 z-10">
       <div className="flex flex-col mx-10">
         <div className="flex-1 flex justify-center">
           <Squirrel

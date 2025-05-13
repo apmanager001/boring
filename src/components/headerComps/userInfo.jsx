@@ -11,7 +11,9 @@ const UserInfo = () => {
      validateSession(); 
    }, [validateSession]);
 
-   if (loading) return <p>Loading...</p>;
+   if (loading) return (
+     <span className="loading loading-dots text-accent"></span>
+   );
    if (error) return <p>Error: {error}</p>;
 
 

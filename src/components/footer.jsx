@@ -1,11 +1,11 @@
 import React from 'react'
 import Newsletter from './newsletter'
-import { Home, Gamepad2, Info, Bell } from "lucide-react";
+import { Home, Gamepad2, ClipboardList, Menu } from "lucide-react";
 
 const Footer = () => {
   return (
     <>
-      <footer className="hidden md:block mt-auto bg-base-200 w-full ">
+      <footer className="hidden md:block mt-auto bg-base-200 w-full z-10">
         <div className="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             <div className="col-span-full lg:col-span-1">
@@ -75,20 +75,17 @@ const Footer = () => {
       </footer>
       <footer className="block md:hidden fixed bottom-0 left-0 right-0 bg-base-200 p-4">
         <div className="flex justify-around">
-          <a href="#" className="text-gray-400 hover:text-gray-200">
+          <a href="/" className="text-gray-400 hover:text-gray-200">
             <Home size={24} />
           </a>
           <a href="/games" className="text-gray-400 hover:text-gray-200">
             <Gamepad2 size={24} />
           </a>
-          <a href="/about" className="text-gray-400 hover:text-gray-200">
-            <Info size={24} />
+          <a href="/leaderboard" className="text-gray-400 hover:text-gray-200">
+            <ClipboardList  size={24}/>
           </a>
-          <a
-            href="/notifications"
-            className="text-gray-400 hover:text-gray-200"
-          >
-            <Bell size={24} />
+          <a href="/about" className="text-gray-400 hover:text-gray-200">
+            <Menu size={24} />
           </a>
         </div>
       </footer>

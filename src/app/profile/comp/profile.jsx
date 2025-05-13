@@ -9,8 +9,8 @@ const Profile = ({
   highestRank = "Unranked",
 }) => {
   return (
-    <div className="p-20 bg-base-200 min-h-screen">
-      <div className=" flex flex-col md:flex-row w-full h-full md:h-[500px]  mx-auto bg-base-100 shadow-xl rounded-lg">
+    <div className="p-6 md:p-20 bg-base-200 min-h-screen">
+      <div className=" flex flex-col md:flex-row w-full max-w-[900px] h-full md:h-[500px]  mx-auto bg-base-100 shadow-lg rounded-lg border border-1px border-neutral">
         <div className="flex flex-col items-center text-center md:w-1/3 p-6">
           <UserCircle className="w-24 h-24 mx-auto text-primary" />
           <h1 className="text-2xl font-bold mt-4">{username}</h1>
