@@ -20,6 +20,9 @@ const OilcapGame = () => {
       Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE).fill(null))
     );
     const [startPos, setStartPos] = useState(null);
+    const [draggedItem, setDraggedItem] = useState(null);
+    const [hasDropped, setHasDropped] = useState(false);
+
 
     // Generate random start position **only on the client**
     useEffect(() => {
@@ -41,12 +44,20 @@ const OilcapGame = () => {
   const [score, setScore] = useState(0);
   const [running, setRunning] = useState(false);
 
-  const handleClick = (rowIndex, colIndex) => {
+  // const handleClick = (rowIndex, colIndex) => {
+  //   setGrid((prevGrid) => {
+  //     const newGrid = [...prevGrid];
+  //     newGrid[rowIndex][colIndex] = "🟫"; // Example pipe
+  //     return newGrid;
+  //   });
+  // };
+  const handleClick = (rowIndex, colIndex, piece = "🟫") => {
     setGrid((prevGrid) => {
       const newGrid = [...prevGrid];
-      newGrid[rowIndex][colIndex] = "🟫"; // Example pipe
+      newGrid[rowIndex][colIndex] = piece; // Place the dropped piece
       return newGrid;
     });
+    setHasDropped(true);
   };
 
   const handleStart = () => {
@@ -62,8 +73,16 @@ const OilcapGame = () => {
         <Timer running={running} />
       </div>
       <div className="flex flex-col md:flex-row justify-center mb-4">
-        <GameBoard grid={grid} handleClick={handleClick} />
-        <Pieces />
+        <GameBoard
+          grid={grid}
+          handleClick={handleClick}
+          setDraggedItem={setDraggedItem}
+        />
+        <Pieces
+          setDraggedItem={setDraggedItem}
+          hasDropped={hasDropped}
+          setHasDropped={setHasDropped}
+        />
       </div>
       {/* <button
         className="btn btn-primary my-4"
