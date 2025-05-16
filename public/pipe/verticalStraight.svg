@@ -1,0 +1,10 @@
+<svg width="140" height="300" viewBox="0 0 140 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wider Pipe body -->
+  <rect x="40" y="50" width="60" height="200" fill="gray" stroke="black" stroke-width="3" rx="15" ry="15"/>
+
+  <!-- Top flared end: Adjusted for width -->
+  <path d="M 40 50 Q 15 20, 70 20 Q 125 20, 100 50" fill="gray" stroke="black" stroke-width="3"/>
+
+  <!-- Bottom flared end: Adjusted for width -->
+  <path d="M 40 250 Q 15 280, 70 280 Q 125 280, 100 250" fill="gray" stroke="black" stroke-width="3"/>
+</svg>
