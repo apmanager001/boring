@@ -5,6 +5,7 @@ import ScoreBoard from "./scoreboard";
 import Pieces from './pieces'
 import Timer from "./timer"
 import { startOilFlow } from "./OilFlow";
+import StartCell from "./startCell";
 
 const BOARD_SIZE = 10;
 
@@ -72,7 +73,7 @@ const OilcapGame = () => {
         <ScoreBoard score={score} />
         <Timer running={running} />
       </div>
-      <div className="flex flex-col md:flex-row justify-center mb-4">
+      <div className="flex flex-col md:flex-row justify-center mb-10">
         <GameBoard
           grid={grid}
           handleClick={handleClick}

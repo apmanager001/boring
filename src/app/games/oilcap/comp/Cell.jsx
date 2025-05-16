@@ -4,10 +4,6 @@ import React from "react";
 
 
 const Cell = ({ type, onClick }) => {
-  if(type){
-    console.log(type)
-
-  }
 
   let content;
   switch (type) {
@@ -32,26 +28,53 @@ const Cell = ({ type, onClick }) => {
       );
       break;
     case "╬":
-      content = <img src="/pipe/cross.svg" alt="╬" className="w-full h-full" />;
+      content = (
+        <img
+          src="/pipe/cross.svg"
+          alt="╬"
+          className="w-full h-full"
+          draggable="false"
+        />
+      );
       break;
     case "╝":
       content = (
-        <img src="/pipe/leftToUp.svg" alt="╝" className="w-full h-full" />
+        <img
+          src="/pipe/leftToUp.svg"
+          alt="╝"
+          className="w-full h-full"
+          draggable="false"
+        />
       );
       break;
     case "╚":
       content = (
-        <img src="/pipe/rightToUp.svg" alt="╚" className="w-full h-full" />
+        <img
+          src="/pipe/rightToUp.svg"
+          alt="╚"
+          className="w-full h-full"
+          draggable="false"
+        />
       );
       break;
     case "╗":
       content = (
-        <img src="/pipe/leftToDown.svg" alt="╗" className="w-full h-full" />
+        <img
+          src="/pipe/leftToDown.svg"
+          alt="╗"
+          className="w-full h-full"
+          draggable="false"
+        />
       );
       break;
     case "╔":
       content = (
-        <img src="/pipe/rightToDown.svg" alt="╔" className="w-full h-full" />
+        <img
+          src="/pipe/rightToDown.svg"
+          alt="╔"
+          className="w-full h-full"
+          draggable="false"
+        />
       );
       break;
     default:

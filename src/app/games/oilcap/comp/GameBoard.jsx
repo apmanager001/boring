@@ -28,7 +28,7 @@ const GameBoard = ({ grid, handleClick, setDraggedItem }) => {
   };
 
   return (
-    <div className="grid grid-cols-10 max-w-[480px] justify-center p-2 md:p-0">
+    <div className="grid grid-cols-10 md:max-w-[480px] justify-center md:p-0">
       {grid.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
           <div
