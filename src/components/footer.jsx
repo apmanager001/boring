@@ -69,7 +69,11 @@ const Footer = () => {
               </p>
             </div>
 
-            <div>Socials</div>
+            <div className='underline'>
+              <a href="mailto:contact@boringsquirrel.com">
+                contact@boringsquirrel.com
+              </a>
+            </div>
           </div>
         </div>
       </footer>
@@ -82,7 +86,7 @@ const Footer = () => {
             <Gamepad2 size={24} />
           </a>
           <a href="/leaderboard" className="text-gray-400 hover:text-gray-200">
-            <ClipboardList  size={24}/>
+            <ClipboardList size={24} />
           </a>
           <a href="/about" className="text-gray-400 hover:text-gray-200">
             <Menu size={24} />

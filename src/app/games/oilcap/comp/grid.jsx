@@ -5,7 +5,6 @@ import ScoreBoard from "./scoreboard";
 import Pieces from './pieces'
 import Timer from "./timer"
 import { startOilFlow } from "./OilFlow";
-import StartCell from "./startCell";
 
 const BOARD_SIZE = 10;
 
@@ -31,9 +30,12 @@ const OilcapGame = () => {
       setGrid((prevGrid) => {
         const newGrid = prevGrid.map((row, rowIndex) =>
           row.map((cell, colIndex) =>
-            rowIndex === newStart.row && colIndex === newStart.col
-              ? "START ║"
-              : cell
+            rowIndex === newStart.row && colIndex === newStart.col ? (
+              "START"
+            ) : (
+              // "START ║"
+              cell
+            )
           )
         );
         return newGrid;
@@ -65,7 +67,7 @@ const OilcapGame = () => {
     setRunning(true);
     startOilFlow(grid, setGrid, setScore);
   };
-
+console.log(grid)
   return (
     <div className="game-container text-center">
       <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
