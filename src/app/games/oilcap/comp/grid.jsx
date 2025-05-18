@@ -62,12 +62,11 @@ const OilcapGame = () => {
     });
     setHasDropped(true);
   };
-
+// console.log(grid)
   const handleStart = () => {
     setRunning(true);
     startOilFlow(grid, setGrid, setScore);
   };
-console.log(grid)
   return (
     <div className="game-container text-center">
       <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
