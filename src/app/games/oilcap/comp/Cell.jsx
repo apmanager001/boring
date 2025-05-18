@@ -95,7 +95,7 @@ const Cell = ({ type, onClick }) => {
 
   return (
     <div
-      className={`min-w-12 min-h-12 border cursor-pointer ${
+      className={`min-w-12 min-h-12 border ${
         typeof type === "string" && type.includes("START")
           ? "bg-green-500 text-black font-bold"
           : "bg-blue-500 text-black font-extrabold text-3xl"

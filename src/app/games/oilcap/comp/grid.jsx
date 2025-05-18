@@ -22,7 +22,9 @@ const OilcapGame = () => {
     const [startPos, setStartPos] = useState(null);
     const [draggedItem, setDraggedItem] = useState(null);
     const [hasDropped, setHasDropped] = useState(false);
-
+    const [startGame, setStartGame] = useState(false);
+    const [score, setScore] = useState(0);
+    const [running, setRunning] = useState(false);
 
     // Generate random start position **only on the client**
     useEffect(() => {
@@ -43,9 +45,6 @@ const OilcapGame = () => {
       setStartPos(newStart);
     }, []);
     
-    
-  const [score, setScore] = useState(0);
-  const [running, setRunning] = useState(false);
 
   // const handleClick = (rowIndex, colIndex) => {
   //   setGrid((prevGrid) => {
@@ -64,12 +63,22 @@ const OilcapGame = () => {
   };
 // console.log(grid)
   const handleStart = () => {
+    setStartGame(true);
     setRunning(true);
-    startOilFlow(grid, setGrid, setScore);
+    // startOilFlow(grid, setGrid, setScore);
   };
   return (
     <div className="game-container text-center">
       <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
+      {!startGame && (
+        <>
+          <h1>Welcome to Oilcap Game! Click Start to begin.</h1>
+          <button className="btn btn-secondary my-4" onClick={handleStart}>
+            Start Game
+          </button>
+        </>
+      )}
+
       <div className="flex justify-center items-center gap-4">
         <ScoreBoard score={score} />
         <Timer running={running} />
@@ -81,6 +90,7 @@ const OilcapGame = () => {
           setDraggedItem={setDraggedItem}
         />
         <Pieces
+          startGame={startGame}
           setDraggedItem={setDraggedItem}
           hasDropped={hasDropped}
           setHasDropped={setHasDropped}

@@ -14,7 +14,7 @@ const PIPE_TYPES = {
 };
 
 
-const Pieces = ({ setDraggedItem, hasDropped, setHasDropped }) => {
+const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
   const [pieceStack, setPieceStack] = useState([]);
   // const [isMobile, setIsMobile] = useState(false);
 
@@ -86,19 +86,19 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped }) => {
       {pieceStack.map((piece, index) => (
         <div
           key={index}
-          className={`w-12 h-12 flex items-center justify-center border border-black cursor-pointer text-black text-xl ${
+          className={`w-12 h-12 flex items-center justify-center border border-black  text-black text-xl ${
             index === 0
-              ? "bg-yellow-400 border border-gray-600"
+              ? `bg-yellow-400 border border-gray-600 ${startGame ? 'cursor-pointer' : ''}`
               : "bg-gray-400 border border-gray-600"
           }`}
-          draggable={index === 0}
         >
           {PIPE_TYPES[piece] ? (
             <img
               src={PIPE_TYPES[piece]}
               alt={piece}
               className="w-full h-full"
-              draggable={index === 0}
+              draggable={startGame ? index === 0 : "false"}
+              // draggable={index === 0}
               onDragStart={(event) => handleDragStart(event, piece)}
               // onPointerDown={(event) => handleDragStart(event, piece)}
             />
