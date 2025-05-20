@@ -1,7 +1,9 @@
 'use client'
 import React from "react";
+import OilDrop from "./oilDrip";
+import './cell.css'
 
-const Cell = ({ type, onClick }) => {
+const Cell = ({ type, onClick, isOilFlowing }) => {
 
   let content;
   if (type === "START") {
@@ -95,13 +97,14 @@ const Cell = ({ type, onClick }) => {
 
   return (
     <div
-      className={`min-w-12 min-h-12 border ${
+      className={`relative min-w-12 min-h-12 border cell ${
         typeof type === "string" && type.includes("START")
           ? "bg-green-500 text-black font-bold"
           : "bg-blue-500 text-black font-extrabold text-3xl"
       }`}
     >
       {content}
+      {isOilFlowing && <OilDrop />}
     </div>
   );
 };

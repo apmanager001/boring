@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Timer = ({ running }) => {
+const Timer = ({ running, startOilFlow }) => {
   const [timeLeft, setTimeLeft] = useState(30); // Start at 30 seconds
 
   useEffect(() => {
@@ -9,6 +9,9 @@ const Timer = ({ running }) => {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
       return () => clearInterval(timer); // Cleanup on unmount
+    }
+    if (timeLeft === 0 && running) {
+      startOilFlow();
     }
   }, [running, timeLeft]);
 
