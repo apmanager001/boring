@@ -10,9 +10,9 @@ const Timer = ({ running, startOilFlow }) => {
       }, 1000);
       return () => clearInterval(timer); // Cleanup on unmount
     }
-    if (timeLeft === 0 && running) {
-      startOilFlow();
-    }
+    // if (timeLeft === 0 && running) {
+    //   startOilFlow();
+    // }
   }, [running, timeLeft]);
 
   return <div className="font-bold text-lg">Time Left: {timeLeft}s</div>;

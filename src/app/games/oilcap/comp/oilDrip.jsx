@@ -2,7 +2,12 @@ import React from "react";
 
 const OilDrop = () => {
   return (
-    <svg width="40" height="40" viewBox="0 0 100 100">
+    <svg
+      className="absolute top-0 left-0 w-full h-full pointer-events-none"
+      width="40"
+      height="40"
+      viewBox="0 0 100 100"
+    >
       <path
         d="M50 20 C 40 40, 60 60, 50 80"
         fill="black"

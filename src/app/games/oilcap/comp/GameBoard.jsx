@@ -33,7 +33,7 @@
 
 import React from "react";
 import Cell from "./Cell";
-import OilDrop from "./oilDrip";
+// import OilDrop from "./oilDrip";
 
 const GameBoard = ({ grid, handleClick, setDraggedItem }) => {
   const handleDrop = (event, rowIndex, colIndex) => {
@@ -55,8 +55,8 @@ const GameBoard = ({ grid, handleClick, setDraggedItem }) => {
             className="relative"
           >
             {/* <Cell type={cell} isOilFlowing={cell === "OIL"} /> */}
-            <Cell type={cell} isOilFlowing={cell === "OIL"} />
-            {cell === "OIL" && <OilDrop />}
+            <Cell type={cell} />
+            {/* {cell === "OIL" && <OilDrop />} */}
           </div>
         ))
       )}

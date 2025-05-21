@@ -1,94 +1,52 @@
 'use client'
 import React from "react";
-import OilDrop from "./oilDrip";
-import './cell.css'
+import Cross from './svg/cross'
+import HorizontalStraight from "./svg/horizontalStraight";
+import VerticalStraight from "./svg/verticalStraight";
+import LeftToDown from "./svg/leftToDown";
+import LeftToUp from "./svg/leftToUp";
+import RightToUp from "./svg/rightToUp";
+import RightToDown from "./svg/righttoDown";
+import Start from "./svg/start";
 
-const Cell = ({ type, onClick, isOilFlowing }) => {
-
+const Cell = ({ type, onClick }) => {
+  let flowing = true
   let content;
   if (type === "START") {
     content = (
-      <div className="flex flex-col items-center justify-between w-full h-full relative">
+      <div className="flex flex-col items-center justify-between w-12 h-11 relative">
         <span className="text-center font-bold text-sm">Start</span>
-        <img
-          src="/pipe/start.svg"
-          alt="║"
-          className="absolute"
-          draggable="false"
-        />
+        <div className="absolute overflow-hidden">
+          <Start className="w-full h-full " isOilFlowing={flowing}/>
+        </div>
       </div>
     );
   } else {
   switch (type) {
     case "║":
       content = (
-        <img
-          src="/pipe/verticalStraight.svg"
-          alt="║"
-          // className="w-14 h-14"
-          draggable="false"
-        />
+        <VerticalStraight className="w-12 h-12" isOilFlowing={flowing}/>
       );
       break;
     case "═":
       content = (
-        <img
-          src="/pipe/horizontalStraight.svg"
-          alt="═"
-          // className="scale-125 "
-          draggable="false"
-        />
+        <HorizontalStraight className="w-12 h-12" isOilFlowing={flowing} />
       );
       break;
     case "╬":
-      content = (
-        <img
-          src="/pipe/cross.svg"
-          alt="╬"
-          className="w-full h-full"
-          draggable="false"
-        />
-      );
+      content = <Cross className="w-12 h-12" isOilFlowing={flowing} />;
       break;
     case "╝":
-      content = (
-        <img
-          src="/pipe/leftToUp.svg"
-          alt="╝"
-          className="w-full h-full"
-          draggable="false"
-        />
-      );
+      content = <LeftToUp isOilFlowing={flowing} />;
       break;
     case "╚":
-      content = (
-        <img
-          src="/pipe/rightToUp.svg"
-          alt="╚"
-          className="w-full h-full"
-          draggable="false"
-        />
-      );
+      content = <RightToUp className="h-12 w-12" isOilFlowing={flowing} />;
       break;
     case "╗":
-      content = (
-        <img
-          src="/pipe/leftToDown.svg"
-          alt="╗"
-          className="w-full h-full"
-          draggable="false"
-        />
-      );
+      content = <LeftToDown className="w-12 h-12" isOilFlowing={flowing} />;
       break;
     case "╔":
-      content = (
-        <img
-          src="/pipe/rightToDown.svg"
-          alt="╔"
-          className="w-full h-full"
-          draggable="false"
-        />
-      );
+      content = <RightToDown isOilFlowing={flowing} />;
       break;
     default:
       content = type || "";
@@ -97,14 +55,13 @@ const Cell = ({ type, onClick, isOilFlowing }) => {
 
   return (
     <div
-      className={`relative min-w-12 min-h-12 border cell ${
+      className={` min-w-12 min-h-12 border ${
         typeof type === "string" && type.includes("START")
           ? "bg-green-500 text-black font-bold"
           : "bg-blue-500 text-black font-extrabold text-3xl"
       }`}
     >
       {content}
-      {isOilFlowing && <OilDrop />}
     </div>
   );
 };
