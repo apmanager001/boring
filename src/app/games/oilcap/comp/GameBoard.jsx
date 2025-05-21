@@ -25,7 +25,7 @@ const GameBoard = ({ grid, handleClick, setDraggedItem }) => {
             <Cell
               type={cell.type}
               flowing={cell.isOilFlowing}
-              onClick={() => handleClick(rowIndex, colIndex)}
+              // onClick={() => handleClick(rowIndex, colIndex)}
             />
           </div>
         ))
