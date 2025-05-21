@@ -9,10 +9,12 @@ import RightToUp from "./svg/rightToUp";
 import RightToDown from "./svg/righttoDown";
 import Start from "./svg/start";
 
-const Cell = ({ type, onClick }) => {
-  let flowing = true
+const Cell = ({ type, onClick, flowing }) => {
+  // let flowing = false
   let content;
+  
   if (type === "START") {
+    // console.log(type)
     content = (
       <div className="flex flex-col items-center justify-between w-12 h-11 relative">
         <span className="text-center font-bold text-sm">Start</span>
@@ -60,6 +62,7 @@ const Cell = ({ type, onClick }) => {
           ? "bg-green-500 text-black font-bold"
           : "bg-blue-500 text-black font-extrabold text-3xl"
       }`}
+      // onClick={onClick}
     >
       {content}
     </div>
