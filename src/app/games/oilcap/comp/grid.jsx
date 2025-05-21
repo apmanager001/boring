@@ -303,6 +303,23 @@ const OilcapGame = () => {
 
   return (
     <div className="game-container text-center">
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">Game Over!</h2>
+            <p className="mb-4">
+              Your oil flowed through {finalScore / 10} pipes!
+            </p>
+            <p className="text-xl font-bold mb-6">Final Score: {finalScore}</p>
+            <button
+              onClick={closePopup}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Play Again
+            </button>
+          </div>
+        </div>
+      )}
       <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
       {!startGame && (
         <>
