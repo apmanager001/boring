@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -7,7 +6,8 @@ import { SocialIcon } from "react-social-icons";
 const SharedButtons = ({ game }) => {
   const { id } = useParams();
 
-  const link = encodeURI(window.location.href);
+  // const link = encodeURI(window.location.href);
+  const link = encodeURI();
   const msg = encodeURIComponent("Check out this awesome game I played!");
   const shareTitle = encodeURIComponent(game);
 
