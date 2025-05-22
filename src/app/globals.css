@@ -3,7 +3,15 @@
 @tailwind utilities;
 
 
+html, body {
+  -webkit-touch-callout: none; /* iOS long-touch menu */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
 
+/* Disable pull-to-refresh on mobile */
+body {
+  overscroll-behavior-y: contain;
+}
 /*
 :root {
   --background: #ffffff;

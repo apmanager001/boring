@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect, useRef } from "react";
+import { Info } from "lucide-react";
 
 const gridSize = 25;
 
@@ -114,11 +115,26 @@ export default function ColoringGame() {
 
   return (
     <div className="w-full min-h-screen p-4 flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Coloring Book</h1>
-      
+      <div className="flex items-center gap-2 mb-4">
+        <h1 className="text-2xl font-bold">Coloring Book</h1>
+        <div className="relative group">
+          <Info />
+          <div className="absolute hidden group-hover:block bg-base-200 text-white text-sm p-2 rounded-md w-64 right-0 top-6">
+            <ol className="list-decimal pl-4">
+              <li>Select a picture using Previous/Next buttons</li>
+              <li>Choose a color from the legend</li>
+              <li>Click on matching numbers in the grid to color them</li>
+              <li>
+                Hold <code>Solve</code> to peek at the solution
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
       {/* Picture Navigation */}
       <div className="flex items-center gap-4 mb-4">
-        <button 
+        <button
           onClick={goToPrevPicture}
           className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors"
         >
@@ -127,7 +143,7 @@ export default function ColoringGame() {
         <span className="font-medium">
           Picture {currentPictureIndex + 1} of {pictureTemplates.length}
         </span>
-        <button 
+        <button
           onClick={goToNextPicture}
           className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors"
         >
@@ -140,8 +156,10 @@ export default function ColoringGame() {
         {Object.entries(colorMap).map(([num, color]) => (
           <button
             key={num}
-            className={`px-4 py-2 rounded text-white font-medium flex items-center gap-2 ${
-              selectedNumber === parseInt(num) ? 'ring-2 ring-black ring-offset-2' : ''
+            className={`px-4 py-2 rounded text-white font-medium flex items-center gap-2 select-none ${
+              selectedNumber === parseInt(num)
+                ? "ring-2 ring-black ring-offset-2"
+                : ""
             }`}
             style={{ backgroundColor: color }}
             onClick={() => setSelectedNumber(parseInt(num))}
@@ -172,25 +190,25 @@ export default function ColoringGame() {
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-            width: '100%',
+            width: "100%",
           }}
         >
           {numberGrid.map((row, i) =>
             row.map((cellNumber, j) => {
               const isColored = colorGrid[i][j] !== null;
               const showNumber = !showSolution && !isColored;
-              
+
               return (
                 <div
                   key={`${i}-${j}`}
-                  className="aspect-square flex items-center justify-center cursor-pointer text-xs"
+                  className="aspect-square flex items-center justify-center cursor-pointer text-xs select-none"
                   style={{
                     border: "1px solid #e5e7eb",
-                    backgroundColor: showSolution 
-                      ? colorMap[cellNumber] 
-                      : isColored 
-                        ? colorGrid[i][j] 
-                        : "#f3f4f6",
+                    backgroundColor: showSolution
+                      ? colorMap[cellNumber]
+                      : isColored
+                      ? colorGrid[i][j]
+                      : "#f3f4f6",
                     transition: "background-color 0.1s ease",
                   }}
                   onClick={() => handleCellClick(i, j, cellNumber)}
@@ -201,14 +219,6 @@ export default function ColoringGame() {
             })
           )}
         </div>
-      </div>
-
-      {/* Instructions */}
-      <div className="mt-4 text-gray-600 text-center max-w-md">
-        <p>1. Select a picture using Previous/Next buttons</p>
-        <p>2. Choose a color from the legend</p>
-        <p>3. Click on matching numbers in the grid to color them</p>
-        <p>4. Hold "Solve" to peek at the solution</p>
       </div>
     </div>
   );

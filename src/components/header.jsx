@@ -32,10 +32,26 @@ const Header = async () => {
                     <a href="/games/tiktaktoe">Tik Tak Toe</a>
                   </li>
                   <li>
+                    <a href="/games/oilcap">OilCap</a>
+                  </li>
+                  <li>
                     <a href="/games/acornsweeper">AcornSweeper</a>
                   </li>
                   <li>
                     <a href="/games/acornTreeSquirrel">Acorn Tree Squirrel</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary>
+                  <Dices />
+                  Kid Games
+                </summary>
+                <ul className="rounded-t-none p-2 text-center bg-base-200 z-50">
+                  <li>
+                    <a href="/kidgames/coloringbook">Coloring Book</a>
                   </li>
                 </ul>
               </details>

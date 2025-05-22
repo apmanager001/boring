@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DndContext, useDraggable } from "@dnd-kit/core";
+// import { DndContext, useDraggable } from "@dnd-kit/core";
 
 
 
@@ -81,14 +81,16 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
 
 
   return (
-    <div className="flex md:flex-col items-center gap-2 p-4 rounded-lg">
+    <div className="flex md:flex-col items-center gap-2 p-4 mb-10 md:mb-0 rounded-lg select-none">
       <h2 className="font-bold text-lg mb-2">Drag your piece:</h2>
       {pieceStack.map((piece, index) => (
         <div
           key={index}
           className={`w-12 h-12 flex items-center justify-center border border-black  text-black text-xl ${
             index === 0
-              ? `bg-yellow-400 border border-gray-600 ${startGame ? 'cursor-pointer' : ''}`
+              ? `bg-yellow-400 border border-gray-600 ${
+                  startGame ? "cursor-pointer" : ""
+                }`
               : "bg-gray-400 border border-gray-600"
           }`}
         >
