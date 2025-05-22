@@ -34,15 +34,15 @@ const OilcapGame = () => {
     const [finalScore, setFinalScore] = useState(0);
 
     function copyURL() {
-      const url = window.location.href;
-      navigator.clipboard
-        .writeText(url)
-        .then(() => {
-          toast.success("URL Copied!");
-        })
-        .catch((err) => {
-          toast.error("Failed to copy the URL");
-        });
+    //   const url = window.location.href;
+    //   navigator.clipboard
+    //     .writeText(url)
+    //     .then(() => {
+    //       toast.success("URL Copied!");
+    //     })
+    //     .catch((err) => {
+    //       toast.error("Failed to copy the URL");
+    //     });
     }
 
     const showEndGamePopup = (cellsConnected) => {
