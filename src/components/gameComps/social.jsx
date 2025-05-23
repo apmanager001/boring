@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link, Share2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { useParams } from "next/navigation";
@@ -8,25 +8,46 @@ import { SocialIcon } from "react-social-icons";
 const SharedButtons = ({ game }) => {
   const { id } = useParams();
 
-  const link = encodeURI(window.location.href);
-  // const link = encodeURI();
+  const [link, setLink] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLink(encodeURI(window.location.href));
+    }
+  }, []);
+
   const msg = encodeURIComponent("Check out this awesome game I played!");
   const shareTitle = encodeURIComponent(game);
 
+  // function copyURL() {
+  //       const url = window.location.href;
+  //       navigator.clipboard
+  //         .writeText(url)
+  //         .then(() => {
+  //           toast.success("URL Copied!");
+  //         })
+  //         .catch((err) => {
+  //           toast.error("Failed to copy the URL");
+  //         });
+  //     }
+
   function copyURL() {
-        const url = window.location.href;
-        navigator.clipboard
-          .writeText(url)
-          .then(() => {
-            toast.success("URL Copied!");
-          })
-          .catch((err) => {
-            toast.error("Failed to copy the URL");
-          });
-      }
+    if (typeof window !== "undefined" && navigator.clipboard) {
+      const url = window.location.href;
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          toast.success("URL Copied!");
+        })
+        .catch(() => {
+          toast.error("Failed to copy the URL");
+        });
+    }
+  }
+  
 
   return (
-    <div className="flex items-center justify-end w-full my-2">
+    <div className="flex items-center justify-end w-full my-2 mx-0 md:-mx-10">
         {/* <Share2 /> */}
         <div
           className="tooltip tooltip-bottom rounded-full h-[35px] w-[35px] hover:bg-base-100 flex justify-center items-center cursor-pointer"
