@@ -33,7 +33,7 @@ const OilcapGame = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [finalScore, setFinalScore] = useState(0);
 
-    function copyURL() {
+    // function copyURL() {
     //   const url = window.location.href;
     //   navigator.clipboard
     //     .writeText(url)
@@ -43,7 +43,7 @@ const OilcapGame = () => {
     //     .catch((err) => {
     //       toast.error("Failed to copy the URL");
     //     });
-    }
+    // }
 
     const showEndGamePopup = (cellsConnected) => {
       setFinalScore(cellsConnected * 10); // Or calculate score however you want
@@ -239,6 +239,7 @@ const OilcapGame = () => {
     flowFromCell(startPos.row, startPos.col, DIRECTIONS.DOWN);
 
     function flowFromCell(row, col, incomingDirection) {
+      console.log(visited)
       const cellKey = `${row},${col}`;
 
       // Skip if invalid or visited
@@ -443,17 +444,16 @@ const OilcapGame = () => {
       )}
 
       
-      <div className="flex items-center justify-end w-full my-2">
-        {/* <Share2 /> */}
+       {/* <div className="flex items-center justify-end w-full my-2">
         <div
           className="tooltip tooltip-bottom rounded-full h-[35px] w-[35px] hover:bg-base-100 flex justify-center items-center cursor-pointer"
           data-tip="Click to Copy URL"
           onClick={copyURL}
         >
           <Link />
-        </div>
+        </div>  */}
         <SharedButtons game={"OilCap"} />
-      </div>
+      {/* </div> */}
       <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
       {!startGame && (
         <>
