@@ -33,18 +33,6 @@ const OilcapGame = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [finalScore, setFinalScore] = useState(0);
 
-    // function copyURL() {
-    //   const url = window.location.href;
-    //   navigator.clipboard
-    //     .writeText(url)
-    //     .then(() => {
-    //       toast.success("URL Copied!");
-    //     })
-    //     .catch((err) => {
-    //       toast.error("Failed to copy the URL");
-    //     });
-    // }
-
     const showEndGamePopup = (cellsConnected) => {
       setFinalScore(cellsConnected * 10); // Or calculate score however you want
       setShowPopup(true);
@@ -413,6 +401,7 @@ const OilcapGame = () => {
         popupShown = true;
         console.log("=== OIL FLOW COMPLETE ===");
         console.log(`Total cells flowed: ${cellsFlowed}`);
+        setStartGame(false)
         showEndGamePopup(cellsFlowed);
       }
     }
@@ -443,17 +432,7 @@ const OilcapGame = () => {
         </div>
       )}
 
-      
-       {/* <div className="flex items-center justify-end w-full my-2">
-        <div
-          className="tooltip tooltip-bottom rounded-full h-[35px] w-[35px] hover:bg-base-100 flex justify-center items-center cursor-pointer"
-          data-tip="Click to Copy URL"
-          onClick={copyURL}
-        >
-          <Link />
-        </div>  */}
-        <SharedButtons game={"OilCap"} />
-      {/* </div> */}
+      <SharedButtons game={"OilCap"} />
       <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
       {!startGame && (
         <>

@@ -7,9 +7,12 @@ import { LogOut, Cog, User, UserRound, KeyRound } from "lucide-react";
 
 const UserInfo = () => {
    const { user, loading, error, validateSession, logout } = useStore();
-   useEffect(() => {
-     validateSession(); 
-   }, [validateSession]);
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        validateSession();
+      }
+    }, [validateSession]);
 
    if (loading) return (
      <span className="loading loading-dots text-accent"></span>
@@ -20,7 +23,9 @@ const UserInfo = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      window.location.href = "/login";
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
+      }
     } catch (error) {
       toast.error(error.message);
     }

@@ -19,7 +19,7 @@ const Header = async () => {
             Boring Squirrel
           </Link>
         </div>
-        <div className="flex">
+        <div className="md:flex hidden">
           <ul className="menu menu-horizontal justify-center text-sm">
             <li>
               <details>

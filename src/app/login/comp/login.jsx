@@ -130,7 +130,7 @@ const Login = () => {
                 />
                 <Eye
                   size={24}
-                  className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer z-20 opacity-100"
+                  className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer opacity-100"
                   onClick={handleHidePassword}
                 />
               </div>

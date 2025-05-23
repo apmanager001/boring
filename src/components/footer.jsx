@@ -1,6 +1,7 @@
 import React from 'react'
 import Newsletter from './newsletter'
 import { Home, Gamepad2, ClipboardList, Menu } from "lucide-react";
+import FooterDrawer from './footerDrawer'
 
 const Footer = () => {
   return (
@@ -69,7 +70,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className='underline'>
+            <div className="underline">
               <a href="mailto:contact@boringsquirrel.com">
                 contact@boringsquirrel.com
               </a>
@@ -88,9 +89,15 @@ const Footer = () => {
           <a href="/leaderboard" className="text-gray-400 hover:text-gray-200">
             <ClipboardList size={24} />
           </a>
-          <a href="/about" className="text-gray-400 hover:text-gray-200">
-            <Menu size={24} />
-          </a>
+          <div className="drawer drawer-end w-5">
+            <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content text-gray-400 hover:text-gray-200">
+              <label htmlFor="my-drawer-4">
+                <Menu size={24} className="cursor-pointer" />
+              </label>
+            </div>
+            <FooterDrawer />
+          </div>
         </div>
       </footer>
     </>

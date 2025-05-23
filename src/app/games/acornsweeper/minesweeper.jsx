@@ -5,6 +5,7 @@ import GameLogged from "../comps/gameLogged";
 import Board from "./comps/board";
 import Timer from "./comps/topBarComps/timer";
 import Marked from "./comps/topBarComps/marked";
+import SharedButtons from "../../../components/gameComps/social";
 
 const Minesweeper = () => {
     const [marked, setMarked] = useState(0)
@@ -15,6 +16,8 @@ const Minesweeper = () => {
       {/* <div className="mt-4 mr-4 flex justify-end w-full md:w-[500px]">
         <GameLogged />
       </div> */}
+      <SharedButtons game={"Acornsweeper"} />
+      <h1 className="text-4xl font-bold my-4">Acornsweeper</h1>
       <div className="mt-4 text-sm text-center">
         <span>
           There are 10 acorns to avoid. <br />
