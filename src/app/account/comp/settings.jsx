@@ -55,10 +55,10 @@ const Settings = () => {
   }
 
   return (
-    <div className="p-6 bg-base-200 min-h-screen">
+    <div className="md:p-6 bg-base-100 md:bg-base-200 min-h-screen">
       <form
         onSubmit={handleUpdate}
-        className="max-w-lg mx-auto bg-base-100 shadow-lg rounded-lg p-6 border border-1px border-neutral"
+        className="max-w-lg mx-auto bg-base-100 md:shadow-lg md:rounded-lg p-6 md:border border-1px border-neutral"
       >
         <div className="form-control mb-4">
           <h1 className="text-3xl font-bold text-center">Settings</h1>

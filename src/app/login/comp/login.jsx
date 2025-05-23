@@ -70,10 +70,10 @@ const Login = () => {
     setHidePassword(!hidePassword)
   }
   return (
-    <section className="my-28 flex box-border justify-center items-center">
-      <div className="bg-base-300 rounded-2xl flex max-w-3xl p-5 items-center hover:shadow-2xl">
-        <div className="md:w-1/2 px-8">
-          <h2 className="font-bold text-3xl text-primary">Login</h2>
+    <section className="md:py-28 flex box-border justify-center items-center bg-base-100 md:bg-base-200">
+      <div className="bg-base-100 md:shadow-lg md:rounded-lg p-6 md:border border-1px border-neutral flex max-w-3xl items-center">
+        <div className="md:w-1/2 p-8">
+          <h2 className="font-bold text-3xl text-gray-500">Login</h2>
 
           <form onSubmit={loginUser} className="flex flex-col gap-4 mt-4">
             <div className="relative">
@@ -191,7 +191,7 @@ const Login = () => {
           <div className="mt-4 text-sm text-white flex justify-between items-center ">
             <p className="mr-3 md:mr-0 ">If you don't have an account yet..</p>
             <a href="/signup">
-              <button className=" btn btn-primary btn-sm rounded-xl py-2 px-5 hover:scale-110 font-semibold duration-300">
+              <button className=" btn btn-primary btn-xs hover:scale-110 font-semibold duration-300">
                 Register
               </button>
             </a>

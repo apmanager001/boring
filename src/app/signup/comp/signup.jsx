@@ -57,10 +57,10 @@ const Signup = () => {
     setHidePassword2(!hidePassword2);
   };
   return (
-    <section className="my-24 flex box-border justify-center items-center">
-      <div className="bg-base-300 rounded-2xl flex max-w-3xl p-5 items-center">
-        <div className="md:w-1/2 px-8">
-          <h2 className="font-bold text-3xl text-primary">Register</h2>
+    <section className="md:py-24 flex box-border justify-center items-center bg-base-100 md:bg-base-200">
+      <div className="bg-base-100 md:shadow-lg md:rounded-lg md:p-6 md:border border-1px border-neutral flex max-w-4xl items-center">
+        <div className="md:w-1/2 p-8">
+          <h2 className="font-bold text-3xl text-gray-500">Register</h2>
 
           <form onSubmit={registerUser} className="flex flex-col gap-1 mt-4">
             <div>
@@ -183,7 +183,7 @@ const Signup = () => {
               If you already have an account..
             </p>
             <a href="/login">
-              <button className=" btn btn-primary btn-sm rounded-xl py-2 px-5 hover:scale-110 font-semibold duration-300">
+              <button className=" btn btn-primary btn-xs  hover:scale-110 font-semibold duration-300">
                 Login
               </button>
             </a>
