@@ -1,11 +1,11 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
-import {Link, Share2} from 'lucide-react'
+import { Link, Share2 } from "lucide-react";
 import toast from "react-hot-toast";
 import GameBoard from "./GameBoard";
 import ScoreBoard from "./scoreboard";
-import Pieces from './pieces'
-import Timer from "./timer"
+import Pieces from "./pieces";
+import Timer from "./timer";
 import SharedButtons from "../../../../components/gameComps/social";
 
 const BOARD_SIZE = 10;
@@ -14,52 +14,50 @@ const getRandomStartPosition = () => ({
   row: Math.floor(Math.random() * 9), // Ensures it's not the last row
   col: Math.floor(Math.random() * BOARD_SIZE),
 });
-    
+
 const OilcapGame = () => {
-    // const [grid, setGrid] = useState(
-    //   Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE).fill(null))
-    // );
-    const [grid, setGrid] = useState(
-      Array.from({ length: BOARD_SIZE }, () =>
-        Array(BOARD_SIZE).fill({ type: null, isOilFlowing: false })
-      )
-    );
-    const [startPos, setStartPos] = useState(null);
-    const [draggedItem, setDraggedItem] = useState(null);
-    const [hasDropped, setHasDropped] = useState(false);
-    const [startGame, setStartGame] = useState(false);
-    const [score, setScore] = useState(0);
-    const [running, setRunning] = useState(false);
-    const [showPopup, setShowPopup] = useState(false);
-    const [finalScore, setFinalScore] = useState(0);
+  // const [grid, setGrid] = useState(
+  //   Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE).fill(null))
+  // );
+  const [grid, setGrid] = useState(
+    Array.from({ length: BOARD_SIZE }, () =>
+      Array(BOARD_SIZE).fill({ type: null, isOilFlowing: false })
+    )
+  );
+  const [startPos, setStartPos] = useState(null);
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [hasDropped, setHasDropped] = useState(false);
+  const [startGame, setStartGame] = useState(false);
+  const [score, setScore] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
 
-    const showEndGamePopup = (cellsConnected) => {
-      setFinalScore(cellsConnected * 10); // Or calculate score however you want
-      setShowPopup(true);
-    };
+  const showEndGamePopup = (cellsConnected) => {
+    setFinalScore(cellsConnected * 10); // Or calculate score however you want
+    setShowPopup(true);
+  };
+console.log(grid)
+  const closePopup = () => {
+    setShowPopup(false);
+    // Reset game if desired
+    // resetGame();
+  };
 
-    const closePopup = () => {
-      setShowPopup(false);
-      // Reset game if desired
-      // resetGame();
-    };
-    
-    useEffect(() => {
-      const newStart = getRandomStartPosition();
-      setGrid((prevGrid) => {
-        const newGrid = prevGrid.map((row, rowIndex) =>
-          row.map((cell, colIndex) =>
-            rowIndex === newStart.row && colIndex === newStart.col
-              ? { type: "START", isOilFlowing: false }
-              : cell
-          )
-        );
-        return newGrid;
-      });
-      setStartPos(newStart);
-    }, []);
-    
-// console.log(grid)
+  useEffect(() => {
+    const newStart = getRandomStartPosition();
+    setGrid((prevGrid) => {
+      const newGrid = prevGrid.map((row, rowIndex) =>
+        row.map((cell, colIndex) =>
+          rowIndex === newStart.row && colIndex === newStart.col
+            ? { type: "START", isOilFlowing: false }
+            : cell
+        )
+      );
+      return newGrid;
+    });
+    setStartPos(newStart);
+  }, []);
 
   const handleClick = (rowIndex, colIndex, piece) => {
     setGrid((prevGrid) => {
@@ -75,135 +73,6 @@ const OilcapGame = () => {
     setRunning(true);
   };
 
-  // const startOilFlow = () => {
-  //   console.log("Starting oil flow from position:", startPos);
-  //   if (!startPos) return;
-
-  //   // Create a queue for BFS (Breadth-First Search)
-  //   const queue = [{ row: startPos.row, col: startPos.col }];
-  //   const visited = new Set();
-  //   const delayBetweenCells = 1000; // 1 second between cells
-  //   let cellsFlowed = 0;
-
-  //   const processQueue = (index = 0) => {
-  //     if (index >= queue.length) {
-  //       console.log("Oil flow complete. Total cells flowed:", cellsFlowed);
-  //       // Show end game popup when flow completes
-  //       showEndGamePopup(cellsFlowed);
-  //       return;
-  //     }
-
-  //     const { row, col } = queue[index];
-  //     const cellKey = `${row},${col}`;
-
-  //     console.log(
-  //       `Processing cell [${row},${col}] - type: ${grid[row]?.[col]?.type}`
-  //     );
-
-  //     // Skip if already visited or invalid cell
-  //     if (
-  //       visited.has(cellKey) ||
-  //       row < 0 ||
-  //       row >= BOARD_SIZE ||
-  //       col < 0 ||
-  //       col >= BOARD_SIZE ||
-  //       !grid[row]?.[col]?.type
-  //     ) {
-  //       console.log(`Skipping cell [${row},${col}]`);
-  //       return processQueue(index + 1);
-  //     }
-
-  //     visited.add(cellKey);
-
-  //     // Update this cell's flowing state with a delay
-  //     setTimeout(
-  //       () => {
-  //         setGrid((prev) => {
-  //           const newGrid = prev.map((r) => [...r]);
-  //           newGrid[row][col] = { ...newGrid[row][col], isOilFlowing: true };
-  //           return newGrid;
-  //         });
-
-  //         setScore((prev) => prev + 10); // Add 10 points per connected pipe
-  //         cellsFlowed++;
-
-  //         // Get current cell type from the latest state
-  //         const cellType = grid[row][col].type;
-  //         console.log(`Cell [${row},${col}] type: ${cellType}`);
-
-  //         // Add connected cells to queue based on pipe type
-  //         // Down connections
-  //         if (
-  //           cellType === "START" ||
-  //           cellType === "║" ||
-  //           cellType === "╬" ||
-  //           cellType === "╚" ||
-  //           cellType === "╝"
-  //         ) {
-  //           const newRow = row + 1;
-  //           const newCol = col;
-  //           if (newRow < BOARD_SIZE && !visited.has(`${newRow},${newCol}`)) {
-  //             queue.push({ row: newRow, col: newCol });
-  //             console.log(`Adding DOWN connection to [${newRow},${newCol}]`);
-  //           }
-  //         }
-
-  //         // Up connections
-  //         if (
-  //           cellType === "START" ||
-  //           cellType === "║" ||
-  //           cellType === "╬" ||
-  //           cellType === "╗" ||
-  //           cellType === "╔"
-  //         ) {
-  //           const newRow = row - 1;
-  //           const newCol = col;
-  //           if (newRow >= 0 && !visited.has(`${newRow},${newCol}`)) {
-  //             queue.push({ row: newRow, col: newCol });
-  //             console.log(`Adding UP connection to [${newRow},${newCol}]`);
-  //           }
-  //         }
-
-  //         // Left connections
-  //         if (
-  //           cellType === "═" ||
-  //           cellType === "╬" ||
-  //           cellType === "╗" ||
-  //           cellType === "╝"
-  //         ) {
-  //           const newRow = row;
-  //           const newCol = col - 1;
-  //           if (newCol >= 0 && !visited.has(`${newRow},${newCol}`)) {
-  //             queue.push({ row: newRow, col: newCol });
-  //             console.log(`Adding LEFT connection to [${newRow},${newCol}]`);
-  //           }
-  //         }
-
-  //         // Right connections
-  //         if (
-  //           cellType === "═" ||
-  //           cellType === "╬" ||
-  //           cellType === "╔" ||
-  //           cellType === "╚"
-  //         ) {
-  //           const newRow = row;
-  //           const newCol = col + 1;
-  //           if (newCol < BOARD_SIZE && !visited.has(`${newRow},${newCol}`)) {
-  //             queue.push({ row: newRow, col: newCol });
-  //             console.log(`Adding RIGHT connection to [${newRow},${newCol}]`);
-  //           }
-  //         }
-
-  //         // Process next cell
-  //         processQueue(index + 1);
-  //       },
-  //       index === 0 ? 0 : delayBetweenCells
-  //     ); // No delay for first cell
-  //   };
-
-  //   processQueue();
-  // };
-
   const startOilFlow = () => {
     console.log("=== STARTING OIL FLOW ===");
     if (!startPos) return;
@@ -211,10 +80,9 @@ const OilcapGame = () => {
     const visited = new Set();
     let cellsFlowed = 0;
     const delayBetweenCells = 1000;
-    let activeFlows = 0; // Track how many flows are in progress
-    let popupShown = false; // Prevent duplicate popups
+    let activeFlows = 0;
+    let popupShown = false;
 
-    // Direction constants
     const DIRECTIONS = {
       UP: "UP",
       DOWN: "DOWN",
@@ -222,21 +90,19 @@ const OilcapGame = () => {
       RIGHT: "RIGHT",
     };
 
-    // Flow from the start position (initial direction is DOWN from the start)
     activeFlows++;
     flowFromCell(startPos.row, startPos.col, DIRECTIONS.DOWN);
 
     function flowFromCell(row, col, incomingDirection) {
-      console.log(visited)
       const cellKey = `${row},${col}`;
 
-      // Skip if invalid or visited
+      // Skip if invalid or already visited
       if (
-        visited.has(cellKey) ||
         row < 0 ||
         row >= BOARD_SIZE ||
         col < 0 ||
-        col >= BOARD_SIZE
+        col >= BOARD_SIZE ||
+        visited.has(cellKey)
       ) {
         console.log(`Stopping flow at [${row},${col}] - invalid or visited`);
         activeFlows--;
@@ -244,17 +110,34 @@ const OilcapGame = () => {
         return;
       }
 
+      // // IMPORTANT: Use the current grid state, not the stale closure value
+      // const currentCell = grid[row][col]; // Remove optional chaining
+      // if (!currentCell || !currentCell.type) {
+      //   console.log(
+      //     `Stopping flow at [${row},${col}] - empty cell`,
+      //     currentCell
+      //   );
+      //   activeFlows--;
+      //   checkFlowCompletion();
+      //   return;
+      // }
+
       const cell = grid[row]?.[col];
+      console.log(grid);
+      console.log(`Checking cell [${row},${col}]`, cell); // Debug log
       if (!cell?.type) {
         console.log(`Stopping flow at [${row},${col}] - empty cell`);
+        console.log(activeFlows);
         activeFlows--;
         checkFlowCompletion();
         return;
       }
 
-      // Mark as visited and update UI
+      // MARK ONLY THIS CELL AS VISITED
       visited.add(cellKey);
+      console.log("Currently visited:", [...visited]); // Log snapshot of visited
       cellsFlowed++;
+
       setGrid((prev) => {
         const newGrid = prev.map((r) => [...r]);
         newGrid[row][col] = { ...newGrid[row][col], isOilFlowing: true };
@@ -263,10 +146,9 @@ const OilcapGame = () => {
       setScore((prev) => prev + 10);
 
       console.log(
-        `Processing ${cell.type} at [${row},${col}] with flow coming from ${incomingDirection}`
+        `Processing ${cell.type} at [${row},${col}] from ${incomingDirection}`
       );
 
-      // Determine outgoing directions based on pipe type and incoming direction
       const outgoingDirections = getOutgoingDirections(
         cell.type,
         incomingDirection
@@ -281,13 +163,11 @@ const OilcapGame = () => {
         return;
       }
 
-      // Increment active flows for each outgoing direction (minus 1 for current flow)
-      activeFlows += outgoingDirections.length - 1;
-
       // Process each outgoing direction with sequential delays
       outgoingDirections.forEach((direction, index) => {
         setTimeout(() => {
           const [newRow, newCol] = getNextPosition(row, col, direction);
+          activeFlows++; // Increment for each new flow we're about to start
           flowFromCell(newRow, newCol, getOppositeDirection(direction));
         }, delayBetweenCells * (index + 1));
       });
@@ -300,9 +180,9 @@ const OilcapGame = () => {
       if (pipeType === "START") {
         return [
           DIRECTIONS.DOWN,
-          DIRECTIONS.UP,
-          DIRECTIONS.LEFT,
-          DIRECTIONS.RIGHT,
+          // DIRECTIONS.UP,
+          // DIRECTIONS.LEFT,
+          // DIRECTIONS.RIGHT,
         ];
       }
 
@@ -396,12 +276,14 @@ const OilcapGame = () => {
     }
 
     function checkFlowCompletion() {
+      console.log("test");
       // Only show popup when all flows have completed and we haven't shown it yet
-      if (activeFlows === 0 && !popupShown) {
+      if (activeFlows && !popupShown) {
+        console.log("testing");
         popupShown = true;
         console.log("=== OIL FLOW COMPLETE ===");
         console.log(`Total cells flowed: ${cellsFlowed}`);
-        setStartGame(false)
+        setStartGame(false);
         showEndGamePopup(cellsFlowed);
       }
     }
@@ -452,7 +334,6 @@ const OilcapGame = () => {
           grid={grid}
           handleClick={handleClick}
           draggedItem={draggedItem}
-          // setDraggedItem={setDraggedItem}
         />
         <Pieces
           startGame={startGame}

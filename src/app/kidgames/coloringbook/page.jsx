@@ -1,10 +1,10 @@
 import React from "react";
-import ColoringGame from "./comp/coloringBook";
+import ColorBookMain from "./comp/colorBookMain";
 
 const Page = () => {
   return (
     <div>
-      <ColoringGame />
+      <ColorBookMain />
     </div>
   );
 };
