@@ -1,6 +1,7 @@
 // templates/template2.js
 export const template2 = {
-  gridSize: 25,
+  gridWidth: 25,
+  gridHeight: 25,
   grid: Array.from({ length: 25 }, (_, i) =>
     Array.from({ length: 25 }, (_, j) => {
       const x = j - 12.5;

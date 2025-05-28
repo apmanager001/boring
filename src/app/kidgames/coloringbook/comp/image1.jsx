@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Image } from "image-js";
+import convert from "color-convert";
 
 const ImageProcessor = ({ onProcessComplete }) => {
   const [pixelatedImage, setPixelatedImage] = useState(null);
@@ -140,13 +141,22 @@ const ImageProcessor = ({ onProcessComplete }) => {
 
       // Group similar colors to max 15 colors
       const limitedColorMap = groupSimilarColors(colorFrequency, 15, 40);
+      // const filteredColorMap = Object.fromEntries(
+      //   limitedColorMap.map((item, index) => [index, item[0]])
+      // );
       const filteredColorMap = Object.fromEntries(
-        limitedColorMap.map((item, index) => [index, item[0]])
-      );
-    
-    
-    
+        limitedColorMap.map(([item, data], index) => {
+          // Extract RGB values
+          const { r, g, b } = data;
 
+          // Convert RGB to closest color name
+          const colorName = convert.rgb.keyword(r, g, b) || item;
+
+          // Format the final output as an array inside the object
+          return [index + 1 , [item, colorName]];
+        })
+      );
+console.log(filteredColorMap)
       setColorMap(limitedColorMap);
 
       // Create a matrix to store color indices (60x60)
@@ -191,15 +201,22 @@ const ImageProcessor = ({ onProcessComplete }) => {
         }
       }
 
-      
-
       const finalColorMatrix = colorMatrix.map((row) =>
-        row.map((colorIndex) => colorMatrix[colorIndex] || `color${colorIndex}`)
+        row.map((colorIndex) => colorIndex + 1)
       );
+
+      const updatedColorMatrix = colorMatrix.map((row) =>
+        row.map((colorIndex) => colorIndex + 1)
+      );
+      
+      
+      // const finalColorMatrix = colorMatrix.map((row) =>
+      //   row.map((colorIndex) => colorMatrix[colorIndex] || `color${colorIndex}`)
+      // );
 
       setFinalColorMatrix(finalColorMatrix);
       const colorData = {
-        grid: colorMatrix,
+        grid: updatedColorMatrix,
         gridWidth: colorMatrix[0].length,
         gridHeight: colorMatrix.length,
         colorMap: filteredColorMap,

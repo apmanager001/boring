@@ -1,6 +1,7 @@
 // templates/template1.js
 export const template1 = {
-  gridSize: 25,
+  gridWidth: 25,
+  gridHeight: 25,
   grid: Array.from({ length: 25 }, (_, i) =>
     Array.from({ length: 25 }, (_, j) => {
       const isEye = i === 5 && j >= 10 && j <= 14;

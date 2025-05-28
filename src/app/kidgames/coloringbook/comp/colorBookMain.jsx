@@ -15,10 +15,14 @@ const ColorBookMain = () => {
     });
 // console.log(currentTemplate)
     const handleTemplateSelect = (template, customColorMap, dimensions) => {
-      setCurrentTemplate(template);
-      setColorMap(customColorMap);
+      console.log(  template.grid)
+      setCurrentTemplate(template)
+      setColorMap(customColorMap)
       // setGridSize(size);
-      setGridDimensions(dimensions);
+      setGridDimensions({
+        width: dimensions.gridWidth,
+        height: dimensions.gridHeight,
+      });
     };
 
     const handleProcessComplete = (colorData) => {
@@ -31,7 +35,6 @@ const ColorBookMain = () => {
         height: colorData.gridHeight,
       });
     };
-    console.log(colorMap);
   return (
     <>
       <ImageProcessor onProcessComplete={handleProcessComplete} />
@@ -40,7 +43,6 @@ const ColorBookMain = () => {
         <ColoringGame
           colorMap={colorMap}
           template={currentTemplate}
-          // gridSize={gridSize}
           gridWidth={gridDimensions.width}
           gridHeight={gridDimensions.height}
         />

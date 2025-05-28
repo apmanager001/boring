@@ -1,6 +1,7 @@
 // templates.js
 "use client";
 import React from "react";
+import convert from "color-convert";
 import { template1 } from "./templates/temp1";
 import { template2 } from "./templates/temp2";
 import { template3 } from "./templates/temp3";
@@ -12,48 +13,47 @@ const Templates = ({ onSelectTemplate }) => {
     {
       name: "Smiley Face",
       template: template1,
-      gridSize: template1.gridSize,
+      dimensions: { width: template1.gridWidth, height: template1.gridHeight },
       colorMap: {
-        1: "red",
-        2: "blue",
-        3: "yellow",
+        1: ["red", "red"],
+        2: ["blue", "blue"],
+        3: ["yellow", "yellow"],
       },
     },
     {
       name: "Heart",
       template: template2,
-      gridSize: template2.gridSize,
+      dimensions: { width: template2.gridWidth, height: template2.gridHeight },
       colorMap: {
-        1: "red",
-        2: "green",
+        1: ["red", "red"],
+        2: ["green", "green"],
       },
     },
     {
       name: "Abstract",
       template: template3,
-      gridSize: template3.gridSize,
+      dimensions: { width: template3.gridWidth, height: template3.gridHeight },
       colorMap: {
-        1: "red",
-        2: "blue",
-        3: "yellow",
-        4: "green",
-        5: "purple",
+        1: ["red", "red"],
+        2: ["blue", "blue"],
+        3: ["yellow", "yellow"],
+        4: ["green", "green"],
+        5: ["purple", "purple"],
       },
     },
     {
       name: "SpongeBob",
       template: template4,
-      gridSize: template4.gridSize,
+      dimensions: { width: template4.gridWidth, height: template4.gridHeight },
       colorMap: {
-        1: "red", // Red tie
-        2: "yellow", // Yellow body
-        3: "blue", // Blue background
-        4: "Black", // Black pupils/mouth line
-        5: "White", // White eyes/teeth
-        6: "Green", // Green nose
-        7: "SaddleBrown", // Brown pants
-        // 8: "White", // White collar
-        8: "Gold", // Gold pores
+        1: ["red", "red"],
+        2: ["yellow", "yellow"],
+        3: ["blue", "blue"],
+        4: ["black", "black"], 
+        5: ["white", "white"],
+        6: ["green", "green"], 
+        7: ["saddlebrown", "saddlebrown"], 
+        8: ["gold", "gold"],
       },
     },
     {
@@ -61,30 +61,62 @@ const Templates = ({ onSelectTemplate }) => {
       template: template5,
       dimensions: { width: template5.gridWidth, height: template5.gridHeight },
       colorMap: {
-          0:    "rgba(32, 128, 255, 255)",
-          1:    "rgba(116, 65, 28, 255)",
-          2:    "rgba(133, 150, 130, 255)",
-          3:    "rgba(177, 193, 164, 255)",
-          4:    "rgba(115, 147, 211, 255)",
-          5:    "rgba(224, 218, 78, 255)",
-          6:    "rgba(193, 184, 33, 255)",
-          7:    "rgba(256, 222, 71, 255)",
-          8:    "rgba(169, 136, 12, 255)",
-          9:    "rgba(238, 64, 35, 255)",
-          10:    "rgba(60, 121, 156, 255)",
-          11:    "rgba(256, 237, 192, 255)",
-          12:    "rgba(64, 128, 96, 255)",
-          13:    "rgba(160, 160, 96, 255)",
-        // 0: "cornflowerblue", // Sky background
-        // 1: "white", // Horse outline
-        // 2: "lightskyblue", // Horse eye white
-        // 3: "saddlebrown", // Horse nostril
-        // 4: "black", // Horse leg joints
-        // 5: "tan", // Horse hooves
-        // 6: "darkslategrey", // Horse mane
-        // 7: "moccasin", // Horse body
-        // 8: "goldenrod", // Clouds
-        // 9: "gray", // Fence
+        1: [
+          "rgba(32, 128, 255, 255)",
+          convert.rgb.keyword(32, 128, 255) || "rgba(32, 128, 255, 255)",
+        ],
+        2: [
+          "rgba(116, 65, 28, 255)",
+          convert.rgb.keyword(116, 65, 28) || "rgba(116, 65, 28, 255)",
+        ],
+        3: [
+          "rgba(133, 150, 130, 255)",
+          convert.rgb.keyword(133, 150, 130) || "rgba(133, 150, 130, 255)",
+        ],
+        4: [
+          "rgba(177, 193, 164, 255)",
+          convert.rgb.keyword(177, 193, 164) || "rgba(177, 193, 164, 255)",
+        ],
+        5: [
+          "rgba(115, 147, 211, 255)",
+          convert.rgb.keyword(115, 147, 211) || "rgba(115, 147, 211, 255)",
+        ],
+        6: [
+          "rgba(224, 218, 78, 255)",
+          convert.rgb.keyword(224, 218, 78) || "rgba(224, 218, 78, 255)",
+        ],
+        7: [
+          "rgba(193, 184, 33, 255)",
+          convert.rgb.keyword(193, 184, 33) || "rgba(193, 184, 33, 255)",
+        ],
+        8: [
+          "rgba(256, 222, 71, 255)",
+          convert.rgb.keyword(256, 222, 71) || "rgba(256, 222, 71, 255)",
+        ],
+        9: [
+          "rgba(169, 136, 12, 255)",
+          convert.rgb.keyword(169, 136, 12) || "rgba(169, 136, 12, 255)",
+        ],
+        10: [
+          "rgba(238, 64, 35, 255)",
+          convert.rgb.keyword(238, 64, 35) || "rgba(238, 64, 35, 255)",
+        ],
+        11: [
+          "rgba(60, 121, 156, 255)",
+          convert.rgb.keyword(60, 121, 156) || "rgba(60, 121, 156, 255)",
+        ],
+        12: [
+          "rgba(256, 237, 192, 255)",
+          convert.rgb.keyword(256, 237, 192) || "rgba(256, 237, 192, 255)",
+        ],
+        13: [
+          "rgba(64, 128, 96, 255)",
+          convert.rgb.keyword(64, 128, 96) || "rgba(64, 128, 96, 255)",
+        ],
+        14: [
+          "rgba(160, 160, 96, 255)",
+          convert.rgb.keyword(160, 160, 96) || "rgba(160, 160, 96, 255)",
+        ],
       },
     },
   ];

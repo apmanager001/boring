@@ -31,6 +31,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
       let i = Math.max(0, row - 1);
       i <= Math.min(gridHeight - 1, row + 1);
       i++
+      
     ) {
       for (
         let j = Math.max(0, col - 1);
@@ -38,7 +39,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
         j++
       ) {
         if (numberGrid[i][j] === selectedNumber) {
-          newColorGrid[i][j] = colorMap[selectedNumber];
+          newColorGrid[i][j] = colorMap[selectedNumber][0];
         }
       }
     }
@@ -47,13 +48,15 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
   };
 
   const handleMouseDown = () => {
-    setShowSolution(true);
+    // Clear any pending timeouts
     if (solutionTimeoutRef.current) {
       clearTimeout(solutionTimeoutRef.current);
     }
+    setShowSolution(true);
   };
 
   const handleMouseUp = () => {
+    // Set a timeout to hide the solution after a short delay
     solutionTimeoutRef.current = setTimeout(() => {
       setShowSolution(false);
     }, 100);
@@ -84,7 +87,6 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
           </div>
         </div>
       </div>
-      {/* <ImageProcessor /> */}
       {/* Color Legend */}
       <div className="flex flex-wrap justify-center gap-2 mb-4">
         {Object.entries(colorMap).map(([num, color]) => (
@@ -95,14 +97,14 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
                 ? "ring-2 ring-black ring-offset-2"
                 : ""
             }`}
-            style={{ backgroundColor: color }}
+            style={{ backgroundColor: color[0] }}
             onClick={() => setSelectedNumber(parseInt(num))}
           >
             <span className="text-white bg-black bg-opacity-30 rounded-full w-6 h-6 flex items-center justify-center">
               {num}
             </span>
             <span className="bg-black bg-opacity-30 py-2 p-4 rounded-full">
-              {color}
+              {color[1]}
             </span>
           </button>
         ))}
@@ -130,11 +132,11 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
             width: "100%",
           }}
         >
+
           {numberGrid.map((row, i) =>
-            row.map((cellNumber, j) => {
+            row.map((cellNumber , j) => {
               const isColored = colorGrid[i][j] !== null;
               const showNumber = !showSolution && !isColored;
-
               return (
                 <div
                   key={`${i}-${j}`}
@@ -142,7 +144,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
                   style={{
                     border: "1px solid #e5e7eb",
                     backgroundColor: showSolution
-                      ? colorMap[cellNumber]
+                      ? colorMap[cellNumber][0]
                       : isColored
                       ? colorGrid[i][j]
                       : "#f3f4f6",
