@@ -62,7 +62,7 @@ const PixelArtMain = () => {
   };
 
   return (
-    <div className="min-h-screen p-4">
+    <div className="min-h-screen p-4 mb-16 md:mb-0">
       <PixelToolbar
         selectedColor={selectedColor}
         timeLeft={timeLeft}

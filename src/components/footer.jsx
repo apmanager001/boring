@@ -23,12 +23,15 @@ const Footer = () => {
               <h4 className="font-semibold text-gray-100">Games</h4>
 
               <div className="mt-3 grid space-y-3">
-                <p>
-                  <a
-                    className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
-                    href="/games/acornsweeper"
-                  >
+                <p className="flex flex-col gap-x-2 text-gray-400">
+                  <a className="hover:text-gray-200" href="/games/acornsweeper">
                     Acornsweeper
+                  </a>
+                  <a className="hover:text-gray-200" href="/games/oilCap">
+                    Oil Cap
+                  </a>
+                  <a className="hover:text-gray-200" href="/games/pixelArt">
+                    Pixel Art
                   </a>
                 </p>
                 {/* <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Changelog</a></p>
@@ -81,19 +84,19 @@ const Footer = () => {
       <footer className="block md:hidden fixed bottom-0 left-0 right-0 bg-base-200 p-4">
         <div className="flex justify-around">
           <a href="/" className="text-gray-400 hover:text-gray-200">
-            <Home size={24} />
+            <Home size={32} />
           </a>
           <a href="/games" className="text-gray-400 hover:text-gray-200">
-            <Gamepad2 size={24} />
+            <Gamepad2 size={32} />
           </a>
           <a href="/leaderboard" className="text-gray-400 hover:text-gray-200">
-            <ClipboardList size={24} />
+            <ClipboardList size={32} />
           </a>
           <div className="drawer drawer-end w-5">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content text-gray-400 hover:text-gray-200">
               <label htmlFor="my-drawer-4">
-                <Menu size={24} className="cursor-pointer" />
+                <Menu size={32} className="cursor-pointer" />
               </label>
             </div>
             <FooterDrawer />

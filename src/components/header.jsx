@@ -8,14 +8,20 @@ const Header = async () => {
   return (
     <div className="navbar justify-center bg-base-200 z-10">
       <div className="flex flex-col mx-10">
-        <div className="flex-1 flex justify-center">
-          <Squirrel
+        <div className="flex-1 flex justify-center items-center">
+          <img
+            src="/squirrel.png"
+            alt="Squirrel Logo"
+            width="100"
+            height="100"
+          />
+          {/* <Squirrel
             color={"white"}
             fill={"#989082"}
             size={44}
             strokeWidth={0.5}
-          />
-          <Link href="/" className="btn btn-ghost text-xl ml-4">
+          /> */}
+          <Link href="/" className="btn btn-ghost text-xl ">
             Boring Squirrel
           </Link>
         </div>
