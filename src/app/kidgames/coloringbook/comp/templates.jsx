@@ -122,7 +122,7 @@ const Templates = ({ onSelectTemplate }) => {
   ];
 
   return (
-    <div className="flex justify-center gap-4 p-4">
+    <div className="flex flex-wrap justify-center gap-4 p-4">
       {templates.map((t, index) => (
         <button
           key={index}
