@@ -6,6 +6,7 @@ import { Info } from "lucide-react";
 // import ImageProcessor from "./image1";
 
 export default function ColoringGame({ colorMap, template, gridWidth, gridHeight }) {
+  
   const [numberGrid, setNumberGrid] = useState(null);
   const [colorGrid, setColorGrid] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
@@ -69,7 +70,6 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
       </div>
     );
   }
-
   return (
     <div className="w-full min-h-screen p-4 flex flex-col items-center">
       <div className="flex items-center gap-2 mb-4">

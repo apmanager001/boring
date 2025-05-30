@@ -13,20 +13,17 @@ const ColorBookMain = () => {
       width: 25,
       height: 25,
     });
-// console.log(currentTemplate)
     const handleTemplateSelect = (template, customColorMap, dimensions) => {
-      console.log(  template.grid)
       setCurrentTemplate(template)
       setColorMap(customColorMap)
       // setGridSize(size);
       setGridDimensions({
-        width: dimensions.gridWidth,
-        height: dimensions.gridHeight,
+        width: template.gridWidth,
+        height: template.gridHeight,
       });
     };
 
     const handleProcessComplete = (colorData) => {
-      console.log(colorData)
       setCurrentTemplate(colorData);
       // You can also set other states if needed
       setColorMap(colorData.colorMap)

@@ -156,7 +156,7 @@ const ImageProcessor = ({ onProcessComplete }) => {
           return [index + 1 , [item, colorName]];
         })
       );
-console.log(filteredColorMap)
+
       setColorMap(limitedColorMap);
 
       // Create a matrix to store color indices (60x60)
