@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LoseAlert = ({onCancel}) => {
+const WinAlert = ({onCancel}) => {
     const playAgain = () => {
         window.location.reload();
     };
@@ -28,4 +28,4 @@ const LoseAlert = ({onCancel}) => {
   );
 }
 
-export default LoseAlert
+export default WinAlert

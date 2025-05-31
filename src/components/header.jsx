@@ -35,17 +35,17 @@ const Header = async () => {
                 </summary>
                 <ul className="rounded-t-none p-2 text-center bg-base-200 z-50">
                   <li>
+                    <a href="/games/acornsweeper">AcornSweeper</a>
+                  </li>
+                  <li>
                     <a href="/games/tiktaktoe">Tik Tak Toe</a>
                   </li>
                   <li>
                     <a href="/games/oilcap">OilCap</a>
                   </li>
-                  <li>
-                    <a href="/games/acornsweeper">AcornSweeper</a>
-                  </li>
-                  <li>
+                  {/* <li>
                     <a href="/games/acornTreeSquirrel">Acorn Tree Squirrel</a>
-                  </li>
+                  </li> */}
                 </ul>
               </details>
             </li>

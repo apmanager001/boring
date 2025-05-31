@@ -71,7 +71,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
     );
   }
   return (
-    <div className="w-full min-h-screen p-4 flex flex-col items-center">
+    <div className="w-full min-h-screen p-4 flex flex-col items-center pb-24">
       <div className="flex items-center gap-2 mb-4">
         <h1 className="text-2xl font-bold">Coloring Book</h1>
         <div className="relative group">

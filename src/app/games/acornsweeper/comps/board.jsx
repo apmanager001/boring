@@ -128,10 +128,13 @@ const Board = ({setMarked, setStart}) => {
     } 
   }, [])
   
+  const onCancel=()=> {
+    setShowAlert(false)
+  }
 
   return (
     <div className={`grid ${gridCols} gap-1`}>
-      {showAlert ? <LoseAlert /> : " "}
+      {showAlert ? <LoseAlert onCancel={onCancel}/> : " "}
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
           <Cell
