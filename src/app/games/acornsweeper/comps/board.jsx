@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Cell from "./cell";
 import LoseAlert from "./loseAlert";
 import Confetti from "./confetti";
+import WinAlert from "./winAlert";
 
 const gridSize = 9
 
@@ -55,12 +56,14 @@ const generateBoard = () => {
   return board;
 };
 
-const Board = ({setMarked, setStart}) => {
+const Board = ({setMarked, setStart, score}) => {
   const [board, setBoard] = useState(generateBoard());
   const [gameOver, setGameOver] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true)
   const [lose, setLose] = useState(false)
   const [showAlert, setShowAlert] = useState(false);
+  const [showWinAlert, setShowWinAlert] = useState(false);
+
   const [revealedCells, setRevealedCells] = useState(0);
   const [gridCols, setGridCols] = useState('grid-cols-9')
 
@@ -73,7 +76,7 @@ const Board = ({setMarked, setStart}) => {
     if (revealedCells === nonBombCells) {
       Confetti()
       setGameOver(true);
-      setShowAlert(true)
+      setShowWinAlert(true)
       setStart(false);
     }
   }, [revealedCells]);
@@ -134,7 +137,9 @@ const Board = ({setMarked, setStart}) => {
 
   return (
     <div className={`grid ${gridCols} gap-1`}>
-      {showAlert ? <LoseAlert onCancel={onCancel}/> : " "}
+      {showAlert ? <LoseAlert onCancel={onCancel} /> : " "}
+      {showWinAlert ? <WinAlert onCancel={onCancel} score={score}/> : " "}
+      {}
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
           <Cell

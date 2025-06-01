@@ -1,6 +1,6 @@
 'use client'
 import React,{useState} from "react";
-import { Squirrel } from "lucide-react";
+import { Squirrel, Info } from "lucide-react";
 import GameLogged from "../comps/gameLogged";
 import Board from "./comps/board";
 import Timer from "./comps/topBarComps/timer";
@@ -10,6 +10,11 @@ import SharedButtons from "../../../components/gameComps/social";
 const Minesweeper = () => {
     const [marked, setMarked] = useState(0)
     const [start, setStart] = useState(false)
+    const [score, setScore] = useState(0)
+
+    const handleTimeUpdate = (currentTime) => {
+      setScore(currentTime);
+    };
 
   return (
     <div className="flex flex-col items-center bg-base-100 mb-20">
@@ -17,16 +22,18 @@ const Minesweeper = () => {
         <GameLogged />
       </div> */}
       <SharedButtons game={"Acornsweeper"} />
-      <h1 className="text-4xl font-bold my-4">Acornsweeper</h1>
-      <div className="mt-4 text-sm text-center">
-        <span>
-          There are 10 acorns to avoid. <br />
-          Right click to flag a square with a Squirrel.
-        </span>
+      <div className="flex items-center gap-4">
+        <h1 className="text-4xl font-bold my-4">Acornsweeper </h1>
+        <div
+          className="tooltip tooltip-left md:tooltip-bottom"
+          data-tip={`There are 10 acorns to avoid. Right-click to flag a square with a Squirrel.`}
+        >
+          <Info />
+        </div>
       </div>
       <div className="flex justify-between my-4 w-96">
         <div className="w-16 flex items-center justify-center">
-          <Timer start={start} />
+          <Timer start={start} onTimeUpdate={handleTimeUpdate}/>
         </div>
         <div className="w-16 flex items-center justify-center">
           <Squirrel
@@ -41,7 +48,7 @@ const Minesweeper = () => {
         </div>
       </div>
       <div>
-        <Board setMarked={setMarked} setStart={setStart} />
+        <Board setMarked={setMarked} setStart={setStart} score={score}/>
       </div>
     </div>
   );
