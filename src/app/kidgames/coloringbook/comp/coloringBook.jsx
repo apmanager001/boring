@@ -20,7 +20,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
       setSelectedNumber(null);
     }
   }, [template]);
-console.log(numberGrid)
+
   const handleCellClick = (row, col, cellNumber) => {
     if (!selectedNumber || !numberGrid || !colorGrid) return;
     if (cellNumber !== selectedNumber) return;
