@@ -32,6 +32,7 @@ const ColorBookMain = () => {
         height: colorData.gridHeight,
       });
     };
+    console.log(colorMap)
   return (
     <>
       <ImageProcessor onProcessComplete={handleProcessComplete} />
