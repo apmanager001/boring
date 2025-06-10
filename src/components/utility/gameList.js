@@ -30,7 +30,7 @@ export const games = [
     description: "Test your memory by matching pairs of cards",
     image:
       "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-    tags: [kids, single],
+    tags: [kids, single, Puzzle],
     link: "/memory",
   },
   {
@@ -55,7 +55,7 @@ export const games = [
     id: 6,
     name: "Pixel Art",
     description:
-      "Build Art as a community. ",
+      "Build Art as a community. Take turns having control and chnaging the pixel colors. Build an abstract piece or make smaller images in the full canvas.",
     image: "/hp/pixel.png",
     tags: [classic, multiplayer],
     link: "/games/pixelArt",

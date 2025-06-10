@@ -7,15 +7,8 @@ const NotFound = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-800 text-white text-center px-6">
       <h1 className="text-6xl font-bold">404</h1>
       <p className="text-2xl mt-4">
-        You've stumbled into **The Lost Puzzle Piece!**
+        You've stumbled into The Lost Puzzle Piece!
       </p>
-
-      {/* Puzzle Image Placeholder (Change this to an actual image) */}
-      {/* <img
-        src="https://images.unsplash.com/photo-1578588476760-8c20b9ee3ae6?q=80&w=500"
-        alt="Lost Puzzle Pieces"
-        className="w-64 h-64 my-6 rounded-lg shadow-xl border-4 border-yellow-500"
-      /> */}
 
       <Puzzle className="w-64 h-64" color="#32CD32" fill="#32CD32" />
 
@@ -34,7 +27,7 @@ const NotFound = () => {
       </Link>
 
       <p className="mt-6 text-sm opacity-70">
-        Or maybe the solution is hidden somewhere in your **inventory**... Have
+        Or maybe the solution is hidden somewhere in your inventory... Have
         you checked your bookmarks?
       </p>
     </div>
