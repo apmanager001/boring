@@ -1,43 +1,7 @@
 'use client'
+import { Heart } from "lucide-react";
+import {games} from '../../components/utility/gameList'
 const Feature = () => {
-  const games = [
-    {
-      id: 1,
-      name: "Tic Tac Toe",
-      description: "Classic X and O game with multiplayer support",
-      image:
-        "https://images.unsplash.com/photo-1605170439002-90845e8c0137?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-      tags: ["2 Players", "Strategy", "Simple"],
-      link: "/tictactoe",
-    },
-    {
-      id: 2,
-      name: "AcornSweeper",
-      description: "Find hidden acorns without detonating them",
-      image:
-        "/hp/squirrels.png",
-      tags: ["Puzzle", "Single Player", "Classic"],
-      link: "/games/acornsweeper",
-    },
-    {
-      id: 3,
-      name: "Memory Match",
-      description: "Test your memory by matching pairs of cards",
-      image:
-        "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-      tags: ["Memory", "Single Player", "Kids"],
-      link: "/memory",
-    },
-    {
-      id: 4,
-      name: "Coloring Book",
-      description: "A simple coliring book. Click the number/color and fill in the image with the coorisponding number.",
-      image:
-        "/hp/sb.png",
-      tags: ["Arcade", "Single Player", "Retro"],
-      link: "/kidgames/coloringbook",
-    },
-  ];
 
   return (
     <div className="py-16 px-4 bg-base-100">
@@ -51,7 +15,7 @@ const Feature = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {games.map((game) => (
+          {games.slice(0,4).map((game) => (
             <div
               key={game.id}
               className="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 group"
@@ -101,23 +65,10 @@ const Feature = () => {
         </div>
 
         <div className="text-center mt-12">
-          <button className="btn btn-outline btn-primary">
+          <a className="btn btn-outline btn-primary" href="/games">
             View All Games
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-          </button>
+            <Heart />
+          </a>
         </div>
       </div>
     </div>

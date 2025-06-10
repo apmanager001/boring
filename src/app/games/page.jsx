@@ -1,8 +1,9 @@
 import React from 'react'
+import GamePage from './comps/gamePage'
 
 const Page = () => {
   return (
-    <div>Games</div>
+    <div><GamePage /></div>
   )
 }
 
