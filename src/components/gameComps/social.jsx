@@ -71,14 +71,14 @@ const SharedButtons = ({ game }) => {
             target="_blank"
           />
         </div>
-        <div className="tooltip tooltip-bottom" data-tip="Share to BlueSky">
+        {/* <div className="tooltip tooltip-bottom" data-tip="Share to BlueSky">
           <SocialIcon
             network="bsky.app"
             style={{ height: 35, width: 35 }}
             url={`https://bsky.app/intent/compose?text=${msg}%20${game}%20${link}`}
             target="_blank"
           />
-        </div>
+        </div> */}
         <div className="tooltip tooltip-left" data-tip="Share to X">
           <SocialIcon
             network="x"

@@ -33,9 +33,28 @@ const ColorBookMain = () => {
       });
     };
 
+    const handleRefresh = () => {
+      window.location.reload();
+    };
+    
   return (
     <>
-      <ImageProcessor onProcessComplete={handleProcessComplete} />
+      {currentTemplate ? (
+        <div style={{ padding: "20px", maxWidth: "1000px", margin: "0 auto" }}>
+          <h2 className="text-center text-xl">Coloring Book</h2>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "20px",
+            }}
+          >
+            <button className="btn btn-primary text-xl my-4" onClick={handleRefresh}> Try Another Image</button>
+          </div>
+        </div>
+      ) : (
+        <ImageProcessor onProcessComplete={handleProcessComplete} />
+      )}
       <Templates onSelectTemplate={handleTemplateSelect} />
       {currentTemplate && (
         <ColoringGame

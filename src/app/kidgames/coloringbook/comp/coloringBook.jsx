@@ -63,6 +63,15 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
     }, 100);
   };
 
+  const handleToggleChange = (isChecked) => {
+    if (isChecked) {
+      setShowSolution(true);
+    } else {
+      setTimeout(() => {
+        setShowSolution(false);
+      }, 100);
+    }
+  };
   if (!numberGrid || !colorGrid) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -111,7 +120,13 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
       </div>
 
       {/* Solve Button */}
-      <button
+      <span className="text-xl">Toggle to Show Image</span>
+      <input
+        type="checkbox"
+        className="toggle toggle-lg my-4 border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-orange-800"
+        onChange={(e) => handleToggleChange(e.target.checked)}
+      />
+      {/* <button
         className="px-6 py-3 mb-4 bg-gray-800 text-white rounded-lg font-medium shadow hover:bg-gray-700 transition-colors"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -120,7 +135,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
         onTouchEnd={handleMouseUp}
       >
         Hold to Solve
-      </button>
+      </button> */}
 
       {/* Game Grid */}
       <div className="w-full max-w-4xl overflow-auto shadow-lg bg-white p-1 rounded">
@@ -132,9 +147,8 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
             width: "100%",
           }}
         >
-
           {numberGrid.map((row, i) =>
-            row.map((cellNumber , j) => {
+            row.map((cellNumber, j) => {
               const isColored = colorGrid[i][j] !== null;
               const showNumber = !showSolution && !isColored;
               return (

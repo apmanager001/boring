@@ -10,7 +10,7 @@ export const games = [
   {
     id: 1,
     name: "Oil Cap",
-    description: "Classic X and O game with multiplayer support",
+    description: "A strategic game ",
     image: "/hp/oilcap.png",
     tags: [single, strategy, leaderboard],
     link: "/games/oilcap",

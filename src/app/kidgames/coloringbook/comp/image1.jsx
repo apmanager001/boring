@@ -252,13 +252,9 @@ const ImageProcessor = ({ onProcessComplete }) => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "1000px", margin: "0 auto" }}>
-      <h2 style={{ textAlign: "center" }}>Pixel Art Converter</h2>
+      <h2 className="text-center text-xl">Coloring Book</h2>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "20px",
-        }}
+        className="flex justify-center my-4"
       >
         <input
           type="file"
