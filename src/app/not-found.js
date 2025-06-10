@@ -4,10 +4,10 @@ import { Puzzle } from "lucide-react";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-800 text-white text-center px-6">
+    <div className="min-h-screen flex flex-col items-center justify-center  text-white text-center px-6">
       <h1 className="text-6xl font-bold">404</h1>
       <p className="text-2xl mt-4">
-        You've stumbled into The Lost Puzzle Piece!
+        You&apos;ve stumbled into The Lost Puzzle Piece!
       </p>
 
       <Puzzle className="w-64 h-64" color="#32CD32" fill="#32CD32" />
@@ -27,8 +27,8 @@ const NotFound = () => {
       </Link>
 
       <p className="mt-6 text-sm opacity-70">
-        Or maybe the solution is hidden somewhere in your inventory... Have
-        you checked your bookmarks?
+        Or maybe the solution is hidden somewhere in your inventory... Have you
+        checked your bookmarks?
       </p>
     </div>
   );
