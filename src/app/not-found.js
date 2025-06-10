@@ -13,7 +13,7 @@ const NotFound = () => {
       <Puzzle className="w-64 h-64" color="#32CD32" fill="#32CD32" />
 
       <p className="mt-4 text-lg">
-        It seems this page is missing a **crucial piece**...
+        It seems this page is missing a crucial piece...
       </p>
       <p className="mt-2">
         <span className="text-yellow-400 font-bold">Hint:</span> Try rearranging
