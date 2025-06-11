@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import {gameLinks, kidLinks } from '../components/headerComps/headerLinks'
 import { Dices, CircleUserRound, TableProperties, User, Cog } from "lucide-react";
 import useStore from '@/app/store/store';
 
@@ -78,20 +79,13 @@ const FooterDrawer = () => {
                 <details>
                   <summary>Games</summary>
                   <ul>
-                    <li>
-                      <Link href="/games/tiktaktoe">Tik Tak Toe</Link>
-                    </li>
-                    <li>
-                      <Link href="/games/oilcap">OilCap</Link>
-                    </li>
-                    <li>
-                      <Link href="/games/acornsweeper">AcornSweeper</Link>
-                    </li>
-                    <li>
-                      <Link href="/games/acornTreeSquirrel">
-                        Acorn Tree Squirrel
-                      </Link>
-                    </li>
+                    {gameLinks
+                      .filter((link) => link.type === "game")
+                      .map((link) => (
+                        <li key={link.name}>
+                          <Link href={link.link}>{link.name}</Link>
+                        </li>
+                      ))}
                   </ul>
                 </details>
               </li>
@@ -99,9 +93,13 @@ const FooterDrawer = () => {
                 <details>
                   <summary>Kid Games</summary>
                   <ul>
-                    <li>
-                      <Link href="/kidgames/coloringbook">Coloring Book</Link>
-                    </li>
+                    {kidLinks
+                      .filter((link) => link.type === "kid")
+                      .map((link) => (
+                        <li key={link.name}>
+                          <Link href={link.link}>{link.name}</Link>
+                        </li>
+                      ))}
                   </ul>
                 </details>
               </li>

@@ -1,5 +1,7 @@
-import React from "react";
+'use client'
+import React, {useState, useEffect} from "react";
 import { UserCircle } from "lucide-react";
+import AxiosInstance from '../../../components/utility/axios'
 
 const Profile = ({
   username = "Placeholder User",
@@ -8,6 +10,24 @@ const Profile = ({
   gamesPlayed = 0,
   highestRank = "Unranked",
 }) => {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await AxiosInstance.get("/users");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+
+console.log(users)
+
   return (
     <div className="md:p-20 bg-base-100 md:bg-base-200 min-h-screen">
       <div className=" flex flex-col md:flex-row w-full max-w-[900px] h-full md:h-[500px]  mx-auto bg-base-100 md:shadow-lg md:rounded-lg md:border border-1px border-neutral">

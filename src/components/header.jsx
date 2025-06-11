@@ -2,6 +2,7 @@ import React from "react";
 import { Squirrel, TableProperties, Dices } from "lucide-react";
 import GoogleSignin from './headerComps/googleSignin'
 import Link from "next/link";
+import {gameLinks, kidLinks } from '../components/headerComps/headerLinks'
 
 const Header = async () => {
 
@@ -34,18 +35,13 @@ const Header = async () => {
                   Games
                 </summary>
                 <ul className="rounded-t-none p-2 text-center bg-base-200 z-50">
-                  <li>
-                    <a href="/games/acornsweeper">AcornSweeper</a>
-                  </li>
-                  <li>
-                    <a href="/games/tiktaktoe">Tik Tak Toe</a>
-                  </li>
-                  <li>
-                    <a href="/games/oilcap">OilCap</a>
-                  </li>
-                  {/* <li>
-                    <a href="/games/acornTreeSquirrel">Acorn Tree Squirrel</a>
-                  </li> */}
+                  {gameLinks
+                    .filter((link) => link.type === "game")
+                    .map((link) => (
+                      <li key={link.name}>
+                        <Link href={link.link}>{link.name}</Link>
+                      </li>
+                    ))}
                 </ul>
               </details>
             </li>
@@ -56,9 +52,13 @@ const Header = async () => {
                   Kid Games
                 </summary>
                 <ul className="rounded-t-none p-2 text-center bg-base-200 z-50">
-                  <li>
-                    <a href="/kidgames/coloringbook">Coloring Book</a>
-                  </li>
+                  {kidLinks
+                    .filter((link) => link.type === "kid")
+                    .map((link) => (
+                      <li key={link.name}>
+                        <Link href={link.link}>{link.name}</Link>
+                      </li>
+                    ))}
                 </ul>
               </details>
             </li>

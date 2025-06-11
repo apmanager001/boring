@@ -81,22 +81,34 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <footer className="block md:hidden fixed bottom-0 left-0 right-0 bg-base-200 p-4">
-        <div className="flex justify-around">
-          <a href="/" className="text-gray-400 hover:text-gray-200">
-            <Home size={32} />
+      <footer className="block md:hidden fixed bottom-0 left-0 right-0 bg-base-200 p-2 w-full">
+        <div className="flex justify-around items-center">
+          <a
+            href="/"
+            className="text-gray-400 hover:text-gray-200"
+            aria-label="Home"
+          >
+            <Home size={36} />
           </a>
-          <a href="/games" className="text-gray-400 hover:text-gray-200">
-            <Gamepad2 size={32} />
+          <a
+            href="/games"
+            className="text-gray-400 hover:text-gray-200"
+            aria-label="Games"
+          >
+            <Gamepad2 size={36} />
           </a>
-          <a href="/leaderboard" className="text-gray-400 hover:text-gray-200">
-            <ClipboardList size={32} />
+          <a
+            href="/leaderboard"
+            className="text-gray-400 hover:text-gray-200"
+            aria-label="Leaderboard"
+          >
+            <ClipboardList size={36} />
           </a>
-          <div className="drawer drawer-end w-5">
+          <div className="drawer drawer-end w-auto">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content text-gray-400 hover:text-gray-200">
+            <div className="drawer-content text-gray-400 hover:text-gray-200 transition-all duration-300">
               <label htmlFor="my-drawer-4">
-                <Menu size={32} className="cursor-pointer" />
+                <Menu size={36} className="cursor-pointer" />
               </label>
             </div>
             <FooterDrawer />
