@@ -1,28 +1,46 @@
 import React from "react";
+import { Squirrel, Nut } from "lucide-react";
 
-const Piece = ({ size, count, onClick, player }) => {
-  const pieceTypes = {
-    sm: "Small",
-    md: "Medium",
-    lg: "Large",
+const Piece = ({ size, count, onClick, player, isSelected }) => {
+  const sizeClasses = {
+    sm: "w-12 h-12 text-sm",
+    md: "w-16 h-16 text-md",
+    lg: "w-20 h-20 text-lg",
   };
 
-  if (count <= 0) return null; // Don't display if no pieces left.
+  const iconSizes = {
+    sm: 24,
+    md: 32,
+    lg: 40,
+  };
+
+  if (count <= 0) return null;
 
   const handleDragStart = (e) => {
-    e.dataTransfer.setData("piece", size); // Store the piece type in the drag data
+    e.dataTransfer.setData("piece", size);
   };
 
   return (
     <div
-      className={`w-12 h-12 border flex items-center justify-center ${
-        player === 2 ? "bg-red-500" : "bg-blue-500"
-      } cursor-pointer`}
+      className={`flex flex-col items-center justify-center border-2 rounded-lg p-2 cursor-grab transition-all duration-200 ${
+        player === 1
+          ? "bg-blue-500 border-blue-600 hover:bg-blue-600"
+          : "bg-amber-600 border-amber-700 hover:bg-amber-700"
+      } ${sizeClasses[size]} ${
+        isSelected ? "ring-4 ring-yellow-400 scale-110" : ""
+      }`}
       onClick={onClick}
       draggable
-      onDragStart={handleDragStart} // Start dragging the piece
+      onDragStart={handleDragStart}
     >
-      {pieceTypes[size]} x{count}
+      {player === 1 ? (
+        <Squirrel size={iconSizes[size]} className="text-white mb-1" />
+      ) : (
+        <Nut size={iconSizes[size]} className="text-white mb-1" />
+      )}
+      <span className="text-white font-bold">
+        {size.toUpperCase()} x{count}
+      </span>
     </div>
   );
 };

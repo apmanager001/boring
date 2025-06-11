@@ -1,17 +1,20 @@
 import React from "react";
+import { Squirrel, Nut } from "lucide-react";
 
 const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
   const handleDragOver = (e) => {
-    e.preventDefault(); // Allow drop by preventing the default behavior
+    e.preventDefault();
   };
 
-  const handleDrop = (e) => { 
+  const handleDrop = (e) => {
     e.preventDefault();
     const piece = e.dataTransfer.getData("piece");
-    if (piece && cell) {
-      if(currentPlayer === cell.player){
-         alert("You can't replace your own piece");
-         return;
+    if (!piece) return;
+
+    if (cell) {
+      if (currentPlayer === cell.player) {
+        alert("You can't replace your own piece");
+        return;
       }
       if (
         cell.piece === "lg" ||
@@ -21,29 +24,71 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
         alert("This square is already occupied with a bigger or equal piece");
         return;
       }
-      handleMove(row, col, piece);
     }
-    if (piece && !cell) {
-      handleMove(row, col, piece);
+
+    handleMove(row, col, piece);
+  };
+
+  const handleClick = () => {
+    if (!selectedPiece) return;
+    if (cell) {
+      if (currentPlayer === cell.player) {
+        alert("You can't replace your own piece");
+        return;
+      }
+      if (
+        cell.piece === "lg" ||
+        (cell.piece === "md" &&
+          (selectedPiece === "sm" || selectedPiece === "md")) ||
+        (cell.piece === "sm" && !["md", "lg"].includes(selectedPiece))
+      ) {
+        alert("This square is already occupied with a bigger or equal piece");
+        return;
+      }
     }
-    // if (selectedPiece) {
-    //   handleMove(row, col, selectedPiece);
-    // }
+    handleMove(row, col, selectedPiece);
+  };
+
+  const getIconSize = (size) => {
+    switch (size) {
+      case "sm":
+        return 24;
+      case "md":
+        return 32;
+      case "lg":
+        return 40;
+      default:
+        return 32;
+    }
   };
 
   return (
     <div
-      className={`w-20 h-20 border flex items-center justify-center ${
+      className={`w-20 h-20 flex flex-col items-center justify-center rounded-md transition-all duration-200 ${
         cell
           ? cell.player === 1
-            ? "bg-blue-500"
-            : "bg-red-500"
-          : "bg-gray-200"
-      }`}
+            ? "bg-blue-500 hover:bg-blue-600"
+            : "bg-amber-600 hover:bg-amber-700"
+          : "bg-gray-200 hover:bg-gray-300"
+      } ${selectedPiece ? "cursor-pointer" : ""}`}
       onDrop={handleDrop}
-      onDragOver={handleDragOver} // Allow dragging over the cell
+      onDragOver={handleDragOver}
+      onClick={handleClick}
     >
-      {cell && <div>{cell.piece}</div>}
+      {cell && (
+        <div className="flex flex-col items-center">
+          <div className={`animate-[bounce_0.5s_ease-in-out]`}>
+            {cell.player === 1 ? (
+              <Squirrel size={getIconSize(cell.piece)} className="text-white" />
+            ) : (
+              <Nut size={getIconSize(cell.piece)} className="text-white" />
+            )}
+          </div>
+          <span className="text-xs font-bold text-white mt-1 bg-black bg-opacity-30 px-2 py-1 rounded-full">
+            {cell.piece.toUpperCase()}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

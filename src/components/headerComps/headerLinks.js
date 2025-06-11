@@ -13,7 +13,7 @@ export const gameLinks = [
     type: game,
   },
   {
-    name: "Tik Tak Toe",
+    name: "Tic Tac Toe",
     link: "/games/tiktaktoe",
     type: game,
   },
@@ -25,9 +25,14 @@ export const gameLinks = [
 ];
 
 export const kidLinks = [
-    {
-        name: "Coloring Book",
-        link: "/kidgames/coloringbook",
-        type: kid,
-      },
-]
+  {
+    name: "Coloring Book",
+    link: "/kidgames/coloringbook",
+    type: kid,
+  },
+  {
+    name: "Memory Match",
+    link: "/games/match",
+    type: kid,
+  },
+];
