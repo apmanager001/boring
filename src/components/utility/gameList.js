@@ -4,7 +4,7 @@ let Puzzle = " Puzzle";
 let single = "Single Player";
 let kids = "Kid Game";
 let classic = "Classic";
-let leaderboard = "Leaderbord";
+let leaderboard = "Leaderboard";
 
 export const games = [
   {
@@ -29,9 +29,9 @@ export const games = [
     name: "Memory Match",
     description: "Test your memory by matching pairs of cards",
     image:
-      "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      "/hp/match.png",
     tags: [kids, single, Puzzle],
-    link: "/memory",
+    link: "/games/match",
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const games = [
     description:
       "A different take on tic tac toe. Every player has 3 different sizes of pieces. A bigger piece can cover a smaller piece. ",
     image: "/hp/tik.png",
-    tags: [classic, multiplayer],
+    tags: [classic, multiplayer, leaderboard],
     link: "/games/tiktaktoe",
   },
   {
