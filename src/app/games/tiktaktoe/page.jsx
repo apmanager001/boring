@@ -1,26 +1,27 @@
 import React from 'react'
 import App from './comps/app'
-import Head from 'next/head'
 import {games} from '../../../components/utility/gameList'
 
-const Page = () => {
+export async function generateMetadata() {
   const seo = games[4];
+  return {
+    title: seo.name,
+    description: seo.description,
+    openGraph: {
+      title: seo.name,
+      description: seo.description,
+      images: [`https://boringsquirrel.com${seo.image}`],
+      url: `https://boringsquirrel.com${seo.link}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
+
+const Page = () => {
   return (
     <div>
-      <Head>
-        <title>{seo.name}</title>
-        <meta name="description" content={seo.description} />
-        <meta name="keywords" content={seo.tags.join(", ")} />
-        <meta property="og:title" content={seo.name} />
-        <meta property="og:description" content={seo.description} />
-        <meta property="og:image" content={seo.image} />
-        <meta
-          property="og:url"
-          content={`https://boringsquirrel.com${seo.link}`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
-
       <App />
     </div>
   );

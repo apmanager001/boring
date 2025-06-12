@@ -49,14 +49,14 @@ const LeaderboardDisplay = () => {
       <p className="text-center text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
         Can you reach the homepage Leaderboard?
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
         {games
           .filter((game) => game.tags.includes("Leaderboard"))
-          .slice(0, 4)
+          .slice(0, 3)
           .map((game) => (
             <div
               key={game.id}
-              className="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 group md:max-w-64"
+              className="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 group md:max-w-64 min-w-64 mx-auto"
             >
               <figure className="relative overflow-hidden h-48">
                 <img
