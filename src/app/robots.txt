@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Sitemap: https://boringsquirrel.com/sitemap.xml
+
+User-agent: *
+Disallow: /account/
+Disallow: /private/
+
+User-agent: *
+Disallow: /store/
+Disallow: /private/
