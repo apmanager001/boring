@@ -1,4 +1,5 @@
 import React from 'react'
+
 import GamePage from './comps/gamePage'
 
 const Page = () => {
