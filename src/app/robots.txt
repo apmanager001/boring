@@ -2,6 +2,9 @@ User-agent: *
 Allow: /
 Sitemap: https://boringsquirrel.com/sitemap.xml
 
+User-agent: Twitterbot
+Allow: /
+
 User-agent: *
 Disallow: /account/
 Disallow: /private/

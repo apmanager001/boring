@@ -58,17 +58,19 @@ const LeaderboardDisplay = () => {
               key={game.id}
               className="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 group md:max-w-64 min-w-64 mx-auto"
             >
-              <figure className="relative overflow-hidden h-48">
-                <img
-                  src={game.image}
-                  alt={game.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <h3 className="text-2xl font-bold text-white">{game.name}</h3>
-                </div>
-              </figure>
+              <Link href={`${game.link}`}>
+                <figure className="relative overflow-hidden h-48">
+                  <img
+                    src={game.image}
+                    alt={game.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-2xl font-bold text-white">{game.name}</h3>
+                  </div>
+                </figure>
+              </Link>
               <ul className="mt-2 space-y-2">
                 {leaderboards[game.id]?.map((player, index) => (
                   <li
