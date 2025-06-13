@@ -10,7 +10,7 @@ export async function generateMetadata() {
     openGraph: {
       title: seo.name,
       description: seo.description,
-      images: [`https://boringsquirrel.com${seo.image}`],
+      image: [`https://boringsquirrel.com${seo.image}`],
       url: `https://boringsquirrel.com${seo.link}`,
     },
     twitter: {
