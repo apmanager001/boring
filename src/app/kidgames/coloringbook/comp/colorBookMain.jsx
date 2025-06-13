@@ -55,7 +55,7 @@ const ColorBookMain = () => {
       ) : (
         <ImageProcessor onProcessComplete={handleProcessComplete} />
       )}
-      <Templates onSelectTemplate={handleTemplateSelect} />
+      {currentTemplate ? "": <Templates onSelectTemplate={handleTemplateSelect} />}
       {currentTemplate && (
         <ColoringGame
           colorMap={colorMap}

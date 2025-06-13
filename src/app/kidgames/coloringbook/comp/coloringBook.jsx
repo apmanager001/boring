@@ -2,6 +2,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Info } from "lucide-react";
+import ScreenshotButton from "./screenshot";
 // import ImageProcessor from "./image";
 // import ImageProcessor from "./image1";
 
@@ -79,6 +80,7 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
       </div>
     );
   }
+
   return (
     <div className="w-full min-h-screen p-4 flex flex-col items-center pb-24">
       <div className="flex items-center gap-2 mb-4">
@@ -121,11 +123,27 @@ export default function ColoringGame({ colorMap, template, gridWidth, gridHeight
 
       {/* Solve Button */}
       <span className="text-xl">Toggle to Show Image</span>
-      <input
-        type="checkbox"
-        className="toggle toggle-lg my-4 border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-orange-800"
-        onChange={(e) => handleToggleChange(e.target.checked)}
-      />
+      <div className="flex flex-col items-center">
+          <input
+            name="showImage"
+            type="checkbox"
+            className="toggle toggle-lg my-4 border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-orange-800"
+            onChange={(e) => handleToggleChange(e.target.checked)}
+          />
+        {showSolution ? (
+          <ScreenshotButton
+            showSolution={showSolution}
+            colorGrid={colorGrid}
+            numberGrid={numberGrid}
+            gridHeight={gridHeight}
+            gridWidth={gridWidth}
+            colorMap={colorMap}
+          />
+        ) : (
+          <div></div>
+        )}
+      </div>
+
       {/* <button
         className="px-6 py-3 mb-4 bg-gray-800 text-white rounded-lg font-medium shadow hover:bg-gray-700 transition-colors"
         onMouseDown={handleMouseDown}
