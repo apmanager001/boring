@@ -44,55 +44,61 @@ const LeaderboardDisplay = () => {
 
   return (
     <div className="py-16 px-4 ">
-        <div className="max-w-6xl mx-auto">
-      <h2 className="text-4xl font-bold text-center mb-4">Game Leaderboards</h2>
-      <p className="text-center text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
-        Can you reach the homepage Leaderboard?
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-        {games
-          .filter((game) => game.tags.includes("Leaderboard"))
-          .slice(0, 3)
-          .map((game) => (
-            <div
-              key={game.id}
-              className="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 group md:max-w-64 min-w-64 mx-auto"
-            >
-              <Link href={`${game.link}`}>
-                <figure className="relative overflow-hidden h-48">
-                  <img
-                    src={game.image}
-                    alt={game.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <h3 className="text-2xl font-bold text-white">{game.name}</h3>
-                  </div>
-                </figure>
-              </Link>
-              <ul className="mt-2 space-y-2">
-                {leaderboards[game.id]?.map((player, index) => (
-                  <li
-                    key={index}
-                    className="flex justify-between px-4 py-1 bg-gray-100 rounded-md"
-                  >
-                    <span className="font-semibold">
-                      {index + 1}. {player.username}
-                    </span>
-                    <span className="text-gray-500">{player.score}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-      </div>
-      <div className="text-center mt-12">
-        <Link className="btn btn-outline btn-primary" href="/leaderboard">
-          View All Game Leaderboards
-          <Heart />
-        </Link>
-      </div>
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-4">
+          Game Leaderboards
+        </h2>
+        <p className="text-center text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
+          Can you reach the homepage Leaderboard?
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+          {games
+            .filter((game) => game.tags.includes("Leaderboard"))
+            .slice(0, 3)
+            .map((game) => (
+              <div
+                key={game.id}
+                className="card card-compact bg-base-200 shadow-xl hover:shadow-2xl transition-shadow duration-300 group md:max-w-64 min-w-64 mx-auto"
+              >
+                <Link href={`${game.link}`}>
+                  <figure className="relative overflow-hidden h-48">
+                    <img
+                      src={game.image}
+                      alt="image of game"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-xl"
+                      width="300"
+                      height="200"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4">
+                      <h3 className="text-2xl font-bold text-white">
+                        {game.name}
+                      </h3>
+                    </div>
+                  </figure>
+                </Link>
+                <ul className="mt-2 space-y-2">
+                  {leaderboards[game.id]?.map((player, index) => (
+                    <li
+                      key={index}
+                      className="flex justify-between px-4 py-1 bg-gray-100 rounded-md"
+                    >
+                      <span className="font-semibold">
+                        {index + 1}. {player.username}
+                      </span>
+                      <span className="text-gray-500">{player.score}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+        </div>
+        <div className="text-center mt-12">
+          <Link className="btn btn-outline btn-primary" href="/leaderboard">
+            View All Game Leaderboards
+            <Heart />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const Header = async () => {
       <div className="flex flex-col mx-10">
         <div className="flex-1 flex justify-center items-center">
           <img
-            src="/squirrel.png"
+            src="/squirrel.webp"
             alt="Squirrel Logo"
             width="100"
             height="100"

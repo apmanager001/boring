@@ -15,16 +15,18 @@ const Feature = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {games.slice(0,4).map((game) => (
+          {games.slice(0, 4).map((game) => (
             <div
               key={game.id}
-              className="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 group"
+              className="card card-compact bg-base-200 shadow-xl hover:shadow-2xl transition-shadow duration-300 group"
             >
               <figure className="relative overflow-hidden h-48">
                 <img
                   src={game.image}
-                  alt={game.name}
+                  alt="image of game"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  width="300"
+                  height="200"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-4 left-4">
@@ -32,14 +34,17 @@ const Feature = () => {
                 </div>
               </figure>
               <div className="card-body">
-                <p className="text-gray-600">{game.description}</p>
-                <div className="flex flex-wrap gap-2 mt-2">
+                <div className="flex flex-wrap gap-2 mt-2 justify-center">
                   {game.tags.map((tag, index) => (
-                    <span key={index} className="badge badge-outline">
+                    <span
+                      key={index}
+                      className="badge badge-soft badge-accent"
+                    >
                       {tag}
                     </span>
                   ))}
                 </div>
+                <p className="text-gray-400">{game.description}</p>
                 <div className="card-actions justify-end mt-4">
                   <a href={game.link} className="btn btn-primary btn-sm">
                     Play Now
