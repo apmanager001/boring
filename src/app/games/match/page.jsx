@@ -11,8 +11,15 @@ export async function generateMetadata() {
     openGraph: {
       title: "Memory Match",
       description: "Test your memory by matching pairs of cards",
-      images: [`https://boringsquirrel.com/hp/match.png`],
-      url: `https://boringsquirrel.com/games/match`,
+      images: [
+        {
+          url: "https://boringsquirrel.com/hp/match.png",
+          width: 1200, // optional but recommended
+          height: 630, // optional but recommended
+          alt: "Memory Match Game Preview",
+        },
+      ],
+      url: "https://boringsquirrel.com/games/match",
     },
     twitter: {
       card: "summary_large_image",
