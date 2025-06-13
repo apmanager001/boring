@@ -19,7 +19,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Boring Squirrel",
-  description: "A place to play great games with others. Most games have there own twist that make them unique.",
+  description:
+    "A place to play great games with others. Most games have there own twist that make them unique.",
+  openGraph: {
+    title: "Boring Squirrel",
+    description:
+      "A place to play great games with others. Most games have their own twist that makes them unique.",
+    images: [
+      {
+        url: "/sqir.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Boring Squirrel Logo",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

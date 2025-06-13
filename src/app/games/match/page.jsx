@@ -2,7 +2,7 @@ import React from 'react'
 import Match from './comp/match'
 // import { games } from "../../../components/utility/gameList";
 
-export async function generateMetadata() {
+export async function metaData() {
   // const seo = games[2];
 
   return {
