@@ -10,7 +10,8 @@ export const games = [
   {
     id: 1,
     name: "Oil Cap",
-    description: "A strategic game ",
+    description:
+      "A strategic puzzle game where players must carefully manage oil flow to maximize efficiency. Plan your moves, control the flow, and compete for the top spot on the leaderboard! Can you be the best?",
     image: "/hp/oilcap.png",
     tags: [single, strategy, leaderboard],
     link: "/games/oilcap",
@@ -19,7 +20,7 @@ export const games = [
     id: 2,
     name: "AcornSweeper",
     description:
-      "A different take on Minesweeper. Find hidden acorns without detonating them",
+      "A fresh twist on the classic Minesweeper! Search for hidden acorns while avoiding explosive surprises. Use logic and strategy to uncover safe spots and climb the leaderboard. How fast can you complete the board?",
     image: "/hp/squirrels.png",
     tags: [single, classic, leaderboard],
     link: "/games/acornsweeper",
@@ -27,9 +28,9 @@ export const games = [
   {
     id: 3,
     name: "Memory Match",
-    description: "Test your memory by matching pairs of cards",
-    image:
-      "/hp/match.png",
+    description:
+      "Sharpen your memory skills by matching pairs of cards! A fun and engaging puzzle game perfect for kids and adults alike. Challenge yourself and improve your recall with every round. How few moves can you match them all?",
+    image: "/hp/match.png",
     tags: [kids, single, Puzzle],
     link: "/games/match",
   },
@@ -37,7 +38,7 @@ export const games = [
     id: 4,
     name: "Coloring Book",
     description:
-      "A simple coloring book. Click the number/color and fill in the image with the corresponding number.",
+      "Unleash your creativity with this interactive coloring book! Select colors, match numbers, and bring beautiful images to life. A relaxing and fun experience for kids and art lovers.",
     image: "/hp/sb.png",
     tags: [kids, single],
     link: "/kidgames/coloringbook",
@@ -46,7 +47,7 @@ export const games = [
     id: 5,
     name: "Tic Tac Toe",
     description:
-      "A different take on tic tac toe. Every player has 3 different sizes of pieces. A bigger piece can cover a smaller piece. ",
+      "A strategic upgrade to the classic game! Players have three different-sized pieces, and larger pieces can cover smaller ones. Outsmart your opponent in this dynamic multiplayer challenge.",
     image: "/hp/tik.png",
     tags: [classic, multiplayer, leaderboard],
     link: "/games/tiktaktoe",
@@ -55,7 +56,7 @@ export const games = [
     id: 6,
     name: "Pixel Art",
     description:
-      "Build Art as a community. Take turns having control and chnaging the pixel colors. Build an abstract piece or make smaller images in the full canvas.",
+      "Collaborate with the community to create stunning pixel masterpieces! Take turns controlling the canvas, change pixel colors, and build unique artwork together.",
     image: "/hp/pixel.png",
     tags: [classic, multiplayer],
     link: "/games/pixelArt",

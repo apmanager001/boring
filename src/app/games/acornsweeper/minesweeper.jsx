@@ -21,19 +21,24 @@ const Minesweeper = () => {
       {/* <div className="mt-4 mr-4 flex justify-end w-full md:w-[500px]">
         <GameLogged />
       </div> */}
-      <SharedButtons game={"Acornsweeper"} />
-      <div className="flex items-center gap-4">
-        <h1 className="text-4xl font-bold my-4">Acornsweeper </h1>
-        <div
-          className="tooltip tooltip-left md:tooltip-bottom"
-          data-tip={`There are 10 acorns to avoid. Right-click to flag a square with a Squirrel.`}
-        >
-          <Info />
+
+      <div className="md:w-[500px]">
+        <div className="flex justify-end">
+          <SharedButtons game={"Acornsweeper"} />
+        </div>
+        <div className="flex justify-center items-center gap-4">
+          <h1 className="text-4xl font-bold my-4">Acornsweeper </h1>
+          <div
+            className="tooltip tooltip-left md:tooltip-bottom"
+            data-tip={`There are 10 acorns to avoid. Right-click to flag a square with a Squirrel.`}
+          >
+            <Info />
+          </div>
         </div>
       </div>
       <div className="flex justify-between my-4 w-96">
         <div className="w-16 flex items-center justify-center">
-          <Timer start={start} onTimeUpdate={handleTimeUpdate}/>
+          <Timer start={start} onTimeUpdate={handleTimeUpdate} />
         </div>
         <div className="w-16 flex items-center justify-center">
           <Squirrel
@@ -48,7 +53,7 @@ const Minesweeper = () => {
         </div>
       </div>
       <div>
-        <Board setMarked={setMarked} setStart={setStart} score={score}/>
+        <Board setMarked={setMarked} setStart={setStart} score={score} />
       </div>
     </div>
   );
