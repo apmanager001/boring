@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       "A place to play great games with others. Most games have their own twist that makes them unique.",
     images: [
       {
-        url: "/sqir.jpg",
+        url: "https://boringsquirrel.com/sqir.jpg",
         width: 1200,
         height: 630,
         alt: "Boring Squirrel Logo",
