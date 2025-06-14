@@ -62,9 +62,9 @@ const WinAlert = ({ onCancel, score }) => {
   };
 
   const copyToClipboard = () => {
-    const text = `I scored ${score} in Acorn Finder! ${window.location.href}`;
+    const text = `I scored ${score} in Acornsweeper! ${window.location.href}`;
     navigator.clipboard.writeText(text);
-    alert("Copied to clipboard!");
+    toast.success("Copied to clipboard!");
   };
 
   return (
@@ -157,12 +157,12 @@ const WinAlert = ({ onCancel, score }) => {
 
         <div className="flex gap-2 justify-center">
           <button
-            className="btn btn-sm border border-gray-600"
+            className="btn btn-sm btn-soft border border-gray-600"
             onClick={onCancel}
           >
             Cancel
           </button>
-          <button className="btn btn-sm btn-success" onClick={playAgain}>
+          <button className="btn btn-sm btn-soft btn-success" onClick={playAgain}>
             Play Again
           </button>
         </div>

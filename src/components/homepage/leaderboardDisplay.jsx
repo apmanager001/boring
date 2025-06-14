@@ -81,7 +81,7 @@ const LeaderboardDisplay = () => {
                   {leaderboards[game.id]?.map((player, index) => (
                     <li
                       key={index}
-                      className="flex justify-between px-4 py-1 bg-gray-100 rounded-md"
+                      className="flex justify-between px-4 py-1 bg-gray-100 rounded-md text-gray-400"
                     >
                       <span className="font-semibold">
                         {index + 1}. {player.username}

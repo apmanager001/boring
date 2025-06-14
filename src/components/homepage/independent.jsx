@@ -1,21 +1,23 @@
 'use client'
+import React from 'react'
 import { Heart } from "lucide-react";
-import {games} from '../../components/utility/gameList'
-const Feature = () => {
-
+import Link from 'next/link';
+import { independentGames } from '../utility/independentGames';
+const Independent = () => {
   return (
     <div className="py-16 px-4 bg-base-100">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-4">
-          Classic Games
+          Independent Games
         </h2>
-        <p className="text-center text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
-          Choose from our selection of classic games, each with a modern twist
-          and exciting features.
+        <p className="text-center text-lg text-gray-500  max-w-2xl mx-auto">
+          Choose from third party games, pick the one that makes sense for you.
         </p>
-
+        <p className="text-center text-md text-gray-600 mb-12 max-w-2xl mx-auto">
+          Have a game you want to Submit? <Link href="/independent" className="text-gray-400 underline">Submit here</Link> 
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {games.slice(0, 4).map((game) => (
+          {independentGames.slice(0, 4).map((game) => (
             <div
               key={game.id}
               className="card card-compact bg-base-200 shadow-xl hover:shadow-2xl transition-shadow duration-300 group"
@@ -36,10 +38,7 @@ const Feature = () => {
               <div className="card-body">
                 <div className="flex flex-wrap gap-2 mt-2 justify-center">
                   {game.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="badge badge-soft badge-accent"
-                    >
+                    <span key={index} className="badge badge-soft badge-accent">
                       {tag}
                     </span>
                   ))}
@@ -78,6 +77,6 @@ const Feature = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Feature;
+export default Independent;

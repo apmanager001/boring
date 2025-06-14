@@ -1,5 +1,7 @@
 import React from 'react'
+import Link from 'next/link';
 import Newsletter from './newsletter'
+import { gameLinks, kidLinks } from './headerComps/headerLinks';
 import { Home, Gamepad2, ClipboardList, Menu } from "lucide-react";
 import FooterDrawer from './footerDrawer'
 
@@ -15,45 +17,55 @@ const Footer = () => {
                 href="#"
                 aria-label="Brand"
               >
-                Boring Games
+                Boring Squirrel
               </a>
             </div>
 
             <div className="col-span-1">
-              <h4 className="font-semibold text-gray-100">Games</h4>
-
               <div className="mt-3 grid space-y-3">
-                <p className="flex flex-col gap-x-2 text-gray-400">
-                  <a className="hover:text-gray-200" href="/games/acornsweeper">
-                    Acornsweeper
-                  </a>
-                  <a className="hover:text-gray-200" href="/games/oilCap">
-                    Oil Cap
-                  </a>
-                  <a className="hover:text-gray-200" href="/games/pixelArt">
-                    Pixel Art
-                  </a>
-                </p>
-                {/* <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Changelog</a></p>
-            <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Docs</a></p> */}
+                <ul className="flex flex-col gap-y-2 text-gray-400 ">
+                  {gameLinks.map((link) => (
+                    <ol key={link.name}>
+                      <Link
+                        href={link.link}
+                        className="hover:text-gray-200 hover:underline"
+                      >
+                        {link.name}
+                      </Link>
+                    </ol>
+                  ))}
+                  {kidLinks.map((link) => (
+                    <ol key={link.name}>
+                      <Link
+                        href={link.link}
+                        className="hover:text-gray-200 hover:underline"
+                      >
+                        {link.name}
+                      </Link>
+                    </ol>
+                  ))}
+                </ul>
               </div>
             </div>
 
             <div className="col-span-1">
-              <h4 className="font-semibold text-gray-100">About Us</h4>
-
-              <div className="mt-3 grid space-y-3">
+              <div className="mt-3 grid space-y-3 text-gray-400">
                 <p>
-                  <a
-                    className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+                  <Link
+                    className="hover:text-gray-200 hover:underline"
                     href="/about"
                   >
                     About us
-                  </a>
+                  </Link>
                 </p>
-                {/* <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Blog</a></p>
-            <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Careers</a> <span className="inline-block ms-1 text-xs bg-blue-700 text-white py-1 px-2 rounded-lg">We're hiring</span></p>
-            <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Customers</a></p> */}
+                <p>
+                  <Link
+                    className="hover:text-gray-200 hover:underline"
+                    href="/independent"
+                  >
+                    Game Devs
+                  </Link>
+                </p>
               </div>
             </div>
 
