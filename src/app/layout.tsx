@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   title: "Boring Squirrel",
   description: description,
   openGraph: {
-    title: "Boring Squirrel",
-    description:
-      description,
+    siteName: "Boring Squirrel",
+    title: "Play Free Games Online at Boring Squirrel",
+    description: description,
     images: [
       {
         url: "https://boringsquirrel.com/sqir.jpg",

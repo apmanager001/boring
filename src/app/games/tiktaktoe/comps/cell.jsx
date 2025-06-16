@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { Squirrel, Nut } from "lucide-react";
 
 const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
@@ -13,7 +14,7 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
 
     if (cell) {
       if (currentPlayer === cell.player) {
-        alert("You can't replace your own piece");
+        toast.error("You can't replace your own piece");
         return;
       }
       if (
@@ -21,7 +22,7 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
         (cell.piece === "md" && (piece === "sm" || piece === "md")) ||
         (cell.piece === "sm" && !["md", "lg"].includes(piece))
       ) {
-        alert("This square is already occupied with a bigger or equal piece");
+        toast.error("This square is already occupied with a bigger or equal piece");
         return;
       }
     }
@@ -33,7 +34,7 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
     if (!selectedPiece) return;
     if (cell) {
       if (currentPlayer === cell.player) {
-        alert("You can't replace your own piece");
+        toast.error("You can't replace your own piece");
         return;
       }
       if (
@@ -42,7 +43,9 @@ const Cell = ({ row, col, cell, handleMove, currentPlayer, selectedPiece }) => {
           (selectedPiece === "sm" || selectedPiece === "md")) ||
         (cell.piece === "sm" && !["md", "lg"].includes(selectedPiece))
       ) {
-        alert("This square is already occupied with a bigger or equal piece");
+        toast.error(
+          "This square is already occupied with a bigger or equal piece"
+        );
         return;
       }
     }

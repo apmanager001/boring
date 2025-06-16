@@ -61,7 +61,7 @@ const GamePage = () => {
               <p className="text-gray-600">{game.description}</p>
               <div className="flex flex-wrap gap-2 mt-2">
                 {game.tags.map((tag, index) => (
-                  <span key={index} className="badge badge-outline">
+                  <span key={index} className="badge badge-soft badge-accent">
                     {tag}
                   </span>
                 ))}
