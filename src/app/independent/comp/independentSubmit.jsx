@@ -30,8 +30,8 @@ const IndependentSubmit = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:m-10 gap-4">
-      <div className="w-1/2 mx-auto p-6 flex-1">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:m-10">
+      <div className="w-full md:w-1/2 p-6 flex-1 max-w-[500px]">
         <h2 className="text-2xl font-bold text-center mb-4">
           Submit Your Game
         </h2>
@@ -112,13 +112,34 @@ const IndependentSubmit = () => {
               className="input input-bordered w-full"
             />
           </label>
+          <label className="form-control">
+            <span className="label-text">Email:</span>
+            <input
+              type="url"
+              name="linkUrl"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="input input-bordered w-full"
+            />
+          </label>
+          <label className="form-control">
+            <span className="label-text">Additional Info:</span>
+            <textarea
+              name="description"
+              value={formData.additionalInfo}
+              onChange={handleChange}
+              required
+              className="textarea textarea-bordered w-full"
+            />
+          </label>
 
           <button type="submit" className="btn btn-soft btn-primary w-full">
             Submit
           </button>
         </form>
       </div>
-      <div className="w-1/2 p-6 flex-1">
+      <div className="w-full md:w-1/2  p-0 md:p-6 flex-1 max-w-[800px] pb-24 md:pb-0">
         <h2 className="text-2xl font-bold text-center mb-4">
           Why Submit Your Game?
         </h2>

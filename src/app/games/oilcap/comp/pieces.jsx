@@ -91,7 +91,7 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
               ? `bg-yellow-400 border border-gray-600 ${
                   startGame ? "cursor-pointer" : ""
                 }`
-              : "bg-gray-400 border border-gray-600"
+              : "bg-gray-400/20 border border-gray-600"
           }`}
         >
           {PIPE_TYPES[piece] ? (

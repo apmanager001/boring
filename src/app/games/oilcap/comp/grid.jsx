@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, Share2 } from "lucide-react";
 import toast from "react-hot-toast";
 import GameBoard from "./GameBoard";
@@ -24,6 +24,7 @@ const OilcapGame = () => {
       Array(BOARD_SIZE).fill({ type: null, isOilFlowing: false })
     )
   );
+  const gridRef = useRef(grid);
   const [startPos, setStartPos] = useState(null);
   const [draggedItem, setDraggedItem] = useState(null);
   const [hasDropped, setHasDropped] = useState(false);
@@ -33,17 +34,23 @@ const OilcapGame = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
 
+  useEffect(() => {
+    gridRef.current = grid;
+  }, [grid]);
+
   const showEndGamePopup = (cellsConnected) => {
     setFinalScore(cellsConnected * 10); // Or calculate score however you want
     setShowPopup(true);
   };
-console.log(grid)
-  const closePopup = () => {
+
+  const closePopup = (reset) => {
     setShowPopup(false);
     // Reset game if desired
-    // resetGame();
+    if(reset === 'reset'){
+      window.location.reload();
+    }
   };
-
+console.log(grid)
   useEffect(() => {
     const newStart = getRandomStartPosition();
     setGrid((prevGrid) => {
@@ -74,7 +81,6 @@ console.log(grid)
   };
 
   const startOilFlow = () => {
-    console.log("=== STARTING OIL FLOW ===");
     if (!startPos) return;
 
     const visited = new Set();
@@ -104,7 +110,6 @@ console.log(grid)
         col >= BOARD_SIZE ||
         visited.has(cellKey)
       ) {
-        console.log(`Stopping flow at [${row},${col}] - invalid or visited`);
         activeFlows--;
         checkFlowCompletion();
         return;
@@ -121,13 +126,9 @@ console.log(grid)
       //   checkFlowCompletion();
       //   return;
       // }
+      const cell = gridRef.current[row]?.[col];
 
-      const cell = grid[row]?.[col];
-      console.log(grid);
-      console.log(`Checking cell [${row},${col}]`, cell); // Debug log
       if (!cell?.type) {
-        console.log(`Stopping flow at [${row},${col}] - empty cell`);
-        console.log(activeFlows);
         activeFlows--;
         checkFlowCompletion();
         return;
@@ -135,7 +136,6 @@ console.log(grid)
 
       // MARK ONLY THIS CELL AS VISITED
       visited.add(cellKey);
-      console.log("Currently visited:", [...visited]); // Log snapshot of visited
       cellsFlowed++;
 
       setGrid((prev) => {
@@ -145,9 +145,6 @@ console.log(grid)
       });
       setScore((prev) => prev + 10);
 
-      console.log(
-        `Processing ${cell.type} at [${row},${col}] from ${incomingDirection}`
-      );
 
       const outgoingDirections = getOutgoingDirections(
         cell.type,
@@ -155,9 +152,6 @@ console.log(grid)
       );
 
       if (outgoingDirections.length === 0) {
-        console.log(
-          `Stopping flow at [${row},${col}] - no valid outgoing directions`
-        );
         activeFlows--;
         checkFlowCompletion();
         return;
@@ -276,14 +270,19 @@ console.log(grid)
     }
 
     function checkFlowCompletion() {
-      console.log("test");
       // Only show popup when all flows have completed and we haven't shown it yet
       if (activeFlows && !popupShown) {
-        console.log("testing");
+        const unflowedPieces = gridRef.current
+          .flat()
+          .filter(
+            (cell) => cell.type !== null && cell.isOilFlowing === false
+          ).length;
+
+        // Subtract 10 points for each bad piece
+        setScore((prevScore) => prevScore - unflowedPieces * 10);
         popupShown = true;
-        console.log("=== OIL FLOW COMPLETE ===");
-        console.log(`Total cells flowed: ${cellsFlowed}`);
         setStartGame(false);
+        
         showEndGamePopup(cellsFlowed);
       }
     }
@@ -297,28 +296,36 @@ console.log(grid)
   return (
     <div className="game-container text-center">
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-md w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 text-black">
+          <div className="bg-white/80 p-6 rounded-lg max-w-md w-full border border-gray-500">
             <h2 className="text-2xl font-bold mb-4">Game Over!</h2>
             <p className="mb-4">
               Your oil flowed through {finalScore / 10} pipes!
             </p>
-            <p className="text-xl font-bold mb-6">Final Score: {finalScore}</p>
-            <button
-              onClick={closePopup}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Play Again
-            </button>
+            <p className="text-xl font-bold mb-6">Final Score: {score}</p>
+            <div className="flex  w-full justify-center gap-4">
+              <button
+                className="btn btn-soft btn-default"
+                onClick={() => closePopup()}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => closePopup("reset")}
+                className="btn btn-soft btn-success"
+              >
+                Play Again
+              </button>
+            </div>
           </div>
         </div>
       )}
 
       <SharedButtons game={"OilCap"} />
-      <h1 className="text-4xl font-bold my-4">Oilcap Game</h1>
+      <h1 className="text-4xl font-bold my-4">Flow</h1>
       {!startGame && (
         <>
-          <h1>Welcome to Oilcap Game! Click Start to begin.</h1>
+          <h1>Welcome to Flow! Click Start to begin.</h1>
           <button className="btn btn-secondary my-4" onClick={handleStart}>
             Start Game
           </button>

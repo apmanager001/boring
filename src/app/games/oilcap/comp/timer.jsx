@@ -31,7 +31,7 @@ const Timer = ({ running, onTimeUp }) => {
   //   return () => clearInterval(timer);
   // }, [running, onTimeUp]);
 
-  return <div className="font-bold text-lg">Time Left: {timeLeft}s</div>;
+  return <div className="font-bold text-lg">Time Left: {timeLeft} s</div>;
 };
 
 export default Timer;

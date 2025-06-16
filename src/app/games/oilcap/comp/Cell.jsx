@@ -63,6 +63,7 @@ const Cell = ({ type, onClick, flowing }) => {
           : "bg-blue-500 text-black font-extrabold text-3xl"
       }`}
       // onClick={onClick}
+      draggable="false"
     >
       {content}
     </div>

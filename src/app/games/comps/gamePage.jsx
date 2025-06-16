@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { games } from "../../../components/utility/gameList";
+import IndependentGames from "./independentGames";
 
 const categories = [
   "All",
@@ -24,6 +25,8 @@ const GamePage = () => {
 
   return (
     <div className="container mx-auto px-6 py-8">
+      <h2 className="text-4xl font-bold text-center text-gray-500 mb-4">Independent Games</h2>
+      <IndependentGames />
       {/* Category Filter */}
       <div className="flex justify-center mb-6">
         <select

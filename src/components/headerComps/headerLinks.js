@@ -19,7 +19,7 @@ export const gameLinks = [
     type: game,
   },
   {
-    name: "OilCap",
+    name: "Flow",
     link: "/games/oilcap",
     type: game,
   },
