@@ -1,10 +1,10 @@
 let strategy = "Strategy";
-let multiplayer = "2 Player";
-let Puzzle = " Puzzle";
+// let multiplayer = "2 Player";
+// let Puzzle = " Puzzle";
 let single = "Single Player";
-let kids = "Kid Game";
-let classic = "Classic";
-let leaderboard = "Leaderboard";
+// let kids = "Kid Game";
+// let classic = "Classic";
+// let leaderboard = "Leaderboard";
 let mobile = 'Mobile'
 
 export const independentGames = [
