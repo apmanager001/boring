@@ -15,13 +15,25 @@ const Profile = ({
   const [loading, setLoading] = useState(false)
 
   const [users, setUsers] = useState([]);
-
+  const [user, setUser] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await AxiosInstance.get(`/users/${id}`);
         setUsers(response.data);
         setLoading(true)
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await AxiosInstance.get(`/users`);
+        setUser(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
