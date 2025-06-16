@@ -44,7 +44,7 @@ const UserInfo = () => {
           </summary>
           <ul className="bg-base-200 rounded-t-none p-4">
             <li>
-              <Link href={`/profile/${user.username}`}>
+              <Link href={`/profile/${user.id}`}>
                 <User />
                 Profile
               </Link>

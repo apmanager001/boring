@@ -16,7 +16,6 @@ const Settings = () => {
     const fetchProfile = async () => {
       try {
         const response = await axiosInstance.get("/profile");
-        console.log(response)
         setUsername(response.data.username);
         setEmail(response.data.email);
         setBio(response.data.bio || "")
@@ -58,7 +57,7 @@ const Settings = () => {
     <div className="md:p-6 bg-base-100 md:bg-base-200 min-h-screen">
       <form
         onSubmit={handleUpdate}
-        className="max-w-lg mx-auto bg-base-100 md:shadow-lg md:rounded-lg p-6 md:border border-1px border-neutral"
+        className="max-w-lg mx-auto bg-base-100 md:shadow-lg md:rounded-lg p-6 md:border border-1px border-gray-500"
       >
         <div className="form-control mb-4">
           <h1 className="text-3xl font-bold text-center">Settings</h1>
@@ -72,66 +71,68 @@ const Settings = () => {
             ""
           )}
         </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Username:</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="input input-bordered"
-          />
+        <div className="mx-10 flex flex-col items-center">
+          <div className="form-control mb-4 flex flex-col w-72">
+            <label className="label">
+              <span className="label-text">Username:</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control mb-4 flex flex-col w-72">
+            <label className="label">
+              <span className="label-text">Email:</span>
+            </label>
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control mb-4 flex flex-col w-72">
+            <label className="label">
+              <span className="label-text">Password:</span>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control mb-4 flex flex-col w-72">
+            <label className="label">
+              <span className="label-text">Bio:</span>
+            </label>
+            <textarea
+              placeholder={bio || "Tell us about yourself..."}
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              className="textarea textarea-bordered"
+            />
+          </div>
+          <div className=" flex items-center mb-4">
+            <label className="label">
+              <span className="label-text">Dark Mode:</span>
+            </label>
+            <input
+              type="checkbox"
+              defaultChecked
+              className="toggle toggle-lg ml-4"
+              value={theme}
+              onChange={(e) => setTheme(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Email:</span>
-          </label>
-          <input
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input input-bordered"
-          />
-        </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Password:</span>
-          </label>
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input input-bordered"
-          />
-        </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Bio:</span>
-          </label>
-          <textarea
-            placeholder={bio || "Tell us about yourself..."}
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            className="textarea textarea-bordered"
-          />
-        </div>
-        <div className=" flex items-center mb-4">
-          <label className="label">
-            <span className="label-text">Dark Mode:</span>
-          </label>
-          <input
-            type="checkbox"
-            defaultChecked
-            className="toggle toggle-neutral ml-4"
-            value={theme}
-            onChange={(e) => setTheme(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary w-full mt-4">
+        <button type="submit" className="btn btn-soft btn-primary w-full mt-4">
           Update Profile
         </button>
       </form>
