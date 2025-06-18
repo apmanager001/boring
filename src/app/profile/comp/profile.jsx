@@ -2,12 +2,11 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "next/navigation";
 import { UserCircle } from "lucide-react";
+import { monthYear } from "../../../components/utility/monthYear";
 import AxiosInstance from '../../../components/utility/axios'
 
 const Profile = ({
-  username = "Placeholder User",
   memberSince = "January 2020",
-  bio = "This is a sample bio about the user.",
   gamesPlayed = 0,
   highestRank = "Unranked",
 }) => {
@@ -43,14 +42,14 @@ const Profile = ({
 
   return (
     <div className="md:p-20 bg-base-100 md:bg-base-200 min-h-screen">
-      <div className=" flex flex-col md:flex-row w-full max-w-[900px] h-full md:h-[500px]  mx-auto bg-base-100 md:shadow-lg md:rounded-lg md:border border-1px border-neutral">
+      <div className=" flex flex-col md:flex-row w-full max-w-[900px] h-full md:h-[500px]  mx-auto bg-base-100 md:shadow-lg md:rounded-lg md:border border-1px border-gray-500">
         {loading ? (
           <>
         <div className="flex flex-col items-center text-center md:w-1/3 p-6">
           <UserCircle className="w-24 h-24 mx-auto text-primary" />
           <h1 className="text-2xl font-bold mt-4">{users.username}</h1>
           <p className="text-sm text-gray-500">
-            Member Since: {memberSince}
+            Member Since: {monthYear(users.createdAt)}
           </p>
           <p className="text-2xl font-bold pt-6">Badges</p>
           <p className="text-gray-500">Coming soon</p>

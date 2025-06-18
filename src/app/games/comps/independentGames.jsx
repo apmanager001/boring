@@ -23,8 +23,6 @@ const IndependentGames = () => {
   //   }
   // };
 
-
-  
   return (
     <>
       {loading ? (
@@ -54,7 +52,7 @@ const IndependentGames = () => {
 
                 <div className="flex flex-wrap gap-1 mt-auto">
                   {game.tags.map((tag, index) => (
-                    <span key={index} className="badge badge-accent text-xs">
+                    <span key={index} className="badge badge-accent badge-soft text-xs">
                       {tag}
                     </span>
                   ))}
