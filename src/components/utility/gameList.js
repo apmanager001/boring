@@ -61,4 +61,13 @@ export const games = [
     tags: [classic, multiplayer],
     link: "/games/pixelArt",
   },
+  {
+    id: 7,
+    name: "Dots and Boxes",
+    description:
+      "Challenge your opponent in this turn-based classic! Take turns drawing lines between dots to complete boxes. Claim a square to earn points—and an extra turn! Strategy and timing are key in this deceptively simple game of wit and precision.",
+    image: "/hp/dots.png",
+    tags: [classic, multiplayer, leaderboard],
+    link: "/games/squares",
+  },
 ];

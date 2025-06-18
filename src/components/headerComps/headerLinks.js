@@ -23,6 +23,11 @@ export const gameLinks = [
     link: "/games/oilcap",
     type: game,
   },
+  {
+    name: "Dots and Boxes",
+    link: "/games/squares",
+    type: game,
+  },
 ];
 
 export const kidLinks = [

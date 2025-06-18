@@ -76,7 +76,7 @@ const NewsHeader = () => {
                   passHref
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-xs btn-outline"
+                  className="btn btn-xs btn-soft btn-primary"
                 >
                   Read
                 </Link>
