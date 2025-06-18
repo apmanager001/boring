@@ -34,7 +34,7 @@ const NewsHeader = () => {
     if (isLoading) {
       return (
         <div className="px-4 sm:px-6 lg:px-12 xl:px-20">
-          <h2 className="text-2xl font-bold mb-2">Loading News...</h2> 
+          <h2 className="text-2xl text-center font-bold mb-2">Loading News...</h2> 
           <div className="flex flex-wrap justify-center gap-4">
             
             {[...Array(4)].map((_, i) => (
