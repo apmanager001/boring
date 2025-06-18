@@ -46,32 +46,70 @@ const CategoryTiles = () => {
       image:
         "https://media.istockphoto.com/id/1354761874/photo/team-of-professional-cybersport-gamers-celebrating-success-in-gaming-club.jpg?s=2048x2048&w=is&k=20&c=sNogk3t5SXJIFEG8rGev9-b7KFk8KnoySUXw0wsYaSk=",
     },
+    {
+      id: 7,
+      name: "Xbox",
+      slug: "xbox",
+      image:
+        "https://media.istockphoto.com/id/1141514587/vector/pixel-art-landscape-summer-ocean-beach-8-bit-city-park-pixel-cityscape-and-highlands.jpg?s=2048x2048&w=is&k=20&c=MiK-QBt3saCxXVMf70yuANtA5li6EW9SCFXOlew1sgs=",
+    },
+    {
+      id: 8,
+      name: "Playstation",
+      slug: "playstation",
+      image:
+        "https://media.istockphoto.com/id/1141514587/vector/pixel-art-landscape-summer-ocean-beach-8-bit-city-park-pixel-cityscape-and-highlands.jpg?s=2048x2048&w=is&k=20&c=MiK-QBt3saCxXVMf70yuANtA5li6EW9SCFXOlew1sgs=",
+    },
+    {
+      id: 9,
+      name: "Nintendo",
+      slug: "nintendo",
+      image:
+        "https://media.istockphoto.com/id/1141514587/vector/pixel-art-landscape-summer-ocean-beach-8-bit-city-park-pixel-cityscape-and-highlands.jpg?s=2048x2048&w=is&k=20&c=MiK-QBt3saCxXVMf70yuANtA5li6EW9SCFXOlew1sgs=",
+    },
+    {
+      id: 10,
+      name: "PC",
+      slug: "pc",
+      image:
+        "https://media.istockphoto.com/id/1141514587/vector/pixel-art-landscape-summer-ocean-beach-8-bit-city-park-pixel-cityscape-and-highlands.jpg?s=2048x2048&w=is&k=20&c=MiK-QBt3saCxXVMf70yuANtA5li6EW9SCFXOlew1sgs=",
+    },
+    {
+      id: 11,
+      name: "Console",
+      slug: "console",
+      image:
+        "https://media.istockphoto.com/id/1141514587/vector/pixel-art-landscape-summer-ocean-beach-8-bit-city-park-pixel-cityscape-and-highlands.jpg?s=2048x2048&w=is&k=20&c=MiK-QBt3saCxXVMf70yuANtA5li6EW9SCFXOlew1sgs=",
+    },
+    {
+      id: 12,
+      name: "Puzzle",
+      slug: "puzzle",
+      image:
+        "https://media.istockphoto.com/id/1141514587/vector/pixel-art-landscape-summer-ocean-beach-8-bit-city-park-pixel-cityscape-and-highlands.jpg?s=2048x2048&w=is&k=20&c=MiK-QBt3saCxXVMf70yuANtA5li6EW9SCFXOlew1sgs=",
+    },
   ];
+// const background =
+//   "bg-gradient-to-br from-emerald-400 via-pink-200 to-purple-500";
 
+const background = "bg-gradient-to-br from-green-500 via-green-300 to-pink-200";
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-      {categories.map((category) => (
-        <Link
-          key={category.id}
-          href={`/news/category/${category.slug}`}
-          passHref
-        >
-          <div className="card image-full h-40 hover:scale-105 transition-transform cursor-pointer">
-            <figure>
-              <img
-                src={category.image || "/default-category.jpg"}
-                alt={category.name}
-                className="w-full h-full object-cover"
-              />
-            </figure>
-            <div className="card-body justify-end p-4 bg-gradient-to-t from-black to-transparent">
-              <h3 className="card-title text-white text-center">
-                {category.name}
-              </h3>
+    <div className={`${background} p-1 rounded-lg`}>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-base-200 p-2">
+        {categories.map((category) => (
+          <Link key={category.id} href={`/news/${category.slug}`} passHref className={`${background}`}>
+            <div className="card image-full h-40 hover:scale-105 transition-transform cursor-pointer">
+              <div className="card-body justify-end p-4 bg-gradient-to-t from-black/30 to-transparent">
+                <h3 className="card-title text-white text-center">
+                  <div className="bg-black/20 p-2 rounded-xl">
+                  {category.name}
+                  </div>
+                </h3>
+              </div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

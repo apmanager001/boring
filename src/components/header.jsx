@@ -1,5 +1,5 @@
 import React from "react";
-import { Squirrel, TableProperties, Dices } from "lucide-react";
+import { Squirrel, TableProperties, Dices, Newspaper } from "lucide-react";
 import GoogleSignin from './headerComps/googleSignin'
 import Link from "next/link";
 import {gameLinks, kidLinks } from '../components/headerComps/headerLinks'
@@ -61,6 +61,11 @@ const Header = async () => {
                     ))}
                 </ul>
               </details>
+            </li>
+            <li>
+              <Link href="/news">
+                <Newspaper /> Gaming News
+              </Link>
             </li>
             <li>
               <Link href="/leaderboard">

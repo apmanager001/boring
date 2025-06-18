@@ -1,9 +1,9 @@
 import React from 'react'
-import NewsArticlePage from '../comp/newsArticlePage'
+import CategoryPage from '../comp/categoryPage'
 
 const Page = () => {
   return (
-    <div><NewsArticlePage /></div>
+    <div><CategoryPage /></div>
   )
 }
 

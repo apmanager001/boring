@@ -15,10 +15,11 @@ const NewsSection = () => {
 
     if (error)
       return <div className="text-center text-error py-8">{error}</div>;
+
   return (
     <>
       <Head>
-        <title>Latest Gaming News & Updates | GamePulse</title>
+        <title>Latest Gaming News & Updates | Gaming News</title>
         <meta
           name="description"
           content="Stay up-to-date with the latest news, game releases, and industry buzz from top gaming sources."
@@ -27,7 +28,7 @@ const NewsSection = () => {
         {/* OpenGraph / Facebook */}
         <meta
           property="og:title"
-          content="Latest Gaming News & Updates | GamePulse"
+          content="Latest Gaming News & Updates | Gaming News"
         />
         <meta
           property="og:description"
@@ -41,7 +42,7 @@ const NewsSection = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Latest Gaming News & Updates | GamePulse"
+          content="Latest Gaming News & Updates | Gaming News"
         />
         <meta
           name="twitter:description"
@@ -52,7 +53,7 @@ const NewsSection = () => {
 
       <section className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center text-primary">
-          GamePulse
+          Gaming News
         </h1>
 
         {/* Top News Carousel */}
