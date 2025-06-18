@@ -31,7 +31,7 @@ export async function GET() {
     }));
 
     return NextResponse.json(formattedItems);
-  } catch (_) {
+  } catch{
     return NextResponse.json(
       { error: "Failed to fetch Gamespot news" },
       { status: 500 }
