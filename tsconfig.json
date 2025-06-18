@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/session.js", "src/app/store/newsStore.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/session.js", "src/app/store/newsStore.js", "src/app/api/rockpapershotgun/route.js", "src/app/api/pcgamer/route.js", "src/app/api/gamespot/route.js", "src/app/api/eurogamer/route.js"],
   "exclude": ["node_modules"]
 }
