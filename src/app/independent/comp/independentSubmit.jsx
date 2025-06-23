@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import axiosInstance from '../../../components/utility/axios'
 import { X, Check } from "lucide-react";
 
 const IndependentSubmit = () => {
@@ -27,24 +28,19 @@ const IndependentSubmit = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/independentgame", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await axiosInstance.post("/independentgame", formData);
 
-      if (response.ok) {
-        toast.success('Your Submission was successful')
-
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Your Submission was successful");
       } else {
         toast.error("Submission failed, please try again");
       }
     } catch (err) {
-      toast.error("Error submitting form:", err);
+      console.error("Error submitting form:", err);
+      toast.error("Error submitting form. Please try again later.");
     }
   };
+  
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:m-10">
