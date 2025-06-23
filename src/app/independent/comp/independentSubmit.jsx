@@ -1,32 +1,49 @@
 "use client";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { X, Check } from "lucide-react";
 
 const IndependentSubmit = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    gameName: "",
     description: "",
     imageUrl: "",
-    tags: ["", "", ""],
+    tag1: "",
+    tag2: "",
+    tag3: "",
     category: "",
     linkUrl: "",
+    email: "",
+    additionalInfo: "",
   });
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleTagChange = (index, value) => {
-    const updatedTags = [...formData.tags];
-    updatedTags[index] = value;
-    setFormData((prev) => ({ ...prev, tags: updatedTags }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
-    // You can send this data to your backend here
+
+    try {
+      const response = await fetch("/independentgame", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast.success('Your Submission was successful')
+
+      } else {
+        toast.error("Submission failed, please try again");
+      }
+    } catch (err) {
+      toast.error("Error submitting form:", err);
+    }
   };
 
   return (
@@ -40,8 +57,8 @@ const IndependentSubmit = () => {
             <span className="label-text">Game Name:</span>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="gameName"
+              value={formData.gameName}
               onChange={handleChange}
               required
               className="input input-bordered w-full"
@@ -75,17 +92,30 @@ const IndependentSubmit = () => {
           <label className="form-control">
             <span className="label-text">Tags (max 3):</span>
             <div className="flex gap-2">
-              {formData.tags.map((tag, index) => (
-                <input
-                  key={index}
-                  name={index}
-                  type="text"
-                  value={tag}
-                  onChange={(e) => handleTagChange(index, e.target.value)}
-                  placeholder={`Tag ${index + 1}`}
-                  className="input input-bordered w-full"
-                />
-              ))}
+              <input
+                type="text"
+                name="tag1"
+                value={formData.tag1}
+                onChange={handleChange}
+                placeholder="Tag 1"
+                className="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="tag2"
+                value={formData.tag2}
+                onChange={handleChange}
+                placeholder="Tag 2"
+                className="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="tag3"
+                value={formData.tag3}
+                onChange={handleChange}
+                placeholder="Tag 3"
+                className="input input-bordered w-full"
+              />
             </div>
           </label>
 
@@ -115,8 +145,8 @@ const IndependentSubmit = () => {
           <label className="form-control">
             <span className="label-text">Email:</span>
             <input
-              type="url"
-              name="linkUrl"
+              type="email"
+              name="email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -126,7 +156,7 @@ const IndependentSubmit = () => {
           <label className="form-control">
             <span className="label-text">Additional Info:</span>
             <textarea
-              name="description"
+              name="additionalInfo"
               value={formData.additionalInfo}
               onChange={handleChange}
               required

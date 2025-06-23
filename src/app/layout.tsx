@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 const description = "Boring Squirrel is your ultimate destination for unique and engaging individual and multiplayer games. Whether you're looking for a casual challenge or a competitive showdown, our games offer exciting twists that make them stand out. Test your memory, strategy, and reflexes with a variety of interactive experiences designed for players of all skill levels. Join the fun, compete with friends, and discover new favorites—all in one place!"
+
 export const metadata: Metadata = {
   title: "Boring Squirrel",
   description: description,
