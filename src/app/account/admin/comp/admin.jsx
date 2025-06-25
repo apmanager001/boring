@@ -10,31 +10,27 @@ const Admin = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchGames = async () => {
+    const initialize = async () => {
       try {
-        const response = await axiosInstance.get("/admin/independentgame");
-        console.log(response)
-        if (response.status !== 200) {
-          console.warn("Unexpected status, redirecting to /account");
+        const userResponse = await axiosInstance.get("/profile");
+        console.log(userResponse.data);
+
+        if (!userResponse.data.admin) {
           window.location.href = "/account";
           return;
         }
-        setGames(response.data);
+
+        const gamesResponse = await axiosInstance.get("/admin/independentgame");
+        setGames(gamesResponse.data);
       } catch (error) {
-        console.error("Error fetching games:", error);
+        console.error("Error initializing admin data:", error);
         window.location.href = "/account";
       } finally {
         setLoading(false);
       }
     };
-    const processedGames = games.map((game) => ({
-      ...game,
-      tags: [game.tag1, game.tag2, game.tag3].filter(Boolean),
-      name: game.gameName,
-      link: game.linkUrl,
-    }));
 
-    fetchGames();
+    initialize();
   }, []);
 
 

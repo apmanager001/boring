@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
 import useStore from '../../app/store/store'
 import axiosInstance from '../utility/axios'
-import { LogOut, Cog, User, UserRound, KeyRound } from "lucide-react";
+import { LogOut, Cog, User, UserRound, KeyRound, Shield } from "lucide-react";
 
 const UserInfo = () => {
    const { user, loading, error, validateSession, logout } = useStore();
@@ -37,7 +37,7 @@ const UserInfo = () => {
   return (
     <>
       {user ? (
-        <details className='z-50'>
+        <details className="z-50">
           <summary>
             <UserRound />
             {user.username}
@@ -55,6 +55,19 @@ const UserInfo = () => {
                 Settings
               </Link>
             </li>
+            {user.admin ? (
+              <li>
+                <Link
+                  href="/account/admin"
+                  className="hover:bg-yellow-300 hover:text-black"
+                >
+                  <Shield />
+                  Admin
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
             <li>
               <Link
                 href="#"
