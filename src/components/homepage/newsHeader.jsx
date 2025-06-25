@@ -11,7 +11,6 @@ const NewsHeader = () => {
     useEffect(() => {
         if (getLatest().length === 0) {
         fetchAllNews();
-        console.log("ran");
         }
     }, [fetchAllNews]);
 

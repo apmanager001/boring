@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { monthYear } from "../../../components/utility/monthYear";
 import axiosInstance from '../../../components/utility/axios'
 
 const Settings = () => {
@@ -64,7 +65,7 @@ const Settings = () => {
           {memberSince ? (
             <label className="label flex justify-center w-full">
               <span className="label-text text-slate-600">
-                Member Since: {memberSince}
+                Member Since: {monthYear(memberSince)}
               </span>
             </label>
           ) : (

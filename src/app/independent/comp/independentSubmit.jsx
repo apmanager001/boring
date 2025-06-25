@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axiosInstance from '../../../components/utility/axios'
-import { X, Check } from "lucide-react";
+import { X, Check, Info } from "lucide-react";
 
 const IndependentSubmit = () => {
   const [formData, setFormData] = useState({
@@ -74,7 +74,15 @@ const IndependentSubmit = () => {
           </label>
 
           <label className="form-control">
-            <span className="label-text">Image URL:</span>
+            <span className="label-text flex gap-2">
+              Image URL:{" "}
+              <div
+                className="tooltip tooltip-right"
+                data-tip="This needs to be an URL of only a photo of your game."
+              >
+                <Info />
+              </div>
+            </span>
             <input
               type="url"
               name="imageUrl"
@@ -116,7 +124,15 @@ const IndependentSubmit = () => {
           </label>
 
           <label className="form-control">
-            <span className="label-text">Category:</span>
+            <span className="label-text flex gap-2">
+              Category:{" "}
+              <div
+                className="tooltip tooltip-right"
+                data-tip="Category you feel your game falls into"
+              >
+                <Info />
+              </div>
+            </span>
             <input
               type="text"
               name="category"
@@ -128,7 +144,15 @@ const IndependentSubmit = () => {
           </label>
 
           <label className="form-control">
-            <span className="label-text">Link URL:</span>
+            <span className="label-text flex gap-2">
+              Link URL:{" "}
+              <div
+                className="tooltip tooltip-right"
+                data-tip="Link to your game website"
+              >
+                <Info />
+              </div>
+            </span>
             <input
               type="url"
               name="linkUrl"
@@ -147,10 +171,16 @@ const IndependentSubmit = () => {
               onChange={handleChange}
               required
               className="input input-bordered w-full"
+              autoComplete="false"
             />
           </label>
           <label className="form-control">
-            <span className="label-text">Additional Info:</span>
+            <span className="label-text flex gap-2">
+              Additional Info:{" "}
+              <div className="tooltip tooltip-right" data-tip="Any additional info you would like to share. This will be included in the display card of your game.">
+                <Info />
+              </div>
+            </span>
             <textarea
               name="additionalInfo"
               value={formData.additionalInfo}
