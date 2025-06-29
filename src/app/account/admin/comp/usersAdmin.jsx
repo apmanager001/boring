@@ -21,7 +21,7 @@ const UsersAdmin = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-xlfont-semibold mb-4 badge badge-outline p-4">Users:<p>{users.length}</p></h2>
+      <h2 className="font-semibold mb-4 badge badge-outline p-4">Users:<p>{users.length}</p></h2>
       
       <div className="flex flex-wrap gap-4">
         {users.map((user) => (
