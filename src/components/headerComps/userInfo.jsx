@@ -1,5 +1,6 @@
 'use client'
 import React, {useState, useEffect} from 'react'
+import toast from 'react-hot-toast'
 import Link from 'next/link'
 import useStore from '../../app/store/store'
 import axiosInstance from '../utility/axios'
@@ -17,7 +18,7 @@ const UserInfo = () => {
    if (loading) return (
      <span className="loading loading-dots text-accent"></span>
    );
-   if (error) return <p>Error: {error}</p>;
+
 
 
   const handleLogout = async () => {

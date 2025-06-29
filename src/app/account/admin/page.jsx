@@ -1,8 +1,9 @@
 import React from 'react'
-import Admin from './comp/admin'
+
+import AdminParent from './comp/adminParentPage'
 const Page = () => {
   return (
-    <div><Admin /></div>
+    <div><AdminParent /></div>
   )
 }
 
