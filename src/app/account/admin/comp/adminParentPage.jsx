@@ -2,9 +2,6 @@
 import React, { useState } from "react";
 import {
   Users,
-  BarChart2,
-  Settings,
-  BookUser,
   ArrowLeftToLine,
   ArrowRightToLine,
   Gamepad2,
@@ -12,6 +9,7 @@ import {
 } from "lucide-react";
 import Admin from "./admin";
 import NewsletterAdmin from "./newsletterAdmin";
+import UsersAdmin from "./usersAdmin";
 
 
 
@@ -22,7 +20,7 @@ const AdminParent = () => {
   const tabs = [
     { name: "Independent Games", icon: <Gamepad2 size={20} /> },
     { name: "Newsletter", icon: <Mails size={20} /> },
-
+    { name: "Users", icon: <Users size={20} /> },
   ];
 
   const renderContent = () => {
@@ -31,6 +29,8 @@ const AdminParent = () => {
         return <Admin />;
       case "Newsletter":
         return <NewsletterAdmin />;
+      case "Users":
+        return <UsersAdmin />;
       default:
         return null;
     }
