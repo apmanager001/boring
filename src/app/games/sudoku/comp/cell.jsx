@@ -15,9 +15,9 @@ export default function Cell({ value, row, col, setBoard, id }) {
 
   return (
     <input
-      type="number"
+      type="text"
       id={id}
-      className={`w-10 h-10 ${
+      className={`w-7 h-7 md:w-12 md:h-12 m-1 ${
         originalValue.current !== 0 ? "" : "border border-primary"
       } text-center text-black font-extrabold border rounded bg-white`}
       maxLength="1"
