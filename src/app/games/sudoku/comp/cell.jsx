@@ -1,7 +1,7 @@
 'use client'
 import { useRef } from "react";
 
-export default function Cell({ value, row, col, setBoard, id, isCorrect }) {
+export default function Cell({ value, row, col, setBoard, id, isCorrect, gameOver }) {
   const originalValue = useRef(value);
 
   const handleChange = (e) => {
@@ -17,9 +17,9 @@ export default function Cell({ value, row, col, setBoard, id, isCorrect }) {
       return ""; 
     }
     if(isCorrect === true){
-      return "border-4 border-green-500";
+      return "border-4 border-success";
     } else if(isCorrect === false){
-      return "border-4 border-red-500"
+      return "border-4 border-error"
     }
       return "input border border-primary focus:border-4 focus:border-primary"
   };
@@ -36,7 +36,7 @@ export default function Cell({ value, row, col, setBoard, id, isCorrect }) {
       max="9"
       value={value || ""}
       onChange={handleChange}
-      disabled={originalValue.current !== 0}
+      disabled={originalValue.current !== 0 || gameOver}
     />
   );
 }
