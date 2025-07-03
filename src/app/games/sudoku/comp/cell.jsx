@@ -1,8 +1,8 @@
 'use client'
 import { useRef } from "react";
 
-export default function Cell({ value, row, col, setBoard, id }) {
-  const originalValue = useRef(value); 
+export default function Cell({ value, row, col, setBoard, id, isCorrect }) {
+  const originalValue = useRef(value);
 
   const handleChange = (e) => {
     const newValue = parseInt(e.target.value) || 0;
@@ -12,16 +12,25 @@ export default function Cell({ value, row, col, setBoard, id }) {
       return updated;
     });
   };
+  const getBorderClass = () => {
+    if (originalValue.current !== 0) {
+      return ""; 
+    }
+    if(isCorrect === true){
+      return "border-4 border-green-500";
+    } else if(isCorrect === false){
+      return "border-4 border-red-500"
+    }
+      return "input border border-primary focus:border-4 focus:border-primary"
+  };
+  
+
 
   return (
     <input
-      type="text"
+      type="tel"
       id={id}
-      className={`w-7 h-7 md:w-12 md:h-12 m-1 ${
-        originalValue.current !== 0
-          ? ""
-          : "input border border-primary focus:border-4 focus:border-accent"
-      } text-center text-black font-extrabold border rounded bg-white`}
+      className={`w-8 h-8 md:w-12 md:h-12 m-1 ${getBorderClass()} text-center text-black font-extrabold border rounded bg-white`}
       maxLength="1"
       min="0"
       max="9"

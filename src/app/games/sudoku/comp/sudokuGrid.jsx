@@ -1,11 +1,10 @@
 import Cell from "./cell";
 
-export default function SudokuGrid({ board, setBoard }) {
+export default function SudokuGrid({ board, setBoard, cellValidity }) {
   return (
     <div className="grid grid-cols-9 gap-px bg-gray-800 p-px rounded shadow border-2 border-gray-800">
       {board.map((row, rowIndex) =>
         row.map((value, colIndex) => {
-
           return (
             <div
               key={`${rowIndex}-${colIndex}`}
@@ -28,6 +27,7 @@ export default function SudokuGrid({ board, setBoard }) {
                 row={rowIndex}
                 col={colIndex}
                 setBoard={setBoard}
+                isCorrect={cellValidity?.[rowIndex]?.[colIndex]}
               />
             </div>
           );

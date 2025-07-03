@@ -1,6 +1,6 @@
 let strategy = "Strategy";
 let multiplayer = "2 Player";
-let Puzzle = " Puzzle";
+let puzzle = " Puzzle";
 let single = "Single Player";
 let kids = "Kid Game";
 let classic = "Classic";
@@ -31,7 +31,7 @@ export const games = [
     description:
       "Sharpen your memory skills by matching pairs of cards! A fun and engaging puzzle game perfect for kids and adults alike. Challenge yourself and improve your recall with every round. How few moves can you match them all?",
     image: "/hp/match.png",
-    tags: [kids, single, Puzzle],
+    tags: [kids, single, puzzle],
     link: "/games/match",
   },
   {
@@ -76,7 +76,7 @@ export const games = [
     description:
       "Put your logic to the test in this timeless puzzle classic! Fill the grid so every row, column, and 3x3 box contains the digits 1 to 9—without repeating. Whether you're sharpening your skills or chasing the perfect solve, Sudoku offers endless brain-teasing fun for all ages.",
     image: "/hp/sudoku.webp",
-    tags: ["classic", "single", "strategy"],
+    tags: [classic, single, strategy, puzzle],
     link: "/games/sudoku",
   },
 ];

@@ -1,20 +1,18 @@
 import toast from "react-hot-toast";
 import { BadgeCheck, History } from "lucide-react";
 
-export default function Controls({ resetGame, solution, board }) {
-
+export default function Controls({ resetGame, solution, board, onValidate }) {
   function checkSolution() {
     const isCorrect = board
       .flat()
       .every((cell, index) => cell === solution.flat()[index]);
 
     if (!isCorrect) {
-      toast.error("Sorry, there is something incorrect 😕");
+      onValidate?.();
     } else {
       toast.success("Great job! Everything looks correct 🎉");
     }
   }
-
 
   return (
     <div className="flex justify-center space-x-4">
