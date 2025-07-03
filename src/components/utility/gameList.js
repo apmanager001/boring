@@ -70,4 +70,13 @@ export const games = [
     tags: [classic, multiplayer, leaderboard],
     link: "/games/squares",
   },
+  {
+    id: 8,
+    name: "Sudoku",
+    description:
+      "Put your logic to the test in this timeless puzzle classic! Fill the grid so every row, column, and 3x3 box contains the digits 1 to 9—without repeating. Whether you're sharpening your skills or chasing the perfect solve, Sudoku offers endless brain-teasing fun for all ages.",
+    image: "/hp/sudoku.webp",
+    tags: ["classic", "single", "strategy"],
+    link: "/games/sudoku",
+  },
 ];
