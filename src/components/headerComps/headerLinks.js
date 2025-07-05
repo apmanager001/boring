@@ -28,6 +28,11 @@ export const gameLinks = [
     link: "/games/squares",
     type: game,
   },
+  {
+    name: "Sudoku",
+    link: "/games/sudoku",
+    type: game,
+  },
 ];
 
 export const kidLinks = [

@@ -32,9 +32,9 @@ const FooterDrawer = () => {
     };
 
   return (
-    <div className="drawer-side">
+    <div className="drawer-side ">
       <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-      <ul className="menu bg-base-200 min-h-full w-80 p-4 mt-16 overflow-y-scroll scrollbar-hide">
+      <ul className="menu bg-base-200 min-h-full w-80 p-4  overflow-y-scroll scrollbar-hide">
         {loading && <span className="loading loading-dots text-accent"></span>}
         {error && <p className="text-red-500">Error: {error}</p>}
         {!loading && !error && user ? (
