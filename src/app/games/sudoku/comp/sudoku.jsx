@@ -15,9 +15,10 @@ const Sudoku= () => {
 
 
   const resetGame = () => {
-    const { puzzle, solution } = generateBoard();
-    setBoard(puzzle);
-    setSolution(solution);
+    // const { puzzle, solution } = generateBoard();
+    // setBoard(puzzle);
+    // setSolution(solution);
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Sudoku= () => {
   };
 
   return (
-    <div className="p-2 md:p-6 max-w-screen-md mx-auto text-center space-y-6">
+    <div className="p-.5 md:p-6 max-w-screen-md mx-auto text-center space-y-6">
       <h1 className="flex items-center gap-2 justify-center text-2xl font-bold">
         <Grid3x3 className="text-primary" size={48} />
         Sudoku Game

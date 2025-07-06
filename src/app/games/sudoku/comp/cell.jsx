@@ -26,7 +26,7 @@ export default function Cell({ value, row, col, setBoard, id, isCorrect, gameOve
     } else if(notSure === true){
       return "border-4 border-warning"
     } else {
-      return "input border border-primary focus:border-4 focus:border-primary"
+      return "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2";
     }
   };
   
@@ -44,7 +44,7 @@ export default function Cell({ value, row, col, setBoard, id, isCorrect, gameOve
       <input
         type="tel"
         id={id}
-        className={`w-8 h-8 md:w-12 md:h-12 m-1 ${getBorderClass()} text-center text-black font-extrabold border rounded bg-white`}
+        className={`w-9 h-9 md:w-12 md:h-12 m-1 ${getBorderClass()} text-center text-black font-extrabold border rounded bg-white`}
         maxLength="1"
         min="0"
         max="9"
