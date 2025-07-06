@@ -1,6 +1,13 @@
 'use client'
 import { useState, useEffect } from "react";
-import { Grid3x3, BadgeCheck, OctagonX } from "lucide-react";
+import {
+  Grid3x3,
+  BadgeCheck,
+  OctagonX,
+  CircleQuestionMark,
+  CircleX,
+  BadgeQuestionMark,
+} from "lucide-react";
 import SudokuGrid from "./sudokuGrid";
 import Controls from "./control";
 import { generateBoard } from "../utility/boardGenerator";
@@ -60,6 +67,60 @@ const Sudoku= () => {
       <h1 className="flex items-center gap-2 justify-center text-2xl font-bold">
         <Grid3x3 className="text-primary" size={48} />
         Sudoku Game
+        <button
+          className=""
+          onClick={() => document.getElementById("SudokuRules").showModal()}
+        >
+          <CircleQuestionMark />
+        </button>
+        <dialog id="SudokuRules" className="modal">
+          <div className="modal-box relative">
+            {/* Close icon in top right */}
+            <form method="dialog">
+              <button
+                className="absolute right-4 top-4 text-gray-500 hover:text-red-500 transition-colors"
+                aria-label="Close"
+              >
+                <CircleX size={24} />
+              </button>
+            </form>
+
+            <h3 className="font-bold text-lg mb-2">Sudoku Rules</h3>
+
+            <ol className="list-decimal list-inside space-y-2 text-sm text-gray-500">
+              <li>
+                Each row must contain the numbers 1–9 without any repetitions.
+              </li>
+              <li>
+                Each column must also contain the numbers 1–9 without repeating
+                values.
+              </li>
+              <li>
+                Each of the nine 3×3 subgrids must include all numbers from 1 to
+                9.
+              </li>
+              <li>
+                Only one number is allowed per cell—no duplicates or
+                placeholders.
+              </li>
+              <li>
+                Use logic and the process of elimination to determine valid
+                entries.
+              </li>
+              <li>
+                Every number placed should be backed by reasoning—guessing isn't
+                Ideal.
+              </li>
+              <li className="flex items-center gap-2 pt-10">
+                  <BadgeQuestionMark className="mt-1 text-warning bg-gray-800 rounded-full p-1 shrink-0" />
+                  <span>
+                    If you're unsure, click this icon (found in the top corner
+                    of the box) to mark a cell for review later.
+                  </span>
+              </li>
+            </ol>
+          </div>
+        </dialog>
       </h1>
       {!gameOver ? (
         <p className="flex justify-center items-center gap-2 text-sm text-gray-600">

@@ -26,7 +26,7 @@ export default function Cell({ value, row, col, setBoard, id, isCorrect, gameOve
     } else if(notSure === true){
       return "border-4 border-warning"
     } else {
-      return "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2";
+      return "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2 md:focus:z-0 md:focus:m-1";
     }
   };
   
