@@ -30,7 +30,7 @@ const IndependentGames = () => {
           <span className="loading loading-spinner loading-lg text-primary"></span>
         </div>
       ) : (
-        <div className="grid grid-cols-3 grid-rows-1 gap-4">
+        <div className="grid grid-cols-3 grid-rows-1 gap-4 my-10">
           {randomizedGames.map((game) => (
             <a
               key={game.id}

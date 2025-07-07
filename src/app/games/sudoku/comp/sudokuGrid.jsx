@@ -1,6 +1,10 @@
+'use client'
+import {useState} from 'react'
 import Cell from "./cell";
 
 export default function SudokuGrid({ board, setBoard, cellValidity, gameOver }) {
+  const [focusedCell, setFocusedCell] = useState({ row: null, col: null });
+
   return (
     <div className="grid grid-cols-9 gap-px bg-gray-800 p-px rounded shadow border-2 border-gray-800">
       {board.map((row, rowIndex) =>
@@ -9,7 +13,7 @@ export default function SudokuGrid({ board, setBoard, cellValidity, gameOver }) 
             <div
               key={`${rowIndex}-${colIndex}`}
               className={`
-            relative bg-white
+            relative
                  
             ${
               (colIndex === 0 && rowIndex === 0,
@@ -29,6 +33,8 @@ export default function SudokuGrid({ board, setBoard, cellValidity, gameOver }) 
                 setBoard={setBoard}
                 isCorrect={cellValidity?.[rowIndex]?.[colIndex]}
                 gameOver={gameOver}
+                focusedCell={focusedCell}
+                setFocusedCell={setFocusedCell}
               />
             </div>
           );
