@@ -1,87 +1,112 @@
-'use client'
-import { useRef, useState } from "react";
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { useSudokuStore } from "../../../store/useSudokuStore";
 import { BadgeQuestionMark } from "lucide-react";
 
-
-export default function Cell({
-  value,
-  row,
-  col,
-  setBoard,
-  id,
-  isCorrect,
-  gameOver,
-  focusedCell,
-  setFocusedCell,
-}) {
-  const originalValue = useRef(value);
+export default function Cell({ row, col }) {
+  const {
+    board,
+    setBoard,
+    focusedCell,
+    setFocusedCell,
+    selectedNumber,
+    noteMode,
+    eraseMode,
+    notSureMode,
+    cellValidity,
+    gameOver,
+  } = useSudokuStore();
+  const { value, given } = board[row][col];
+  const [notes, setNotes] = useState([]);
   const [notSure, setNotSure] = useState(false);
+  // console.log(selectedNumber)
+  useEffect(() => {
+    if (
+      focusedCell.row === row &&
+      focusedCell.col === col &&
+      selectedNumber !== null &&
+      !given &&
+      !gameOver
+    ) { 
+      setBoard((prevBoard) => {
+        const newBoard = prevBoard.map((rowArr) =>
+          rowArr.map((cell) => ({ ...cell }))
+        );
+        newBoard[row][col] = {
+          ...newBoard[row][col],
+          value: eraseMode ? 0 : selectedNumber,
+          given:false
+        };
+        return newBoard;
+      });
 
-  const handleChange = (e) => {
-    const newValue = parseInt(e.target.value) || 0;
-    setBoard((prev) => {
-      const updated = [...prev];
-      updated[row][col] = newValue;
-      return updated;
-    });
-  };
+      if (noteMode && !eraseMode) {
+        setNotes((prev) =>
+          Array.from(new Set([...prev, selectedNumber])).sort()
+        );
+      } else {
+        setNotes([]);
+      }
+    }
+  }, [selectedNumber]);
+
+  useEffect(() => {
+    if (
+      focusedCell.row === row &&
+      focusedCell.col === col &&
+      !given &&
+      notSureMode
+    ) {
+      setNotSure((prev) => !prev);
+    }
+  }, [notSureMode]);
+
   const getBorderClass = () => {
-    if (originalValue.current !== 0) {
-      return "";
-    }
-    if (isCorrect === true) {
-      return "border-4 border-success";
-    } else if (isCorrect === false) {
-      return "border-4 border-error";
-    } else if (notSure === true) {
-      return "border-4 border-warning";
-    } else {
-      return "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2 md:focus:z-0 md:focus:m-1";
-    }
-  };
-
-  const handleNotSure = () => {
-    setNotSure((prev) => !prev);
+    if (given) return "";
+    if (cellValidity?.[row]?.[col] === true) return "border-4 border-success";
+    if (cellValidity?.[row]?.[col] === false) return "border-4 border-error";
+    if (notSure) return "border-4 border-warning";
+    return "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2 md:focus:z-0 md:focus:m-1";
   };
 
   const isHighlighted = () => {
     if (focusedCell.row === null || focusedCell.col === null) return false;
-    const sameRow = focusedCell.row === row;
-    const sameCol = focusedCell.col === col;
-    const sameGrid =
-      Math.floor(focusedCell.row / 3) === Math.floor(row / 3) &&
-      Math.floor(focusedCell.col / 3) === Math.floor(col / 3);
-    return sameRow || sameCol || sameGrid;
+    return (
+      focusedCell.row === row ||
+      focusedCell.col === col ||
+      (Math.floor(focusedCell.row / 3) === Math.floor(row / 3) &&
+        Math.floor(focusedCell.col / 3) === Math.floor(col / 3))
+    );
   };
 
-  const changeHighlight = `${isHighlighted() ? "bg-blue-100" : "bg-white"}`
+  const background = isHighlighted() ? `bg-blue-100 ${given? 'border border-gray-300' : ''}` : "bg-white";
+
   return (
     <div
-      className={`indicator w-full flex justify-center
-      ${changeHighlight} transition-colors duration-150`}
+      className={`indicator w-full flex justify-center ${background} transition-colors duration-150`}
     >
-      {originalValue.current === 0 && (
-        <span
-          className="indicator-item indicator-start cursor-pointer hover:text-warning hover:bg-gray-800 text-white/0 rounded-full p-0"
-          onClick={handleNotSure}
+      {!given && notes.length > 0 ? (
+        <div
+          onClick={() => setFocusedCell({ row, col })}
+          className={`grid grid-cols-3 gap-0.5 w-9 h-9 md:w-12 md:h-12 m-1 text-xs text-gray-600 font-bold border rounded ${getBorderClass()} ${background}`}
         >
-          <BadgeQuestionMark />
-        </span>
+          {[...Array(9)].map((_, i) => (
+            <div key={i} className="flex items-center justify-center">
+              {notes.includes(i + 1) ? i + 1 : ""}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <input
+          type="tel"
+          id={`row/${row}-col/${col}`}
+          className={`w-9 h-9 md:w-12 md:h-12 m-1 text-center text-black font-extrabold border rounded ${getBorderClass()} ${background}`}
+          onFocus={() => setFocusedCell({ row, col })}
+          value={value || ""}
+          disabled={given || gameOver}
+          readOnly
+        />
       )}
-      <input
-        type="tel"
-        id={id}
-        className={`w-9 h-9 md:w-12 md:h-12 m-1 ${getBorderClass()} text-center text-black font-extrabold border rounded
-        ${changeHighlight}`}
-        onFocus={() => setFocusedCell({ row, col })}
-        maxLength="1"
-        min="0"
-        max="9"
-        value={value || ""}
-        onChange={handleChange}
-        disabled={originalValue.current !== 0 || gameOver}
-        autoComplete="off"
-      />
     </div>
   );
 }

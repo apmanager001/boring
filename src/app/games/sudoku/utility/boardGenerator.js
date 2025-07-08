@@ -10,7 +10,6 @@ export function generateBoard() {
   function isSafe(board, row, col, num) {
     const boxRow = Math.floor(row / 3) * 3;
     const boxCol = Math.floor(col / 3) * 3;
-
     for (let i = 0; i < 9; i++) {
       if (
         board[row][i] === num ||
@@ -48,32 +47,35 @@ export function generateBoard() {
     return board;
   }
 
-  function cloneBoard(board) {
-    return board.map((row) => [...row]);
+  function createCellBoard(matrix, isGiven) {
+    return matrix.map((row) =>
+      row.map((val) => ({ value: val, given: isGiven ? val !== 0 : false }))
+    );
   }
 
-  // ✅ Generate puzzle from full board
   const fullBoard = generateFullBoard();
-  const puzzleBoard = cloneBoard(fullBoard);
+  const puzzleMatrix = fullBoard.map((row) => [...row]);
 
   const totalGaps = Math.floor(Math.random() * 6) + 46;
-  const usedPositions = new Set();
+  const used = new Set();
   let gaps = 0;
 
   while (gaps < totalGaps) {
     const row = Math.floor(Math.random() * 9);
     const col = Math.floor(Math.random() * 9);
     const key = `${row}-${col}`;
-
-    if (!usedPositions.has(key)) {
-      puzzleBoard[row][col] = 0;
-      usedPositions.add(key);
+    if (!used.has(key)) {
+      puzzleMatrix[row][col] = 0;
+      used.add(key);
       gaps++;
     }
   }
 
+  const puzzle = createCellBoard(puzzleMatrix, true);
+  const solution = createCellBoard(fullBoard, true);
+
   return {
-    puzzle: puzzleBoard,
-    solution: fullBoard,
+    puzzle,
+    solution,
   };
 }
