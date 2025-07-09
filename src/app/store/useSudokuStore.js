@@ -54,9 +54,23 @@ export const useSudokuStore = create((set, get) => {
       const { board, solution, validationsLeft, gameOver } = get();
       if (gameOver || validationsLeft < 0) return;
 
+      // const validity = board.map((row, i) =>
+      //   row.map((val, j) => (val !== 0 ? val === solution[i][j] : null))
+      // );
+      
       const validity = board.map((row, i) =>
-        row.map((val, j) => (val !== 0 ? val === solution[i][j] : null))
+        row.map((cell, j) => {
+          const userVal = cell?.value;
+          const isGiven = cell?.given;
+          const correctVal = solution?.[i]?.[j]?.value;
+
+          // Only validate if it's a user-inputted value (not given and not 0)
+          if (isGiven || userVal === 0 || correctVal == null) return null;
+
+          return userVal === correctVal;
+        })
       );
+      
 
       const remaining = validationsLeft - 1;
       set({

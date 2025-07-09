@@ -79,7 +79,9 @@ export default function Cell({ row, col }) {
     );
   };
 
-  const background = isHighlighted() ? `bg-blue-100 ${given? 'border border-gray-300' : ''}` : "bg-white";
+  const background = isHighlighted()
+    ? `bg-blue-100 ${given ? "border border-gray-300" : ""}`
+    : "bg-white";
 
   return (
     <div
