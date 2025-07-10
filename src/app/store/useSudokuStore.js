@@ -71,6 +71,7 @@ export const useSudokuStore = create((set, get) => {
         })
       );
       
+      console.log(validationsLeft);
 
       const remaining = validationsLeft - 1;
       set({

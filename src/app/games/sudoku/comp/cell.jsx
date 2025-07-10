@@ -19,7 +19,9 @@ export default function Cell({ row, col }) {
   const { value, given } = board[row][col];
   const [notes, setNotes] = useState([]);
   const [notSure, setNotSure] = useState(false);
-  // console.log(selectedNumber)
+  // if (selectedNumber) {
+  //   console.log(`Selected number is: ${selectedNumber}`);
+  // }
   useEffect(() => {
     if (
       focusedCell.row === row &&
@@ -62,11 +64,17 @@ export default function Cell({ row, col }) {
   }, [notSureMode]);
 
   const getBorderClass = () => {
+    const baseFocusClass =
+      "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:relative focus:z-10 focus:-m-2 md:focus:z-0 md:focus:m-1";
+    const isFocused = focusedCell.row === row && focusedCell.col === col;
     if (given) return "";
     if (cellValidity?.[row]?.[col] === true) return "border-4 border-success";
     if (cellValidity?.[row]?.[col] === false) return "border-4 border-error";
     if (notSure) return "border-4 border-warning";
-    return "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2 md:focus:z-0 md:focus:m-1";
+    return `${baseFocusClass}${isFocused ? " border-4" : ""}`;
+
+    // "input border focus:w-12 focus:h-12 border-primary transition-all duration-150 focus:border-4 focus:border-primary focus:relative focus:z-10 focus:-m-2 md:focus:z-0 md:focus:m-1";
+           ;
   };
 
   const isHighlighted = () => {
@@ -83,10 +91,45 @@ export default function Cell({ row, col }) {
     ? `bg-blue-100 ${given ? "border border-gray-300" : ""}`
     : "bg-white";
 
+    useEffect(() => {
+      if (!cellValidity) return;
+
+      const allTrue = cellValidity.every((row) =>
+        row.every((cell) => cell === true)
+      );
+
+      if (allTrue) {
+        showWinModal(); // 🎉 Trigger your win logic here
+      }
+    }, [cellValidity]);
+
+    const showWinModal = () => {
+      const modal = document.getElementById("winModal");
+      /** @type {HTMLDialogElement | null} */
+      if (modal instanceof HTMLDialogElement) {
+        modal.showModal();
+      }
+
+    };
   return (
     <div
       className={`indicator w-full flex justify-center ${background} transition-colors duration-150`}
     >
+      {/* <dialog id="winModal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-success">
+            🎉 Congratulations!
+          </h3>
+          <p className="py-4">
+            You’ve successfully completed the puzzle. You’re a logic wizard 🧙
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn btn-success">Celebrate and Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog> */}
       {!given && notes.length > 0 ? (
         <div
           onClick={() => setFocusedCell({ row, col })}
