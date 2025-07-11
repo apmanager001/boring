@@ -23,7 +23,7 @@ export default function Cell({ row, col }) {
   // if (selectedNumber) {
   //   console.log(`Selected number is: ${selectedNumber}`);
   // }
-  console.log(notes)
+
   useEffect(() => {
     if (
       focusedCell.row === row &&
