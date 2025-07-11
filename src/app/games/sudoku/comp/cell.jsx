@@ -10,6 +10,7 @@ export default function Cell({ row, col }) {
     focusedCell,
     setFocusedCell,
     selectedNumber,
+    setSelectedNumber,
     noteMode,
     eraseMode,
     notSureMode,
@@ -22,6 +23,7 @@ export default function Cell({ row, col }) {
   // if (selectedNumber) {
   //   console.log(`Selected number is: ${selectedNumber}`);
   // }
+  console.log(notes)
   useEffect(() => {
     if (
       focusedCell.row === row &&
@@ -49,8 +51,13 @@ export default function Cell({ row, col }) {
       } else {
         setNotes([]);
       }
+      if(eraseMode){
+        setNotes([])
+      }
+      setSelectedNumber(null);
+
     }
-  }, [selectedNumber]);
+  }, [selectedNumber, eraseMode]);
 
   useEffect(() => {
     if (
@@ -131,12 +138,39 @@ export default function Cell({ row, col }) {
         </div>
       </dialog> */}
       {!given && notes.length > 0 ? (
+        // <div
+        //   onClick={() => setFocusedCell({ row, col })}
+        //   className={`flex w-9 h-9 md:h-12 md:w-12 m-1 border text-xs rounded ${getBorderClass()} ${background}`}
+        // >
+
+        //   {[...Array(8)].map((_, i) => {
+        //     const positions = [
+        //       "top-0 left-0", // top-left
+        //       "top-0 right-0", // top-right
+        //       "bottom-0 left-0", // bottom-left
+        //       "bottom-0 right-0", // bottom-right
+        //       "top-0 left-1/2 -translate-x-1/2", // top-center
+        //       "top-1/2 right-0 -translate-y-1/2", // right-center
+        //       "bottom-0 left-1/2 -translate-x-1/2", // bottom-center
+        //       "top-1/2 left-0 -translate-y-1/2", // left-center
+        //     ];
+
+        //     return (
+        //       <input
+        //         key={i}
+        //         className={`absolute w-9 h-9 md:w-12 md:h-12 bg-white border rounded ${positions[i]} ${background}`}
+        //         type="text"
+
+        //       />
+        //     );
+        //   })}
+        // </div>
         <div
           onClick={() => setFocusedCell({ row, col })}
-          className={`grid grid-cols-3 gap-0.5 w-9 h-9 md:w-12 md:h-12 m-1 text-xs text-gray-600 font-bold border rounded ${getBorderClass()} ${background}`}
+          className={`grid grid-cols-3 gap-y-1 pl-1 gap-x-4 w-9 h-9 md:w-12 md:h-12 m-1 text-xs text-gray-600 font-bold border rounded ${getBorderClass()} ${background}`}
         >
           {[...Array(9)].map((_, i) => (
-            <div key={i} className="flex items-center justify-center">
+            <div key={i} className="flex items-center justify-center text-info">
               {notes.includes(i + 1) ? i + 1 : ""}
             </div>
           ))}

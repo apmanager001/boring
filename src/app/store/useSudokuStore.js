@@ -18,7 +18,7 @@ export const useSudokuStore = create((set, get) => {
 
     selectedNumber: null,
     setSelectedNumber: (num) => set({ selectedNumber: num }),
-
+    
     noteMode: false,
     toggleNoteMode: () => set((s) => ({ noteMode: !s.noteMode })),
 

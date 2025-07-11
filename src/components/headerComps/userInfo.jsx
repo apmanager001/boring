@@ -3,14 +3,18 @@ import React, {useState, useEffect} from 'react'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 import useStore from '../../app/store/store'
-import axiosInstance from '../utility/axios'
 import { LogOut, Cog, User, UserRound, KeyRound, Shield } from "lucide-react";
 
 const UserInfo = () => {
    const { user, loading, error, validateSession, logout } = useStore();
 
+    // useEffect(() => {
+    //   if (typeof window !== "undefined") {
+    //     validateSession();
+    //   }
+    // }, [validateSession]);
     useEffect(() => {
-      if (typeof window !== "undefined") {
+      if (!loading && !user) {
         validateSession();
       }
     }, [validateSession]);
