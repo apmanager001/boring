@@ -26,7 +26,7 @@ export default function Controls() {
   return (
     <div className="pb-24">
       <div className="flex justify-center gap-10">
-        <div
+        {/* <div
           className={`bg-error ${buttonPush} ${
             eraseMode ? "ring-4 ring-white scale-105" : ""
           }`}
@@ -34,7 +34,16 @@ export default function Controls() {
         >
           <Eraser size={40} />
           <p>Eraser</p>
-        </div>
+        </div> */}
+        <button
+          className={`bg-error ${buttonPush} ${
+            eraseMode ? "ring-4 ring-white scale-105" : ""
+          }`}
+          onClick={() => setSelectedNumber(0)}
+        >
+          <Eraser size={40} />
+          <p>Eraser</p>
+        </button>
         <div
           className={`bg-info ${buttonPush} ${
             noteMode ? "ring-4 ring-white scale-105" : ""
