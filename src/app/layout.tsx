@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from '../components/header'
-import Footer from '../components/footer'
+import Header from "../components/header";
+import Footer from "../components/footer";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,12 +15,44 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-const description = "Boring Squirrel is your ultimate destination for unique and engaging individual and multiplayer games. Whether you're looking for a casual challenge or a competitive showdown, our games offer exciting twists that make them stand out. Test your memory, strategy, and reflexes with a variety of interactive experiences designed for players of all skill levels. Join the fun, compete with friends, and discover new favorites—all in one place!"
+
+const description =
+  "Boring Squirrel is your ultimate destination for unique and engaging individual and multiplayer games. Whether you're looking for a casual challenge or a competitive showdown, our games offer exciting twists that make them stand out. Test your memory, strategy, and reflexes with a variety of interactive experiences designed for players of all skill levels. Join the fun, compete with friends, and discover new favorites—all in one place!";
 
 export const metadata: Metadata = {
-  title: "Boring Squirrel",
+  title: {
+    default: "Boring Squirrel - Free Online Games | Play Fun Games",
+    template: "%s | Boring Squirrel",
+  },
   description: description,
+  keywords: [
+    "free online games",
+    "browser games",
+    "puzzle games",
+    "strategy games",
+    "multiplayer games",
+    "kids games",
+    "memory games",
+    "sudoku",
+    "minesweeper",
+    "tic tac toe",
+  ],
+  authors: [{ name: "Boring Squirrel" }],
+  creator: "Boring Squirrel",
+  publisher: "Boring Squirrel",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://boringsquirrel.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://boringsquirrel.com",
     siteName: "Boring Squirrel",
     title: "Play Free Games Online at Boring Squirrel",
     description: description,
@@ -30,9 +61,32 @@ export const metadata: Metadata = {
         url: "https://boringsquirrel.com/sqir.jpg",
         width: 1200,
         height: 630,
-        alt: "Boring Squirrel Logo",
+        alt: "Boring Squirrel - Free Online Games",
+        type: "image/jpeg",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Play Free Games Online at Boring Squirrel",
+    description: description,
+    images: ["https://boringsquirrel.com/sqir.jpg"],
+    creator: "@boringsquirrel",
+    site: "@boringsquirrel",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code", // Replace with your actual verification code
   },
 };
 
@@ -44,16 +98,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQLCMP047S"></Script>
-        <Script id='google-analytics'>
-          {
-            `window.dataLayer = window.dataLayer || [];
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZQLCMP047S"
+        ></Script>
+        <Script id="google-analytics">
+          {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-ZQLCMP047S');`
-          }
+            gtag('config', 'G-ZQLCMP047S');`}
         </Script>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/sqir.jpg" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#4F46E5" />
+        <meta name="application-name" content="Boring Squirrel" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Boring Squirrel" />
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}

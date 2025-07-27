@@ -16,9 +16,6 @@ const getRandomStartPosition = () => ({
 });
 
 const OilcapGame = () => {
-  // const [grid, setGrid] = useState(
-  //   Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE).fill(null))
-  // );
   const [grid, setGrid] = useState(
     Array.from({ length: BOARD_SIZE }, () =>
       Array(BOARD_SIZE).fill({ type: null, isOilFlowing: false })
@@ -33,10 +30,27 @@ const OilcapGame = () => {
   const [running, setRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
+  const [selectedPiece, setSelectedPiece] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     gridRef.current = grid;
   }, [grid]);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+      setIsMobile(mobile);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const showEndGamePopup = (cellsConnected) => {
     setFinalScore(cellsConnected * 10); // Or calculate score however you want
@@ -46,11 +60,11 @@ const OilcapGame = () => {
   const closePopup = (reset) => {
     setShowPopup(false);
     // Reset game if desired
-    if(reset === 'reset'){
+    if (reset === "reset") {
       window.location.reload();
     }
   };
-console.log(grid)
+
   useEffect(() => {
     const newStart = getRandomStartPosition();
     setGrid((prevGrid) => {
@@ -67,12 +81,31 @@ console.log(grid)
   }, []);
 
   const handleClick = (rowIndex, colIndex, piece) => {
+    // For mobile: use selected piece if available
+    const pieceToPlace = piece || selectedPiece;
+
+    if (!pieceToPlace) {
+      if (isMobile) {
+        toast.error("Please select a piece first!");
+      }
+      return;
+    }
+
     setGrid((prevGrid) => {
       const newGrid = [...prevGrid];
-      newGrid[rowIndex][colIndex] = { type: piece, isOilFlowing: false };
+      newGrid[rowIndex][colIndex] = { type: pieceToPlace, isOilFlowing: false };
       return newGrid;
     });
+
     setHasDropped(true);
+    setSelectedPiece(null); // Clear selection after placing
+  };
+
+  const handlePieceSelect = (piece) => {
+    if (isMobile && startGame) {
+      setSelectedPiece(piece);
+      toast.success(`Selected: ${piece}`);
+    }
   };
 
   const handleStart = () => {
@@ -115,17 +148,6 @@ console.log(grid)
         return;
       }
 
-      // // IMPORTANT: Use the current grid state, not the stale closure value
-      // const currentCell = grid[row][col]; // Remove optional chaining
-      // if (!currentCell || !currentCell.type) {
-      //   console.log(
-      //     `Stopping flow at [${row},${col}] - empty cell`,
-      //     currentCell
-      //   );
-      //   activeFlows--;
-      //   checkFlowCompletion();
-      //   return;
-      // }
       const cell = gridRef.current[row]?.[col];
 
       if (!cell?.type) {
@@ -144,7 +166,6 @@ console.log(grid)
         return newGrid;
       });
       setScore((prev) => prev + 10);
-
 
       const outgoingDirections = getOutgoingDirections(
         cell.type,
@@ -282,7 +303,7 @@ console.log(grid)
         setScore((prevScore) => prevScore - unflowedPieces * 10);
         popupShown = true;
         setStartGame(false);
-        
+
         showEndGamePopup(cellsFlowed);
       }
     }
@@ -323,6 +344,22 @@ console.log(grid)
 
       <SharedButtons game={"OilCap"} />
       <h1 className="text-4xl font-bold my-4">Flow</h1>
+
+      {/* Mobile Instructions */}
+      {isMobile && startGame && (
+        <div className="bg-blue-100 p-3 rounded-lg mb-4 max-w-md mx-auto">
+          <p className="text-sm">
+            <strong>Mobile Controls:</strong> Tap a piece to select it, then tap
+            a cell to place it!
+          </p>
+          {selectedPiece && (
+            <p className="text-sm mt-1 text-green-600">
+              Selected: {selectedPiece}
+            </p>
+          )}
+        </div>
+      )}
+
       {!startGame && (
         <>
           <h1>Welcome to Flow! Click Start to begin.</h1>
@@ -341,12 +378,17 @@ console.log(grid)
           grid={grid}
           handleClick={handleClick}
           draggedItem={draggedItem}
+          isMobile={isMobile}
+          selectedPiece={selectedPiece}
         />
         <Pieces
           startGame={startGame}
           setDraggedItem={setDraggedItem}
           hasDropped={hasDropped}
           setHasDropped={setHasDropped}
+          isMobile={isMobile}
+          onPieceSelect={handlePieceSelect}
+          selectedPiece={selectedPiece}
         />
       </div>
     </div>

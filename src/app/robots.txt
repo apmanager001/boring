@@ -1,14 +1,22 @@
 User-agent: *
 Allow: /
+
+# Disallow private and admin areas
+Disallow: /account/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /store/
+
+# Allow important pages
+Allow: /games/
+Allow: /news/
+Allow: /about/
+Allow: /leaderboard/
+Allow: /independent/
+
+# Sitemap location
 Sitemap: https://boringsquirrel.com/sitemap.xml
 
-User-agent: Twitterbot
-Allow: /
-
-User-agent: *
-Disallow: /account/
-Disallow: /private/
-
-User-agent: *
-Disallow: /store/
-Disallow: /private/
+# Crawl delay for respectful crawling
+Crawl-delay: 1

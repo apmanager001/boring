@@ -1,4 +1,4 @@
-export function generateBoard() {
+export function generateBoard(minGaps = 51, maxGaps = 55) {
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -56,7 +56,9 @@ export function generateBoard() {
   const fullBoard = generateFullBoard();
   const puzzleMatrix = fullBoard.map((row) => [...row]);
 
-  const totalGaps = Math.floor(Math.random() * 6) + 46;
+  // Use difficulty-based gap range
+  const totalGaps =
+    Math.floor(Math.random() * (maxGaps - minGaps + 1)) + minGaps;
   const used = new Set();
   let gaps = 0;
 

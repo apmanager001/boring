@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { DndContext, useDraggable } from "@dnd-kit/core";
 
-
-
 const PIPE_TYPES = {
   "║": "/pipe/verticalStraight.svg",
   "═": "/pipe/horizontalStraight.svg",
@@ -13,15 +11,16 @@ const PIPE_TYPES = {
   "╬": "/pipe/cross.svg",
 };
 
-
-const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
+const Pieces = ({
+  setDraggedItem,
+  hasDropped,
+  setHasDropped,
+  startGame,
+  isMobile,
+  onPieceSelect,
+  selectedPiece,
+}) => {
   const [pieceStack, setPieceStack] = useState([]);
-  // const [isMobile, setIsMobile] = useState(false);
-
-  // useEffect(() => {
-  //   // Check if user is on mobile using window.navigator
-  //   setIsMobile(/Mobi|Android|iPhone/i.test(navigator.userAgent));
-  // }, []);
 
   useEffect(() => {
     setPieceStack(
@@ -32,17 +31,6 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
     );
   }, []);
 
-  // Handle placing a piece (only the top one)
-  // const handleSelect = () => {
-  //   if (pieceStack.length > 0) {
-  //     onSelect(pieceStack[0]); // Send the top piece to the board
-  //     setPieceStack((prev) => prev.slice(1)); // Remove top piece
-  //   }
-  // };
-
-  // const handleDragStart = (event) => {
-  //   setDraggedItem(event.active.id);
-  // };
   const handleDragEnd = (event) => {
     setDraggedItem(null);
     setHasDropped(true);
@@ -51,6 +39,12 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
   const handleDragStart = (event, piece) => {
     event.dataTransfer.setData("text/plain", piece);
     setDraggedItem(piece);
+  };
+
+  const handlePieceClick = (piece, index) => {
+    if (isMobile && startGame && index === 0) {
+      onPieceSelect(piece);
+    }
   };
 
   useEffect(() => {
@@ -79,50 +73,53 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
     updateStack();
   }, [hasDropped, setHasDropped]);
 
-
   return (
     <div className="flex md:flex-col items-center gap-2 p-4 mb-10 md:mb-0 rounded-lg select-none">
-      <h2 className="font-bold text-lg mb-2">Drag your piece:</h2>
+      <h2 className="font-bold text-lg mb-2">
+        {isMobile ? "Tap to select:" : "Drag your piece:"}
+      </h2>
       {pieceStack.map((piece, index) => (
         <div
           key={index}
-          className={`w-12 h-12 flex items-center justify-center border border-black  text-black text-xl ${
+          className={`w-12 h-12 flex items-center justify-center border border-black text-black text-xl transition-all duration-200 ${
             index === 0
-              ? `bg-yellow-400 border border-gray-600 ${
-                  startGame ? "cursor-pointer" : ""
+              ? `${
+                  startGame
+                    ? isMobile
+                      ? "cursor-pointer hover:scale-110"
+                      : "cursor-grab"
+                    : ""
+                } ${
+                  isMobile && selectedPiece === piece
+                    ? "bg-yellow-300 border-yellow-600 ring-2 ring-yellow-400"
+                    : "bg-yellow-400 border-gray-600"
                 }`
               : "bg-gray-400/20 border border-gray-600"
           }`}
+          onClick={() => handlePieceClick(piece, index)}
         >
           {PIPE_TYPES[piece] ? (
             <img
               src={PIPE_TYPES[piece]}
               alt={piece}
-              className="w-full h-full"
-              draggable={startGame ? index === 0 : "false"}
-              // draggable={index === 0}
+              className="w-full h-full pointer-events-none"
+              draggable={startGame && !isMobile ? index === 0 : false}
               onDragStart={(event) => handleDragStart(event, piece)}
-              // onPointerDown={(event) => handleDragStart(event, piece)}
             />
           ) : (
             piece
           )}
         </div>
       ))}
+
+      {/* Mobile Instructions */}
+      {isMobile && startGame && (
+        <div className="text-xs text-gray-600 mt-2 max-w-32 text-center">
+          Tap piece → Tap cell to place
+        </div>
+      )}
     </div>
   );
-  // return (
-  //   <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-  //     <div className="flex md:flex-col items-center gap-2 p-4 rounded-lg">
-  //       <h2 className="font-bold text-lg mb-2">Drag your piece:</h2>
-  //       {pieceStack.map((piece, index) => (
-  //         <DraggablePiece key={index} id={piece} piece={piece} index={index} />
-  //       ))}
-  //     </div>
-  //   </DndContext>
-  // );
-
-
 };
 
 // const DraggablePiece = ({ id, piece, index }) => {
@@ -159,8 +156,5 @@ const Pieces = ({ setDraggedItem, hasDropped, setHasDropped, startGame }) => {
 //     </div>
 //   );
 // };
-
-
-
 
 export default Pieces;

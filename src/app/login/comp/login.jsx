@@ -1,47 +1,54 @@
-'use client'
-import React, {useEffect, useState} from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
-import axiosInstance from '../../../components/utility/axios';
 import { toast } from "react-hot-toast";
-import Google from './google';
-import { Eye } from 'lucide-react';
+import Google from "./google";
+import { Eye } from "lucide-react";
+import useStore from "../../../app/store/store";
 
 const Login = () => {
   const [name, setName] = useState("");
-  const [hidePassword, setHidePassword] = useState(true)
+  const [hidePassword, setHidePassword] = useState(true);
   const [data, setData] = useState({
     name: "",
     password: "",
   });
-  const handleGoogleLogin =()=>{
-    const url = process.env.NEXT_PUBLIC_API_URL
+
+  const { login } = useStore();
+
+  const handleGoogleLogin = () => {
+    const url = process.env.NEXT_PUBLIC_API_URL;
     window.location.href = `${url}/google`;
-  }
+  };
+
   const loginUser = async (e) => {
     e.preventDefault();
     const { name, password } = data;
-    try {
-      const response = await axiosInstance.post("/login", { username:name, password });
 
-      if (response.data.error) {
-        console.error(response.data.error);
-        toast.error(response.data.error);
-      } else {
+    try {
+      console.log("Login attempt with username:", name);
+      const result = await login(name, password);
+
+      if (result.success) {
         setData({});
         toast.success("Login Successful");
+        console.log("Login successful, redirecting to account page");
         window.location.href = "/account";
+      } else {
+        toast.error(result.error || "Login failed");
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        toast.error("Incorrect username/email or password");
-      } else {
-        toast.error("Login failed");
-      }
+      console.error("Login error:", error);
+      toast.error("Login failed");
     }
   };
 
   const handleChangePassword = () => {
+    // This would need to be updated to use the store as well
+    // For now, keeping the original implementation
+    const axiosInstance = require("../../../components/utility/axios").default;
+
     axiosInstance
       .post("/resetpassword", {
         name,
@@ -66,9 +73,10 @@ const Login = () => {
       });
   };
 
-  const handleHidePassword =()=> {
-    setHidePassword(!hidePassword)
-  }
+  const handleHidePassword = () => {
+    setHidePassword(!hidePassword);
+  };
+
   return (
     <section className="md:py-28 flex box-border justify-center items-center bg-base-100 md:bg-base-200">
       <div className="bg-base-100 md:shadow-lg md:rounded-lg p-6 md:border border-1px border-neutral flex max-w-3xl items-center">
@@ -208,6 +216,6 @@ const Login = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Login
+export default Login;
