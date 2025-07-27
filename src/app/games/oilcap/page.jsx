@@ -1,7 +1,6 @@
 import React from "react";
 import OilcapGame from "./comp/grid";
 import { games } from "../../../components/utility/gameList";
-import { Metadata } from "next";
 import {
   GameSchema,
   BreadcrumbSchema,

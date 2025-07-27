@@ -1,5 +1,4 @@
 import React from "react";
-import { Metadata } from "next";
 import Minesweeper from "./minesweeper";
 import { games } from "../../../components/utility/gameList";
 import {

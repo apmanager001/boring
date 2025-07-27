@@ -1,9 +1,8 @@
 import React from "react";
-import { Metadata } from "next";
 import GamePage from "./comps/gamePage";
 import { BreadcrumbSchema } from "../../components/utility/StructuredData";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "All Games - Free Online Games Collection | Boring Squirrel",
   description:
     "Explore our complete collection of free online games! From puzzle games and strategy challenges to multiplayer experiences and kids games. Find your next favorite game to play instantly.",
