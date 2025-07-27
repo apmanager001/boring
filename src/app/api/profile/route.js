@@ -36,7 +36,8 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const body = await request.json();
+    // Parse request body but don't use it for now
+    await request.json();
 
     // Handle profile updates here
     // For now, just return success

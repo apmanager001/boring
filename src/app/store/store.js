@@ -21,7 +21,7 @@ const useStore = create((set, get) => ({
         username,
         password,
       });
-      const { user, message } = response.data;
+      const { user } = response.data;
 
       if (user) {
         set({

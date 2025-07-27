@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function POST() {
   try {
     // Clear session cookies or tokens here
     const response = NextResponse.json({ message: "Logged out successfully" });
