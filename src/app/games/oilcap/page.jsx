@@ -26,7 +26,7 @@ export async function generateMetadata() {
       description: seo.description,
       url: `https://boringsquirrel.com${seo.link}`,
       images: [`https://boringsquirrel.com${seo.image}`],
-      type: "game",
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
