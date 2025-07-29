@@ -1,81 +1,102 @@
 import React from 'react'
+import Link from 'next/link'
 import {
-  Squirrel,
-  UserCheck,
-  Puzzle,
-  Rocket,
-  Smile,
   Gamepad2,
-  Dices,
-  List,
-  Gamepad,
-  Newspaper
+  Rocket,
+  UserCheck,
+  Smile,
+  ArrowRight,
+  Play
 } from "lucide-react";
-
 
 const Hero = () => {
   return (
-    <section className="bg-base-100 py-16 px-4 md:px-12 lg:px-24">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Logo Icon */}
-        {/* <div className="flex justify-center mb-4">
-          <Squirrel className="w-10 h-10 text-primary" />
-        </div> */}
-
+    <section className="bg-gradient-to-br from-base-100 to-base-200 py-20 px-4 md:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto text-center">
         {/* Main Heading */}
-        <h1 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
-          Welcome to Boring Squirrel
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-base-content mb-6 leading-tight">
+          Play <span className="text-primary">Free Games</span><br />
+          <span className="text-2xl md:text-3xl lg:text-4xl font-normal text-base-content/70">
+            No Downloads • No Signups • Instant Fun
+          </span>
         </h1>
 
         {/* Subheading */}
-        <p className="text-lg text-base-content/70 max-w-2xl mx-auto mb-8">
-          Fun, free, and frictionless gaming—no downloads, no signups. Just
-          click, play, and enjoy a wide variety of games for all ages.
+        <p className="text-xl text-base-content/70 max-w-3xl mx-auto mb-10 leading-relaxed">
+          Dive into our collection of classic and modern games. From brain-teasing puzzles 
+          to strategic challenges, there's something for everyone. Start playing in seconds!
         </p>
 
-        {/* Feature Badges */}
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center">
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Gamepad2 className="text-success" />
-            <span className="text-sm font-medium">Always Free to Play</span>
+        {/* Call to Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <Link 
+            href="/games" 
+            className="btn btn-primary btn-lg text-lg px-8 py-4 hover:scale-105 transition-transform"
+          >
+            <Play className="w-5 h-5 mr-2" />
+            Start Playing Now
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Link>
+          <Link 
+            href="/leaderboard" 
+            className="btn btn-outline btn-lg text-lg px-8 py-4"
+          >
+            View Leaderboards
+          </Link>
+        </div>
+
+        {/* Feature Badges - Reduced to 4 key features */}
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 bg-base-100 shadow-lg px-6 py-4 rounded-xl w-full max-w-xs hover:shadow-xl transition-shadow">
+            <div className="p-2 bg-success/20 rounded-lg">
+              <Gamepad2 className="text-success w-6 h-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-semibold text-base-content">Always Free</div>
+              <div className="text-sm text-base-content/60">No hidden costs</div>
+            </div>
           </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Rocket className="text-accent" />
-            <span className="text-sm font-medium">No Install Needed</span>
+          
+          <div className="flex items-center gap-3 bg-base-100 shadow-lg px-6 py-4 rounded-xl w-full max-w-xs hover:shadow-xl transition-shadow">
+            <div className="p-2 bg-accent/20 rounded-lg">
+              <Rocket className="text-accent w-6 h-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-semibold text-base-content">Instant Play</div>
+              <div className="text-sm text-base-content/60">No downloads needed</div>
+            </div>
           </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <UserCheck className="text-warning" />
-            <span className="text-sm font-medium">No Signup Required</span>
+          
+          <div className="flex items-center gap-3 bg-base-100 shadow-lg px-6 py-4 rounded-xl w-full max-w-xs hover:shadow-xl transition-shadow">
+            <div className="p-2 bg-warning/20 rounded-lg">
+              <UserCheck className="text-warning w-6 h-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-semibold text-base-content">No Signup</div>
+              <div className="text-sm text-base-content/60">Jump right in</div>
+            </div>
           </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Smile className="text-primary" />
-            <span className="text-sm font-medium">All Ages Welcome</span>
+          
+          <div className="flex items-center gap-3 bg-base-100 shadow-lg px-6 py-4 rounded-xl w-full max-w-xs hover:shadow-xl transition-shadow">
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Smile className="text-primary w-6 h-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-semibold text-base-content">All Ages</div>
+              <div className="text-sm text-base-content/60">Family friendly</div>
+            </div>
           </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Puzzle className="text-secondary" />
-            <span className="text-sm font-medium">Challenging Gameplay</span>
-          </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Dices className="text-success" />
-            <span className="text-sm font-medium">Tons of Game Types</span>
-          </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <List className="text-accent" />
-            <span className="text-sm font-medium">
-              Compare scores on Leaderboard
-            </span>
-          </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Gamepad className="text-warning" />
-            <span className="text-sm font-medium">
-              Find other Independent Games
-            </span>
-          </div>
-          <div className="flex items-center gap-3 bg-base-100 shadow-md px-4 py-3 rounded-lg w-full max-w-xs">
-            <Newspaper className="text-primary" />
-            <span className="text-sm font-medium">
-              Find News About Games
-            </span>
+        </div>
+
+        {/* Social Proof */}
+        <div className="mt-16 text-center">
+          <p className="text-base-content/60 text-lg mb-4">
+            Join thousands of players enjoying our games daily
+          </p>
+          <div className="flex justify-center items-center gap-8 text-sm text-base-content/50">
+            <span>🎮 8+ Classic Games</span>
+            <span>🏆 Live Leaderboards</span>
+            <span>📱 Mobile Friendly</span>
           </div>
         </div>
       </div>

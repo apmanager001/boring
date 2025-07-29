@@ -4,6 +4,7 @@ import NewsHeader from "../components/homepage/newsHeader";
 import LeaderboardDisplay from "../components/homepage/leaderboardDisplay";
 import IndependentGames from "../components/homepage/independent";
 import Hero from "../components/homepage/hero";
+import Testimonials from "../components/homepage/testimonials";
 import {
   WebsiteSchema,
   OrganizationSchema,
@@ -22,12 +23,19 @@ export const metadata: Metadata = {
     "kids games",
     "no download games",
     "instant play games",
+    "classic games",
+    "brain games",
+    "memory games",
+    "sudoku",
+    "minesweeper",
+    "tic tac toe",
   ],
   openGraph: {
     title: "Free Online Games | Play Fun Browser Games at Boring Squirrel",
     description:
       "Play free online games at Boring Squirrel! Enjoy puzzle games, strategy games, multiplayer games, and kids games. No download required - play instantly in your browser.",
     url: "https://boringsquirrel.com",
+    type: "website",
     images: [
       {
         url: "https://boringsquirrel.com/sqir.jpg",
@@ -54,13 +62,24 @@ export default function Home() {
     <>
       <WebsiteSchema />
       <OrganizationSchema />
-      <div>
-        <Hero />
-        <Feature />
-        <NewsHeader />
-        <LeaderboardDisplay />
-        <IndependentGames />
-      </div>
+      
+      {/* Hero Section */}
+      <Hero />
+      
+      {/* Featured Games */}
+      <Feature />
+      
+      {/* Testimonials */}
+      <Testimonials />
+      
+      {/* News Section */}
+      <NewsHeader />
+      
+      {/* Leaderboards */}
+      <LeaderboardDisplay />
+      
+      {/* Independent Games */}
+      <IndependentGames />
     </>
   );
 }
