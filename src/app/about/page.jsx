@@ -1,7 +1,6 @@
-import { Metadata } from 'next'
 import { Gamepad2, Heart, Users, Trophy, Star, Shield } from "lucide-react"
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "About Boring Squirrel - Free Online Games Platform",
   description: "Learn about Boring Squirrel, your destination for free online games. Discover our mission to provide fun, accessible gaming experiences for everyone.",
   keywords: ["about us", "free games", "online gaming", "boring squirrel", "game platform", "casual games"],
