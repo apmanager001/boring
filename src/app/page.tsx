@@ -62,22 +62,22 @@ export default function Home() {
     <>
       <WebsiteSchema />
       <OrganizationSchema />
-      
+
       {/* Hero Section */}
       <Hero />
-      
+
       {/* Featured Games */}
       <Feature />
-      
+
       {/* Testimonials */}
       <Testimonials />
-      
+
       {/* News Section */}
       <NewsHeader />
-      
+
       {/* Leaderboards */}
       <LeaderboardDisplay />
-      
+
       {/* Independent Games */}
       <IndependentGames />
     </>

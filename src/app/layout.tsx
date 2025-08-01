@@ -36,6 +36,14 @@ export const metadata: Metadata = {
     "sudoku",
     "minesweeper",
     "tic tac toe",
+    "flow game",
+    "acornsweeper",
+    "pixel art",
+    "dots and boxes",
+    "coloring book",
+    "online gaming",
+    "casual games",
+    "brain games",
   ],
   authors: [{ name: "Boring Squirrel" }],
   creator: "Boring Squirrel",
@@ -85,9 +93,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code", // Replace with your actual verification code
-  },
+  // Remove verification until you have the actual code
+  // verification: {
+  //   google: "your-google-verification-code", // Replace with your actual verification code
+  // },
 };
 
 export default function RootLayout({
@@ -118,6 +127,31 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Boring Squirrel" />
         <meta name="mobile-web-app-capable" content="yes" />
+        
+        {/* Additional SEO meta tags */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Boring Squirrel",
+              "url": "https://boringsquirrel.com",
+              "description": description,
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://boringsquirrel.com/games?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}

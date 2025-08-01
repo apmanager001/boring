@@ -9,33 +9,58 @@ const parser = new Parser({
       ["media:thumbnail", "mediaThumbnail"],
     ],
   },
+  timeout: 10000, // 10 second timeout
 });
 
 export async function GET() {
   try {
-    const feed = await parser.parseURL("https://www.gamespot.com/feeds/news");
+    // Add timeout and better error handling
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    
+    const feed = await parser.parseURL("https://www.gamespot.com/feeds/game-news/");
+    clearTimeout(timeoutId);
 
-    const formattedItems = feed.items.map((item) => ({
-      id: item.guid,
-      title: item.title,
-      link: item.link,
-      description: item.contentSnippet || item.description,
-      content: item.content,
-      pubDate: item.pubDate,
-      image:
-        item.mediaContent?.[0]?.$?.url ||
-        item.mediaThumbnail?.$?.url ||
-        item.enclosure?.url,
-      author: item.creator || item.author,
-      categories: item.categories || [],
-    }));
+    if (!feed || !feed.items || !Array.isArray(feed.items)) {
+      console.warn("Gamespot feed returned invalid data");
+      return NextResponse.json([], { status: 200 }); // Return empty array instead of error
+    }
 
-    return NextResponse.json(formattedItems);
-  } catch{
-    return NextResponse.json(
-      { error: "Failed to fetch Gamespot news" },
-      { status: 500 }
-    );
+    const formattedItems = feed.items
+      .filter(item => item && item.title && item.link) // Filter out invalid items
+      .slice(0, 20) // Limit to 20 items to prevent large responses
+      .map((item) => ({
+        id: item.guid || item.link || Math.random().toString(36).substr(2, 9),
+        title: item.title || "Untitled",
+        link: item.link || "#",
+        description: item.contentSnippet || item.description || "",
+        content: item.content || "",
+        pubDate: item.pubDate || new Date().toISOString(),
+        image:
+          item.mediaContent?.[0]?.$?.url ||
+          item.mediaThumbnail?.$?.url ||
+          item.enclosure?.url ||
+          "/default-news.jpg",
+        author: item.creator || item.author || "Gamespot",
+        categories: item.categories || [],
+      }));
+
+    return NextResponse.json(formattedItems, {
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600', // 5 min cache
+      }
+    });
+  } catch (error) {
+    console.error("Gamespot API error:", error);
+    
+    // Return empty array instead of 500 error to prevent indexing issues
+    return NextResponse.json([], {
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300', // 1 min cache on error
+      }
+    });
   }
 }
   

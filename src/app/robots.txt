@@ -7,16 +7,34 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
 Disallow: /store/
+Disallow: /login
+Disallow: /signup
 
-# Allow important pages
+# Allow important pages explicitly
 Allow: /games/
 Allow: /news/
 Allow: /about/
 Allow: /leaderboard/
 Allow: /independent/
+Allow: /kidgames/
 
 # Sitemap location
 Sitemap: https://boringsquirrel.com/sitemap.xml
 
 # Crawl delay for respectful crawling
 Crawl-delay: 1
+
+# Additional directives for better indexing
+# Allow all game pages
+Allow: /games/oilcap
+Allow: /games/acornsweeper
+Allow: /games/match
+Allow: /games/tiktaktoe
+Allow: /games/pixelArt
+Allow: /games/squares
+Allow: /games/sudoku
+Allow: /kidgames/coloringbook
+
+# Block any potential duplicate content
+Disallow: /*?*
+Disallow: /*#
