@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { Toaster } from "react-hot-toast";
+import QueryProvider from "../components/providers/QueryProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -127,13 +128,13 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Boring Squirrel" />
         <meta name="mobile-web-app-capable" content="yes" />
-        
+
         {/* Additional SEO meta tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
-        
+
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -141,47 +142,50 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "Boring Squirrel",
-              "url": "https://boringsquirrel.com",
-              "description": description,
-              "potentialAction": {
+              name: "Boring Squirrel",
+              url: "https://boringsquirrel.com",
+              description: description,
+              potentialAction: {
                 "@type": "SearchAction",
-                "target": "https://boringsquirrel.com/games?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            })
+                target:
+                  "https://boringsquirrel.com/games?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
           }}
         />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <Toaster
-          position={"top-left"}
-          toastOptions={{
-            duration: 5000,
-            style: {
-              border: "2px solid #000",
-              padding: "22px",
-              color: "#713200",
-              fontSize: "16px",
-              fontWeight: "700",
-            },
-            success: {
+        <QueryProvider>
+          <Toaster
+            position={"top-left"}
+            toastOptions={{
+              duration: 5000,
               style: {
-                background: "#CFFDBC",
+                border: "2px solid #000",
+                padding: "22px",
+                color: "#713200",
+                fontSize: "16px",
+                fontWeight: "700",
               },
-            },
-            error: {
-              style: {
-                background: "#ff9494",
+              success: {
+                style: {
+                  background: "#CFFDBC",
+                },
               },
-            },
-          }}
-        />
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+              error: {
+                style: {
+                  background: "#ff9494",
+                },
+              },
+            }}
+          />
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

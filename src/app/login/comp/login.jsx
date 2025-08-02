@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 import Google from "./google";
 import { Eye } from "lucide-react";
-import useStore from "../../../app/store/store";
+import { useLogin } from "../../../hooks/useAuth";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -15,12 +14,7 @@ const Login = () => {
     password: "",
   });
 
-  const { login } = useStore();
-
-  const handleGoogleLogin = () => {
-    const url = process.env.NEXT_PUBLIC_API_URL;
-    window.location.href = `${url}/google`;
-  };
+  const loginMutation = useLogin();
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -28,19 +22,22 @@ const Login = () => {
 
     try {
       console.log("Login attempt with username:", name);
-      const result = await login(name, password);
+      const result = await loginMutation.mutateAsync({
+        username: name,
+        password,
+      });
 
-      if (result.success) {
+      if (result.user) {
         setData({});
         toast.success("Login Successful");
         console.log("Login successful, redirecting to account page");
         window.location.href = "/account";
       } else {
-        toast.error(result.error || "Login failed");
+        toast.error("Login failed - no user data received");
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Login failed");
+      toast.error(error.response?.data?.error || "Login failed");
     }
   };
 
@@ -98,120 +95,117 @@ const Login = () => {
                 id="email"
                 name="email"
                 className="input input-bordered w-full"
-                placeholder="Username"
                 value={data.name}
                 onChange={(e) => setData({ ...data, name: e.target.value })}
                 required
-                autoComplete="false"
               />
             </div>
+
             <div className="relative">
-              <div className="flex justify-between items-center">
-                <label
-                  htmlFor="password"
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                >
-                  Password
-                </label>
-                <Link
-                  href="#"
-                  className="text-xs font-bold link text-accent hover:text-secondary"
-                  onClick={() =>
-                    document.getElementById("my_modal_2").showModal()
-                  }
-                >
-                  Forgot password?
-                </Link>
-              </div>
+              <label
+                htmlFor="password"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={hidePassword ? "password" : "text"}
                   id="password"
                   name="password"
-                  placeholder="Password"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full pr-10"
                   value={data.password}
                   onChange={(e) =>
                     setData({ ...data, password: e.target.value })
                   }
                   required
                 />
-                <Eye
-                  size={24}
-                  className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer opacity-100"
+                <button
+                  type="button"
                   onClick={handleHidePassword}
-                />
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                >
+                  <Eye className="h-5 w-5 text-gray-400" />
+                </button>
               </div>
             </div>
+
             <button
-              className="btn btn-primary py-2 rounded-xl hover:scale-105 duration-300 text-lg"
               type="submit"
+              className="btn btn-primary w-full"
+              disabled={loginMutation.isPending}
             >
-              Login
+              {loginMutation.isPending ? "Logging in..." : "Login"}
             </button>
           </form>
-          <dialog id="my_modal_2" className="modal">
-            <div className="modal-box flex flex-col gap-6 rounded-box bg-base-200 p-6 max-w-md text-center">
-              <form method="dialog">
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                  ✕
-                </button>
-              </form>
-              <h1 className="text-2xl font-bold">Forgot password?</h1>
 
-              <span className="flex flex-col"></span>
-              <label className="form-control">
-                <div className="label">
-                  <span className="label-text">Email</span>
-                </div>
-                <input
-                  className="input input-bordered"
-                  type="text"
-                  value={name}
-                  name="name"
-                  placeholder="Email or Username"
-                  onChange={(e) => setName(e.target.value)}
-                  autoComplete="false"
-                />
-              </label>
-              <input
-                type="submit"
-                className="btn btn-primary ml-4"
-                value="Send Email"
-                onClick={handleChangePassword}
-              />
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              <button>close</button>
-            </form>
-          </dialog>
-          <div className="mt-6  items-center text-gray-100">
-            <div className="divider">OR</div>
+          <div className="mt-4">
+            <button
+              onClick={handleChangePassword}
+              className="text-sm text-blue-600 hover:text-blue-800"
+            >
+              Forgot Password?
+            </button>
           </div>
-          <button
-            className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 hover:bg-gray-200 font-medium"
-            // onClick={() => signIn("google")}
-            onClick={handleGoogleLogin}
-          >
-            <Google />
-            Login with Google
-          </button>
-          <div className="mt-4 text-sm text-white flex justify-between items-center ">
-            <p className="mr-3 md:mr-0 ">If you don't have an account yet..</p>
-            <a href="/signup">
-              <button className=" btn btn-primary btn-xs hover:scale-110 font-semibold duration-300">
-                Register
-              </button>
-            </a>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-base-100 text-gray-500">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <Google />
+            </div>
+          </div>
+
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{" "}
+              <Link
+                href="/signup"
+                className="text-blue-600 hover:text-blue-800"
+              >
+                Sign up
+              </Link>
+            </p>
           </div>
         </div>
-        <div className="md:block hidden w-1/2 h-80 mx-auto overflow-hidden rounded-2xl">
-          <img
-            className=" max-h-[1600px] object-cover transform scale-175 "
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1518770352423-dce09a3d3307?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="login form image"
-          />
+
+        <div className="hidden md:block md:w-1/2 p-8">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-4">
+              Welcome Back!
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Sign in to your account to continue playing your favorite games
+              and track your progress.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">
+                  Access to all games
+                </span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">Track your scores</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">
+                  Compete with friends
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

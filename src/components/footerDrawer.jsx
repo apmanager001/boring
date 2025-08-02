@@ -1,43 +1,90 @@
-'use client'
-import React, {useState, useEffect} from 'react'
-import toast from 'react-hot-toast';
-import Link from 'next/link';
-import {gameLinks, kidLinks } from '../components/headerComps/headerLinks'
-import { Dices, CircleUserRound, TableProperties, User, Cog } from "lucide-react";
-import useStore from '@/app/store/store';
+"use client";
+import React, { useState, useEffect, useCallback } from "react";
+import toast from "react-hot-toast";
+import Link from "next/link";
+import { gameLinks, kidLinks } from "../components/headerComps/headerLinks";
+import {
+  Dices,
+  CircleUserRound,
+  TableProperties,
+  User,
+  Cog,
+} from "lucide-react";
+import useStore from "@/app/store/store";
+import { useProfile, useLogout } from "../hooks/useAuth";
 
 const FooterDrawer = () => {
-    const { user, loading, error, validateSession, logout } = useStore();
+  const { user, error, setUser, clearUser, setError, clearError } = useStore();
+  const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-      if (typeof window !== "undefined") {
-        validateSession();
+  // Callbacks for TanStack Query
+  const handleProfileSuccess = useCallback(
+    (data) => {
+      setUser(data);
+    },
+    [setUser]
+  );
+
+  const handleProfileError = useCallback(
+    (error) => {
+      if (error?.response?.status === 401 || error?.response?.status === 404) {
+        // User not logged in - this is normal
+        clearUser();
+      } else {
+        // Other errors
+        setError(error.message || "Failed to load profile");
       }
-    }, [validateSession]);
+    },
+    [clearUser, setError]
+  );
 
-    // if (loading)
-    //   return <span className="loading loading-dots text-accent"></span>;
-    // if (error) return <p>Error: {error}</p>;
+  // TanStack Query hooks
+  const {
+    data: profileData,
+    isLoading,
+    error: profileError,
+  } = useProfile(handleProfileSuccess, handleProfileError);
+  const logoutMutation = useLogout();
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    const handleLogout = async () => {
-      try {
-        await logout();
-        if (typeof window !== "undefined") {
-          window.location.href = "/login";
-        }
-      } catch (error) {
-        toast.error(error.message);
+  // Clear errors when component unmounts
+  useEffect(() => {
+    return () => {
+      if (error) {
+        clearError();
       }
     };
+  }, [error, clearError]);
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return <span className="loading loading-dots text-accent"></span>;
+  }
+
+  const handleLogout = async () => {
+    try {
+      await logoutMutation.mutateAsync();
+      clearUser();
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
+      }
+    } catch (error) {
+      toast.error(error.message || "Failed to logout");
+    }
+  };
 
   return (
     <div className="drawer-side ">
       <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
       <ul className="menu bg-base-200 min-h-full w-80 p-4  overflow-y-scroll scrollbar-hide">
-        {loading && <span className="loading loading-dots text-accent"></span>}
+        {isLoading && (
+          <span className="loading loading-dots text-accent"></span>
+        )}
         {error && <p className="text-red-500">Error: {error}</p>}
-        {!loading && !error && user ? (
+        {!isLoading && !error && user ? (
           <div className="flex flex-col min-h-60">
             <div className="flex justify-center">
               <CircleUserRound size={150} />
@@ -55,8 +102,9 @@ const FooterDrawer = () => {
                 <button
                   className="btn btn-primary btn-sm block "
                   onClick={handleLogout}
+                  disabled={logoutMutation.isPending}
                 >
-                  Sign out
+                  {logoutMutation.isPending ? "Signing out..." : "Sign out"}
                 </button>
               </div>
             </div>
@@ -133,6 +181,6 @@ const FooterDrawer = () => {
       </ul>
     </div>
   );
-}
+};
 
-export default FooterDrawer
+export default FooterDrawer;

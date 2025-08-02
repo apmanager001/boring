@@ -1,11 +1,35 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
+import { useGoogleAuth } from "../../../hooks/useAuth";
+import { toast } from "react-hot-toast";
 
+function Google({ context = "login" }) {
+  const googleAuthMutation = useGoogleAuth();
 
+  const handleGoogleLogin = async () => {
+    try {
+      await googleAuthMutation.mutateAsync();
+      toast.success(`Google ${context} successful!`);
+      // Redirect to account page after successful login/signup
+      if (typeof window !== "undefined") {
+        window.location.href = "/account";
+      }
+    } catch (error) {
+      console.error("Google auth error:", error);
+      toast.error(error.response?.data?.error || `Google ${context} failed`);
+    }
+  };
 
-function Google() {
+  const buttonText =
+    context === "signup" ? "Sign up with Google" : "Login with Google";
+  const loadingText = context === "signup" ? "Signing up..." : "Signing in...";
+
   return (
-    <div>
+    <button
+      onClick={handleGoogleLogin}
+      disabled={googleAuthMutation.isPending}
+      className="bg-white text-black border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 hover:bg-gray-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+    >
       <svg
         className="mr-3"
         xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +53,9 @@ function Google() {
           d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
         ></path>
       </svg>
-    </div>
+      {googleAuthMutation.isPending ? loadingText : buttonText}
+    </button>
   );
 }
 
-export default Google
+export default Google;

@@ -1,43 +1,49 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import useStore from "../../app/store/store";
+import { useProfile, useLogout } from "../../hooks/useAuth";
 import { LogOut, Cog, User, UserRound, KeyRound, Shield } from "lucide-react";
 import LoadingSpinner from "../utility/LoadingSpinner";
 
 const UserInfo = () => {
-  const {
-    user,
-    loading,
-    error,
-    initialized,
-    validateSession,
-    logout,
-    clearError,
-  } = useStore();
+  const { user, error, initialized, setUser, clearUser, setError, clearError } =
+    useStore();
   const [mounted, setMounted] = useState(false);
-  const [timeoutReached, setTimeoutReached] = useState(false);
+
+  // Callbacks for TanStack Query
+  const handleProfileSuccess = useCallback(
+    (data) => {
+      setUser(data);
+    },
+    [setUser]
+  );
+
+  const handleProfileError = useCallback(
+    (error) => {
+      if (error?.response?.status === 401 || error?.response?.status === 404) {
+        // User not logged in - this is normal
+        clearUser();
+      } else {
+        // Other errors
+        setError(error.message || "Failed to load profile");
+      }
+    },
+    [clearUser, setError]
+  );
+
+  // TanStack Query hooks
+  const {
+    data: profileData,
+    isLoading,
+    error: profileError,
+  } = useProfile(handleProfileSuccess, handleProfileError);
+  const logoutMutation = useLogout();
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    // Always validate session when component mounts to pick up login state
-    if (mounted) {
-      console.log("UserInfo: Component mounted, validating session");
-      validateSession();
-
-      // Set a timeout to prevent infinite loading
-      const timeout = setTimeout(() => {
-        console.log("UserInfo: Timeout reached, forcing initialization");
-        setTimeoutReached(true);
-      }, 10000); // 10 seconds timeout
-
-      return () => clearTimeout(timeout);
-    }
-  }, [validateSession, mounted]);
 
   // Clear errors when component unmounts
   useEffect(() => {
@@ -48,59 +54,31 @@ const UserInfo = () => {
     };
   }, [error, clearError]);
 
-  // Debug logging
-  useEffect(() => {
-    console.log("UserInfo state:", {
-      user,
-      loading,
-      initialized,
-      mounted,
-      timeoutReached,
-    });
-  }, [user, loading, initialized, mounted, timeoutReached]);
-
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
-    console.log("UserInfo: Not mounted yet, showing loading spinner");
     return <LoadingSpinner size="sm" className="flex gap-2 items-center" />;
   }
 
-  // Show loading spinner only if loading and timeout not reached
-  if (loading && !timeoutReached) {
-    console.log("UserInfo: Loading, showing loading spinner");
+  // Show loading spinner only if loading and not initialized
+  if (isLoading && !initialized) {
     return <LoadingSpinner size="sm" className="flex gap-2 items-center" />;
-  }
-
-  // If timeout reached, show login button as fallback
-  if (timeoutReached && !initialized) {
-    console.log("UserInfo: Timeout reached, showing login button as fallback");
-    return (
-      <Link href="/login" className="flex gap-2 items-center">
-        <KeyRound />
-        Login
-      </Link>
-    );
   }
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logoutMutation.mutateAsync();
+      clearUser();
       if (typeof window !== "undefined") {
         window.location.href = "/login";
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message || "Failed to logout");
     }
   };
 
   if (error) {
     toast.error(error);
   }
-
-  console.log(
-    "UserInfo: Rendering with user:",
-    user ? "logged in" : "not logged in"
-  );
 
   return (
     <>
