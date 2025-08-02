@@ -180,9 +180,7 @@ const Login = () => {
 
         <div className="hidden md:block md:w-1/2 p-8">
           <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4">
-              Welcome Back!
-            </h3>
+            <h3 className="text-2xl font-bold mb-4">Welcome Back!</h3>
             <p className="text-gray-600 mb-6">
               Sign in to your account to continue playing your favorite games
               and track your progress.

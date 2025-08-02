@@ -23,9 +23,13 @@ const authAPI = {
     return response.data;
   },
 
+  // Google SSO should redirect to the server endpoint, not make a direct API call
   googleAuth: async () => {
-    const response = await axiosInstance.get("/google");
-    return response.data;
+    // This will redirect to the server's Google SSO endpoint
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || window.location.origin;
+    window.location.href = `${baseUrl}/google`;
+    // Note: This function won't return anything because of the redirect
+    return null;
   },
 };
 
@@ -66,18 +70,15 @@ export const useLogin = () => {
 };
 
 export const useGoogleAuth = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: authAPI.googleAuth,
-    onSuccess: (data) => {
-      // Invalidate and refetch profile data
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-      // Set profile data immediately
-      queryClient.setQueryData(["profile"], data);
+    onSuccess: () => {
+      // The redirect will happen automatically
+      // We don't need to do anything here as the user will be redirected
+      console.log("Redirecting to Google SSO...");
     },
     onError: (error) => {
-      console.error("Google auth error:", error);
+      console.error("Google SSO error:", error);
     },
   });
 };

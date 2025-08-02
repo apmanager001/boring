@@ -6,27 +6,25 @@ import { toast } from "react-hot-toast";
 function Google({ context = "login" }) {
   const googleAuthMutation = useGoogleAuth();
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleSSO = () => {
     try {
-      await googleAuthMutation.mutateAsync();
-      toast.success(`Google ${context} successful!`);
-      // Redirect to account page after successful login/signup
-      if (typeof window !== "undefined") {
-        window.location.href = "/account";
-      }
+      // Start the SSO flow - this will redirect the user to backend
+      googleAuthMutation.mutate();
+      toast.success(`Redirecting to Google ${context}...`);
     } catch (error) {
-      console.error("Google auth error:", error);
-      toast.error(error.response?.data?.error || `Google ${context} failed`);
+      console.error("Google SSO error:", error);
+      toast.error(`Failed to start Google ${context}`);
     }
   };
 
   const buttonText =
     context === "signup" ? "Sign up with Google" : "Login with Google";
-  const loadingText = context === "signup" ? "Signing up..." : "Signing in...";
+  const loadingText =
+    context === "signup" ? "Redirecting..." : "Redirecting...";
 
   return (
     <button
-      onClick={handleGoogleLogin}
+      onClick={handleGoogleSSO}
       disabled={googleAuthMutation.isPending}
       className="bg-white text-black border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 hover:bg-gray-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
     >
