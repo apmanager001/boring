@@ -17,7 +17,6 @@ const Settings = () => {
     const fetchProfile = async () => {
       try {
         const response = await axiosInstance.get("/profile");
-        console.log(response)
         setUsername(response.data.username);
         setEmail(response.data.email);
         setBio(response.data.bio || "")

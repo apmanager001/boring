@@ -14,6 +14,7 @@ const authAPI = {
   },
 
   getProfile: async () => {
+    // Use the frontend profile API which proxies to backend
     const response = await axiosInstance.get("/profile");
     return response.data;
   },
@@ -34,7 +35,7 @@ const authAPI = {
 };
 
 // Custom hooks
-export const useProfile = (onSuccess, onError) => {
+export const useProfile = () => {
   return useQuery({
     queryKey: ["profile"],
     queryFn: authAPI.getProfile,
@@ -47,8 +48,6 @@ export const useProfile = (onSuccess, onError) => {
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
-    onSuccess,
-    onError,
   });
 };
 

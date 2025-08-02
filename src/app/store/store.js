@@ -18,7 +18,6 @@ const useStore = create((set) => ({
       error: null,
       initialized: true,
     });
-    console.log("User set in store:", user);
   },
 
   // Clear user data (called from TanStack Query hooks)
@@ -29,13 +28,11 @@ const useStore = create((set) => ({
       error: null,
       initialized: true,
     });
-    console.log("User cleared from store");
   },
 
   // Set error
   setError: (error) => {
     set({ error });
-    console.log("Error set in store:", error);
   },
 
   // Clear error
@@ -51,7 +48,6 @@ const useStore = create((set) => ({
   // Reset store to initial state
   reset: () => {
     set(initialState);
-    console.log("Store reset to initial state");
   },
 }));
 

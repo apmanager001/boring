@@ -2,29 +2,36 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
-    // Check if user is authenticated via session cookie
-    const sessionCookie = request.cookies.get("session");
+    // Get all cookies from the request
+    const cookies = request.cookies;
 
-    // If you have a session cookie, validate it here
-    if (!sessionCookie || sessionCookie.value !== "authenticated") {
+    // Proxy the request to the backend
+    const backendUrl =
+      process.env.NEXT_PUBLIC_API_URL || "https://api.boringsquirrel.com";
+    const backendProfileUrl = `${backendUrl}/profile`;
+
+    // Forward all cookies to the backend
+    const cookieHeader = Array.from(cookies.entries())
+      .map(([name, cookie]) => `${name}=${cookie.value}`)
+      .join("; ");
+
+    const response = await fetch(backendProfileUrl, {
+      method: "GET",
+      headers: {
+        Cookie: cookieHeader,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
       return NextResponse.json(
         { error: "No user logged in." },
         { status: 404 }
       );
     }
 
-    // Mock user data - replace with your actual user data from database
-    // In a real app, you'd get the user ID from the session and look up the user
-    const user = {
-      id: 23,
-      username: "demo_user",
-      email: "demo@example.com",
-      bio: "This is my bio.",
-      createdAt: "2025-06-17T15:21:10.353Z",
-      admin: false,
-    };
-
-    return NextResponse.json(user);
+    const userData = await response.json();
+    return NextResponse.json(userData);
   } catch (error) {
     console.error("Profile API error:", error);
     return NextResponse.json(
@@ -36,12 +43,38 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    // Parse request body but don't use it for now
-    await request.json();
+    // Parse request body
+    const body = await request.json();
 
-    // Handle profile updates here
-    // For now, just return success
-    return NextResponse.json({ message: "Profile updated successfully" });
+    // Proxy the request to the backend
+    const backendUrl =
+      process.env.NEXT_PUBLIC_API_URL || "https://api.boringsquirrel.com";
+    const backendProfileUrl = `${backendUrl}/profile`;
+
+    // Forward all cookies to the backend
+    const cookies = request.cookies;
+    const cookieHeader = Array.from(cookies.entries())
+      .map(([name, cookie]) => `${name}=${cookie.value}`)
+      .join("; ");
+
+    const response = await fetch(backendProfileUrl, {
+      method: "POST",
+      headers: {
+        Cookie: cookieHeader,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: "Failed to update profile" },
+        { status: response.status }
+      );
+    }
+
+    const result = await response.json();
+    return NextResponse.json(result);
   } catch (error) {
     console.error("Profile update error:", error);
     return NextResponse.json(

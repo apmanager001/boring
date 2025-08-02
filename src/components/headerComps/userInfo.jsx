@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import useStore from "../../app/store/store";
@@ -12,38 +12,41 @@ const UserInfo = () => {
     useStore();
   const [mounted, setMounted] = useState(false);
 
-  // Callbacks for TanStack Query
-  const handleProfileSuccess = useCallback(
-    (data) => {
-      setUser(data);
-    },
-    [setUser]
-  );
-
-  const handleProfileError = useCallback(
-    (error) => {
-      if (error?.response?.status === 401 || error?.response?.status === 404) {
-        // User not logged in - this is normal
-        clearUser();
-      } else {
-        // Other errors
-        setError(error.message || "Failed to load profile");
-      }
-    },
-    [clearUser, setError]
-  );
-
   // TanStack Query hooks
   const {
     data: profileData,
     isLoading,
     error: profileError,
-  } = useProfile(handleProfileSuccess, handleProfileError);
+    refetch,
+  } = useProfile();
   const logoutMutation = useLogout();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Force refetch profile data when component mounts (in case user just logged in)
+  useEffect(() => {
+    if (mounted) {
+      refetch();
+    }
+  }, [mounted, refetch]);
+
+  // Sync profile data with store when it changes
+  useEffect(() => {
+    if (profileData) {
+      setUser(profileData);
+    } else if (profileError) {
+      if (
+        profileError?.response?.status === 401 ||
+        profileError?.response?.status === 404
+      ) {
+        clearUser();
+      } else {
+        setError(profileError.message || "Failed to load profile");
+      }
+    }
+  }, [profileData, profileError, setUser, clearUser, setError]);
 
   // Clear errors when component unmounts
   useEffect(() => {
