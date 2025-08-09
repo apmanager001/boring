@@ -120,7 +120,7 @@ export default function RootLayout({
             gtag('config', 'G-ZQLCMP047S');`}
         </Script>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/sqir.jpg" />
+        <link rel="apple-touch-icon" href="/squirrelglasses.webp" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#4F46E5" />
         <meta name="application-name" content="Boring Squirrel" />
